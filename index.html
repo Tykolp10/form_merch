@@ -78,15 +78,16 @@
 
     .logo {
       font-family: 'Inter', -apple-system, sans-serif;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 800;
-      letter-spacing: -0.5px;
+      letter-spacing: -0.3px;
+      white-space: nowrap;
       background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .logo-badge {
@@ -139,26 +140,37 @@
     /* HERO SECTION */
     .hero {
       text-align: center;
-      padding: 36px 20px 28px;
+      padding: 32px 16px 24px;
       margin-bottom: 24px;
     }
 
+    .motto-tag {
+      font-size: clamp(0.72rem, 2.5vw, 0.85rem);
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
     .hero-tag {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--accent);
-      margin-bottom: 8px;
+      letter-spacing: 1.5px;
+      color: var(--text-sub);
+      margin-bottom: 10px;
     }
 
     .hero-title {
       font-family: 'Inter', -apple-system, sans-serif;
-      font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+      font-size: clamp(1.4rem, 4.2vw, 2.6rem);
       font-weight: 800;
-      line-height: 1.15;
+      line-height: 1.25;
       margin-bottom: 12px;
-      letter-spacing: -0.5px;
+      letter-spacing: -0.3px;
+      white-space: normal;
     }
 
     .hero-subtitle {
@@ -693,11 +705,15 @@
 
     /* RESPONSIVE DESIGN FOR MOBILE & TABLETS */
     @media (max-width: 640px) {
-      .hero { padding: 24px 10px; }
-      .hero-title { font-size: 1.8rem; }
+      .nav { padding: 10px 14px; }
+      .logo { font-size: 1.05rem; }
+      .status-pill { font-size: 0.65rem; padding: 3px 8px; }
+      .hero { padding: 20px 8px; }
+      .motto-tag { font-size: 0.7rem; letter-spacing: 0.8px; }
+      .hero-title { font-size: 1.45rem; }
       .catalog-grid { grid-template-columns: 1fr; }
-      .bar-inner { gap: 12px; }
-      .btn-checkout { padding: 12px 20px; font-size: 0.85rem; }
+      .bar-inner { gap: 10px; }
+      .btn-checkout { padding: 10px 18px; font-size: 0.85rem; }
       .card-img-wrap { aspect-ratio: 1.1 / 1; }
     }
   </style>
@@ -721,6 +737,7 @@
     
     <!-- HERO HEADER -->
     <section class="hero">
+      <div class="motto-tag">ATAS BERKAT ROCHMAT ALLOH YANG MAHA KUASA</div>
       <div class="hero-tag">Official Merchandise Collection</div>
       <h1 class="hero-title">PRE-ORDER MERCH MQ 2026</h1>
       <p class="hero-subtitle">Koleksi pakaian & aksoris resmi. Dibuat dengan spesifikasi Premium Cotton Combed 30s & cetak DTF High Density.</p>
