@@ -163,14 +163,17 @@
       margin-bottom: 24px;
     }
 
-    .motto-tag {
-      font-size: clamp(0.72rem, 2.5vw, 0.85rem);
-      font-weight: 800;
-      color: var(--accent);
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-      line-height: 1.4;
+    .hero-logo {
+      max-height: 90px;
+      width: auto;
+      margin: 0 auto 16px;
+      display: block;
+      filter: drop-shadow(0 8px 24px rgba(59, 130, 246, 0.4));
+      transition: transform 0.3s ease;
+    }
+
+    .hero-logo:hover {
+      transform: scale(1.05);
     }
 
     .hero-tag {
@@ -768,7 +771,7 @@
     
     <!-- HERO HEADER -->
     <section class="hero">
-      <div class="motto-tag">ATAS BERKAT ROCHMAT ALLOH YANG MAHA KUASA</div>
+      <img src="https://raw.githubusercontent.com/Tykolp10/form_merch/main/logo_mq.png" alt="Logo MQ 12" class="hero-logo">
       <div class="hero-tag">Official Merchandise Collection</div>
       <h1 class="hero-title">PRE-ORDER MERCH MQ 2026</h1>
       <p class="hero-subtitle">Koleksi pakaian & aksoris resmi. Dibuat dengan spesifikasi Premium Cotton Combed 30s & cetak DTF High Density.</p>
