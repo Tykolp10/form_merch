@@ -8,7 +8,7 @@
  * dan mengembalikan ORDER_COUNTER ke 0
  */
 function resetDataUji() {
-  const ss = SpreadsheetApp.getActive();
+  const ss = getSS_();
   
   // Kosongkan ORDERS (sisakan header)
   const shOrd = ss.getSheetByName(SH.ORDERS);
