@@ -2,713 +2,1042 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pre-Order Merch MQ 2026 — Official Store</title>
-  <meta name="description" content="Pre-Order Official Merchandise MQ 2026. Kaos Lengan Pendek, Kaos Lengan Panjang, Tumbler, Korek & Keychain.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>MQ 2026 — Official Merchandise Store</title>
+  <meta name="description" content="Official Pre-Order Merchandise MQ 2026. Premium Apparel & Exclusive Accessories.">
+  
+  <!-- Modern Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --bg-dark: #0b0f19;
-      --card-bg: rgba(22, 28, 45, 0.7);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --accent: #e5a93c;
-      --accent-glow: rgba(229, 169, 60, 0.3);
-      --text-main: #f3f4f6;
-      --text-muted: #9ca3af;
-      --success: #10b981;
-      --danger: #ef4444;
-      --radius: 16px;
+      --bg: #080b11;
+      --surface: #0f1523;
+      --surface-hover: #161e31;
+      --surface-card: #12192a;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-focus: #d4af37;
+      
+      --accent: #d4af37; /* Metallic Gold */
+      --accent-hover: #f3cf65;
+      --accent-glow: rgba(212, 175, 55, 0.25);
+      
+      --text: #f8fafc;
+      --text-sub: #94a3b8;
+      --text-muted: #64748b;
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg-dark);
-      color: var(--text-main);
-      background-image: 
-        radial-gradient(circle at 15% 15%, rgba(229, 169, 60, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.06) 0%, transparent 40%);
-      background-attachment: fixed;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      overflow-x: hidden;
       min-height: 100vh;
-      padding-bottom: 100px;
+      padding-bottom: 120px;
+      background-image: 
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(212, 175, 55, 0.15), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 60%, rgba(30, 58, 138, 0.1), transparent);
     }
 
-    h1, h2, h3, h4 {
-      font-family: 'Outfit', sans-serif;
+    /* HEADER & NAVBAR */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(8, 11, 17, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
     }
 
-    .container {
-      max-width: 1000px;
+    .nav-container {
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 24px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    /* HEADER HERO */
-    .hero {
-      text-align: center;
-      padding: 40px 20px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      backdrop-filter: blur(12px);
-      margin-bottom: 24px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 6px 14px;
-      background: rgba(229, 169, 60, 0.15);
-      color: var(--accent);
-      border: 1px solid rgba(229, 169, 60, 0.3);
-      border-radius: 30px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .hero h1 {
-      font-size: 2.5rem;
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.35rem;
       font-weight: 800;
-      background: linear-gradient(135deg, #fff 0%, #d1d5db 100%);
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-badge {
+      font-size: 0.65rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      padding: 2px 8px;
+      background: var(--accent-glow);
+      color: var(--accent);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: var(--radius-full);
+      letter-spacing: 1px;
+    }
+
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #34d399;
+      background: rgba(52, 211, 153, 0.1);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+    }
+
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      background-color: #34d399;
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
+      70% { box-shadow: 0 0 0 6px rgba(52, 211, 153, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+    }
+
+    /* CONTAINER MAIN */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      text-align: center;
+      padding: 36px 20px 28px;
+      margin-bottom: 24px;
+    }
+
+    .hero-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent);
       margin-bottom: 8px;
     }
 
-    .hero p {
-      color: var(--text-muted);
-      font-size: 1rem;
-      max-width: 600px;
-      margin: 0 auto 20px;
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 12px;
+      letter-spacing: -1px;
     }
 
-    .po-date {
-      display: flex;
+    .hero-subtitle {
+      color: var(--text-sub);
+      font-size: 0.95rem;
+      max-width: 580px;
+      margin: 0 auto 20px;
+      font-weight: 400;
+    }
+
+    .info-bar {
+      display: inline-flex;
+      flex-wrap: wrap;
       justify-content: center;
       gap: 16px;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
-    .po-date strong {
-      color: var(--text-main);
-    }
-
-    /* SECTION TITLE */
-    .section-head {
-      margin: 32px 0 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .section-head h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-    }
-
-    .btn-size-chart {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--card-border);
-      color: var(--accent);
-      padding: 8px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 10px 20px;
+      border-radius: var(--radius-full);
       font-size: 0.85rem;
-      transition: all 0.2s;
+      color: var(--text-sub);
     }
 
-    .btn-size-chart:hover {
-      background: rgba(229, 169, 60, 0.15);
-      border-color: var(--accent);
+    .info-bar span strong {
+      color: var(--text);
     }
 
-    /* CATALOG GRID */
-    .catalog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-    }
-
-    .product-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      backdrop-filter: blur(10px);
-      transition: transform 0.2s, border-color 0.2s;
+    /* CATEGORY TABS */
+    .tabs-container {
       display: flex;
-      flex-direction: column;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      scrollbar-width: none;
     }
+    .tabs-container::-webkit-scrollbar { display: none; }
 
-    .product-card:hover {
-      border-color: rgba(229, 169, 60, 0.4);
-      transform: translateY(-4px);
-    }
-
-    .product-img {
-      width: 100%;
-      height: 240px;
-      object-fit: cover;
-      background: #121624;
-    }
-
-    .product-details {
-      padding: 20px;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .product-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .product-price {
-      font-size: 1.1rem;
-      color: var(--accent);
-      font-weight: 800;
-      margin-bottom: 16px;
-    }
-
-    /* SIZE SELECTOR MATRIX */
-    .size-matrix {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: auto;
-    }
-
-    .size-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(255, 255, 255, 0.03);
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.04);
-    }
-
-    .size-label {
-      font-weight: 700;
-      font-size: 0.9rem;
-      width: 40px;
-    }
-
-    .qty-control {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .btn-qty {
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      border: 1px solid var(--card-border);
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text-main);
-      font-size: 1rem;
-      font-weight: 700;
+    .tab-btn {
+      padding: 10px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-full);
+      color: var(--text-sub);
+      font-size: 0.85rem;
+      font-weight: 600;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.15s;
+      white-space: nowrap;
+      transition: var(--transition);
     }
 
-    .btn-qty:hover {
+    .tab-btn.active, .tab-btn:hover {
       background: var(--accent);
       color: #000;
       border-color: var(--accent);
     }
 
-    .qty-val {
-      font-weight: 700;
-      font-size: 0.95rem;
-      width: 20px;
-      text-align: center;
-    }
-
-    /* FORM BUYER DATA */
-    .form-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 28px;
-      backdrop-filter: blur(10px);
-      margin-top: 32px;
-    }
-
-    .form-grid {
+    /* PRODUCT CATALOG GRID */
+    .catalog-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-      margin-top: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
     }
 
-    .form-group {
+    .card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
       display: flex;
       flex-direction: column;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .card:hover {
+      border-color: rgba(212, 175, 55, 0.35);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+      transform: translateY(-3px);
+    }
+
+    .card-img-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #0d121f;
+      overflow: hidden;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .card:hover .card-img {
+      transform: scale(1.05);
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(8, 11, 17, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+    }
+
+    .card-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .card-price {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .card-spec {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    /* SIZE SELECTOR COMPONENT */
+    .size-picker {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .size-picker-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-sub);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-chart-link {
+      color: var(--accent);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.75rem;
+      text-decoration: underline;
+    }
+
+    .size-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
       gap: 6px;
     }
 
-    .form-group.full {
-      grid-column: 1 / -1;
+    .size-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px 4px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      transition: var(--transition);
     }
 
-    label {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-muted);
+    .size-item.has-qty {
+      border-color: var(--accent);
+      background: rgba(212, 175, 55, 0.08);
     }
 
-    input, select, textarea {
-      width: 100%;
+    .size-label {
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .btn-mini {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: var(--text);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-mini:hover {
+      background: var(--accent);
+      color: #000;
+    }
+
+    .qty-num {
+      font-size: 0.75rem;
+      font-weight: 800;
+      width: 14px;
+      text-align: center;
+    }
+
+    /* ACCESSORIES ITEM LIST */
+    .acc-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface);
+      border: 1px solid var(--border);
       padding: 12px 14px;
-      background: rgba(10, 14, 26, 0.8);
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      color: var(--text-main);
+      border-radius: var(--radius-md);
+      margin-bottom: 8px;
+    }
+
+    .acc-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .acc-name {
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .acc-price {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .acc-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-acc {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-acc:hover {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+    }
+
+    /* BUYER DATA FORM */
+    .checkout-section {
+      margin-top: 40px;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: clamp(20px, 4vw, 32px);
+    }
+
+    .form-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .form-field label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-sub);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .input-control {
+      width: 100%;
+      padding: 12px 16px;
+      background: #090d16;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      color: var(--text);
       font-family: inherit;
       font-size: 0.95rem;
-      outline: none;
-      transition: border-color 0.2s;
+      transition: var(--transition);
     }
 
-    input:focus, select:focus, textarea:focus {
+    .input-control:focus {
+      outline: none;
       border-color: var(--accent);
       box-shadow: 0 0 0 3px var(--accent-glow);
     }
 
-    .shipping-box {
+    /* SEGMENTED BUTTONS FOR DELIVERY */
+    .segmented {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      background: #090d16;
+      padding: 4px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+
+    .seg-btn {
+      padding: 10px;
+      border: none;
+      background: transparent;
+      color: var(--text-sub);
+      font-weight: 700;
+      font-size: 0.85rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .seg-btn.active {
+      background: var(--surface-hover);
+      color: var(--accent);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .shipping-details {
       display: none;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
       margin-top: 16px;
       padding-top: 16px;
-      border-top: 1px dashed var(--card-border);
+      border-top: 1px dashed var(--border);
     }
 
-    .shipping-box.active {
-      display: grid;
+    .shipping-details.show {
+      display: block;
     }
 
-    /* STICKY BOTTOM BAR */
-    .sticky-bar {
+    /* STICKY FLOATING CART BAR */
+    .floating-bar {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(11, 15, 25, 0.92);
-      backdrop-filter: blur(16px);
-      border-top: 1px solid var(--card-border);
-      padding: 16px 24px;
-      z-index: 99;
+      background: rgba(8, 11, 17, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      padding: 14px 20px;
+      z-index: 100;
     }
 
-    .sticky-content {
-      max-width: 1000px;
+    .bar-inner {
+      max-width: 1100px;
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    .summary-text {
+    .bar-summary {
       display: flex;
       flex-direction: column;
     }
 
-    .summary-qty {
-      font-size: 0.85rem;
-      color: var(--text-muted);
+    .bar-items {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      font-weight: 600;
     }
 
-    .summary-price {
-      font-size: 1.3rem;
+    .bar-price {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.35rem;
       font-weight: 800;
       color: var(--accent);
     }
 
-    .btn-submit {
-      background: linear-gradient(135deg, var(--accent) 0%, #c48a28 100%);
+    .btn-checkout {
+      background: linear-gradient(135deg, var(--accent) 0%, #b8860b 100%);
       color: #000;
       border: none;
-      padding: 14px 32px;
-      border-radius: 30px;
-      font-size: 1rem;
+      padding: 12px 28px;
+      border-radius: var(--radius-full);
+      font-size: 0.95rem;
       font-weight: 800;
       cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 8px 20px var(--accent-glow);
+      transition: var(--transition);
+      box-shadow: 0 8px 24px var(--accent-glow);
     }
 
-    .btn-submit:hover {
+    .btn-checkout:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 25px var(--accent-glow);
+      box-shadow: 0 12px 28px var(--accent-glow);
     }
 
-    .btn-submit:disabled {
+    .btn-checkout:disabled {
       opacity: 0.5;
       cursor: not-allowed;
       transform: none;
     }
 
-    /* MODAL SIZE CHART & SUCCESS */
-    .modal-overlay {
+    /* MODAL SYSTEM */
+    .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(8px);
+      z-index: 999;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
-      z-index: 999;
+      padding: 16px;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s;
+      transition: var(--transition);
     }
 
-    .modal-overlay.active {
+    .modal-backdrop.open {
       opacity: 1;
       pointer-events: auto;
     }
 
-    .modal-card {
-      background: var(--bg-dark);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 28px;
-      max-width: 500px;
+    .modal-box {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
       width: 100%;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+      max-width: 480px;
+      padding: 24px;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.6);
+      position: relative;
     }
 
-    .modal-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 16px;
+    .modal-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .modal-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
     }
 
     .modal-close {
       background: none;
       border: none;
-      color: var(--text-muted);
-      font-size: 1.5rem;
+      color: var(--text-sub);
+      font-size: 1.4rem;
       cursor: pointer;
     }
 
-    .size-table {
+    .table-chart {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 12px;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+      margin-top: 10px;
     }
 
-    .size-table th, .size-table td {
+    .table-chart th, .table-chart td {
       padding: 10px;
-      border: 1px solid var(--card-border);
+      border: 1px solid var(--border);
       text-align: center;
     }
 
-    .size-table th {
-      background: rgba(255, 255, 255, 0.05);
+    .table-chart th {
+      background: var(--surface);
       color: var(--accent);
     }
 
-    .success-icon {
-      font-size: 3rem;
-      text-align: center;
-      margin-bottom: 16px;
-    }
-
-    .success-detail {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px dashed var(--card-border);
+    .success-box {
+      background: rgba(52, 211, 153, 0.08);
+      border: 1px dashed rgba(52, 211, 153, 0.3);
+      border-radius: var(--radius-md);
       padding: 16px;
-      border-radius: 12px;
       margin: 16px 0;
-      font-size: 0.9rem;
-      line-height: 1.6;
+      text-align: center;
     }
 
-    @media (max-width: 600px) {
-      .hero h1 { font-size: 1.8rem; }
-      .sticky-content { flex-direction: row; }
-      .btn-submit { padding: 12px 20px; font-size: 0.9rem; }
+    /* RESPONSIVE DESIGN FOR MOBILE & TABLETS */
+    @media (max-width: 640px) {
+      .hero { padding: 24px 10px; }
+      .hero-title { font-size: 1.8rem; }
+      .catalog-grid { grid-template-columns: 1fr; }
+      .bar-inner { gap: 12px; }
+      .btn-checkout { padding: 12px 20px; font-size: 0.85rem; }
+      .card-img-wrap { aspect-ratio: 1.1 / 1; }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <!-- HERO -->
-    <header class="hero">
-      <div class="badge">Official Store</div>
-      <h1>PRE-ORDER MERCH MQ 2026</h1>
-      <p>Koleksi Merchandise Eksklusif MQ 2026. Kaos berbahan Premium Cotton Combed 30s Hitam & Aksesoris Official.</p>
-      <div class="po-date">
-        <span>📅 Periode PO: <strong>10 – 27 Agustus 2026</strong></span>
+  <!-- NAVBAR -->
+  <nav class="nav">
+    <div class="nav-container">
+      <div class="logo">
+        MQ MERCH <span class="logo-badge">'26</span>
       </div>
-    </header>
+      <div class="status-pill">
+        <div class="pulse-dot"></div>
+        <span>PO BUKA (10-27 AGUS)</span>
+      </div>
+    </div>
+  </nav>
 
-    <!-- SECTION TITLE CATALOG -->
-    <div class="section-head">
-      <h2>Pilih Merchandise</h2>
-      <button type="button" class="btn-size-chart" onclick="openModal('sizeModal')">📐 Size Chart Kaos</button>
+  <div class="container">
+    
+    <!-- HERO HEADER -->
+    <section class="hero">
+      <div class="hero-tag">Official Merchandise Collection</div>
+      <h1 class="hero-title">PRE-ORDER MERCH MQ 2026</h1>
+      <p class="hero-subtitle">Koleksi pakaian & aksoris resmi. Dibuat dengan spesifikasi Premium Cotton Combed 30s & cetak DTF High Density.</p>
+      <div class="info-bar">
+        <span>⏱️ Batas Pembayaran: <strong>1x24 Jam</strong></span>
+        <span>🚚 Pengiriman: <strong>Ekspedisi / Ambil Lokasi</strong></span>
+      </div>
+    </section>
+
+    <!-- CATEGORY TABS -->
+    <div class="tabs-container">
+      <button class="tab-btn active" onclick="filterCategory('all', this)">Semua Product</button>
+      <button class="tab-btn" onclick="filterCategory('pendek', this)">Kaos Lengan Pendek</button>
+      <button class="tab-btn" onclick="filterCategory('panjang', this)">Kaos Lengan Panjang</button>
+      <button class="tab-btn" onclick="filterCategory('aksesoris', this)">Aksesoris</button>
     </div>
 
     <!-- CATALOG GRID -->
     <div class="catalog-grid">
 
-      <!-- ITEM 1: KAOS PENDEK -->
-      <div class="product-card">
-        <img src="https://raw.githubusercontent.com/Tykolp10/form_merch/main/kaos_pendek_hitam.png" alt="Kaos Lengan Pendek Hitam" class="product-img">
-        <div class="product-details">
-          <div class="product-title">Kaos Lengan Pendek Hitam</div>
-          <div class="product-price">Rp 120.000</div>
-          
-          <div class="size-matrix">
-            <div class="size-row">
-              <span class="size-label">S</span>
-              <div class="qty-control">
-                <button type="button" class="btn-qty" onclick="updateQty('KP-S', -1)">-</button>
-                <span class="qty-val" id="qty-KP-S">0</span>
-                <button type="button" class="btn-qty" onclick="updateQty('KP-S', 1)">+</button>
-              </div>
-            </div>
-            <div class="size-row">
-              <span class="size-label">M</span>
-              <div class="qty-control">
-                <button type="button" class="btn-qty" onclick="updateQty('KP-M', -1)">-</button>
-                <span class="qty-val" id="qty-KP-M">0</span>
-                <button type="button" class="btn-qty" onclick="updateQty('KP-M', 1)">+</button>
-              </div>
-            </div>
-            <div class="size-row">
-              <span class="size-label">L</span>
-              <div class="qty-control">
-                <button type="button" class="btn-qty" onclick="updateQty('KP-L', -1)">-</button>
-                <span class="qty-val" id="qty-KP-L">0</span>
-                <button type="button" class="btn-qty" onclick="updateQty('KP-L', 1)">+</button>
-              </div>
-            </div>
-            <div class="size-row">
-              <span class="size-label">XL</span>
-              <div class="qty-control">
-                <button type="button" class="btn-qty" onclick="updateQty('KP-XL', -1)">-</button>
-                <span class="qty-val" id="qty-KP-XL">0</span>
-                <button type="button" class="btn-qty" onclick="updateQty('KP-XL', 1)">+</button>
-              </div>
-            </div>
-            <div class="size-row">
-              <span class="size-label">XXL</span>
-              <div class="qty-control">
-                <button type="button" class="btn-qty" onclick="updateQty('KP-XXL', -1)">-</button>
-                <span class="qty-val" id="qty-KP-XXL">0</span>
-                <button type="button" class="btn-qty" onclick="updateQty('KP-XXL', 1)">+</button>
-              </div>
-            </div>
-          </div>
+      <!-- PRODUCT 1: KAOS PENDEK -->
+      <article class="card" data-cat="pendek">
+        <div class="card-img-wrap">
+          <span class="card-badge">Best Seller</span>
+          <img src="https://raw.githubusercontent.com/Tykolp10/form_merch/main/kaos_pendek_hitam.png" alt="Kaos Lengan Pendek Hitam" class="card-img">
         </div>
-      </div>
+        <div class="card-body">
+          <div class="card-header">
+            <h3 class="card-title">Kaos Lengan Pendek Hitam</h3>
+            <span class="card-price">Rp 120.000</span>
+          </div>
+          <p class="card-spec">100% Cotton Combed 30s • Unisex Fit • Sablon Premium</p>
 
-      <!-- ITEM 2: KAOS PANJANG -->
-      <div class="product-card">
-        <img src="https://raw.githubusercontent.com/Tykolp10/form_merch/main/kaos_panjang_hitam.png" alt="Kaos Lengan Panjang Hitam" class="product-img">
-        <div class="product-details">
-          <div class="product-title">Kaos Lengan Panjang Hitam</div>
-          <div class="product-price">Rp 125.000</div>
-          
-          <div class="size-matrix">
-            <div class="size-row">
-              <span class="size-label">S</span>
-              <div class="qty-control">
-                <button type="button" class="btn-qty" onclick="updateQty('KJ-S', -1)">-</button>
-                <span class="qty-val" id="qty-KJ-S">0</span>
-                <button type="button" class="btn-qty" onclick="updateQty('KJ-S', 1)">+</button>
-              </div>
+          <div class="size-picker">
+            <div class="size-picker-head">
+              <span>Pilih Ukuran & Jumlah</span>
+              <button type="button" class="btn-chart-link" onclick="openModal('sizeModal')">Size Chart</button>
             </div>
-            <div class="size-row">
-              <span class="size-label">M</span>
-              <div class="qty-control">
-                <button type="button" class="btn-qty" onclick="updateQty('KJ-M', -1)">-</button>
-                <span class="qty-val" id="qty-KJ-M">0</span>
-                <button type="button" class="btn-qty" onclick="updateQty('KJ-M', 1)">+</button>
+            
+            <div class="size-grid">
+              <!-- S -->
+              <div class="size-item" id="item-KP-S">
+                <span class="size-label">S</span>
+                <div class="qty-controls">
+                  <button type="button" class="btn-mini" onclick="changeQty('KP-S', -1)">-</button>
+                  <span class="qty-num" id="qty-KP-S">0</span>
+                  <button type="button" class="btn-mini" onclick="changeQty('KP-S', 1)">+</button>
+                </div>
               </div>
-            </div>
-            <div class="size-row">
-              <span class="size-label">L</span>
-              <div class="qty-control">
-                <button type="button" class="btn-qty" onclick="updateQty('KJ-L', -1)">-</button>
-                <span class="qty-val" id="qty-KJ-L">0</span>
-                <button type="button" class="btn-qty" onclick="updateQty('KJ-L', 1)">+</button>
+              <!-- M -->
+              <div class="size-item" id="item-KP-M">
+                <span class="size-label">M</span>
+                <div class="qty-controls">
+                  <button type="button" class="btn-mini" onclick="changeQty('KP-M', -1)">-</button>
+                  <span class="qty-num" id="qty-KP-M">0</span>
+                  <button type="button" class="btn-mini" onclick="changeQty('KP-M', 1)">+</button>
+                </div>
               </div>
-            </div>
-            <div class="size-row">
-              <span class="size-label">XL</span>
-              <div class="qty-control">
-                <button type="button" class="btn-qty" onclick="updateQty('KJ-XL', -1)">-</button>
-                <span class="qty-val" id="qty-KJ-XL">0</span>
-                <button type="button" class="btn-qty" onclick="updateQty('KJ-XL', 1)">+</button>
+              <!-- L -->
+              <div class="size-item" id="item-KP-L">
+                <span class="size-label">L</span>
+                <div class="qty-controls">
+                  <button type="button" class="btn-mini" onclick="changeQty('KP-L', -1)">-</button>
+                  <span class="qty-num" id="qty-KP-L">0</span>
+                  <button type="button" class="btn-mini" onclick="changeQty('KP-L', 1)">+</button>
+                </div>
               </div>
-            </div>
-            <div class="size-row">
-              <span class="size-label">XXL</span>
-              <div class="qty-control">
-                <button type="button" class="btn-qty" onclick="updateQty('KJ-XXL', -1)">-</button>
-                <span class="qty-val" id="qty-KJ-XXL">0</span>
-                <button type="button" class="btn-qty" onclick="updateQty('KJ-XXL', 1)">+</button>
+              <!-- XL -->
+              <div class="size-item" id="item-KP-XL">
+                <span class="size-label">XL</span>
+                <div class="qty-controls">
+                  <button type="button" class="btn-mini" onclick="changeQty('KP-XL', -1)">-</button>
+                  <span class="qty-num" id="qty-KP-XL">0</span>
+                  <button type="button" class="btn-mini" onclick="changeQty('KP-XL', 1)">+</button>
+                </div>
+              </div>
+              <!-- XXL -->
+              <div class="size-item" id="item-KP-XXL">
+                <span class="size-label">XXL</span>
+                <div class="qty-controls">
+                  <button type="button" class="btn-mini" onclick="changeQty('KP-XXL', -1)">-</button>
+                  <span class="qty-num" id="qty-KP-XXL">0</span>
+                  <button type="button" class="btn-mini" onclick="changeQty('KP-XXL', 1)">+</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </article>
 
-      <!-- ITEM 3: AKSESORIS -->
-      <div class="product-card">
-        <div class="product-img" style="display:flex; align-items:center; justify-content:center; font-size:3rem;">🎁</div>
-        <div class="product-details">
-          <div class="product-title">Official Merchandise</div>
-          <div class="product-price">Tumbler, Korek & Keychain</div>
-          
-          <div class="size-matrix">
-            <div class="size-row">
-              <span class="size-label" style="width:110px;">Tumbler (75k)</span>
-              <div class="qty-control">
-                <button type="button" class="btn-qty" onclick="updateQty('TB-STD', -1)">-</button>
-                <span class="qty-val" id="qty-TB-STD">0</span>
-                <button type="button" class="btn-qty" onclick="updateQty('TB-STD', 1)">+</button>
-              </div>
+      <!-- PRODUCT 2: KAOS PANJANG -->
+      <article class="card" data-cat="panjang">
+        <div class="card-img-wrap">
+          <span class="card-badge">Long Sleeve</span>
+          <img src="https://raw.githubusercontent.com/Tykolp10/form_merch/main/kaos_panjang_hitam.png" alt="Kaos Lengan Panjang Hitam" class="card-img">
+        </div>
+        <div class="card-body">
+          <div class="card-header">
+            <h3 class="card-title">Kaos Lengan Panjang Hitam</h3>
+            <span class="card-price">Rp 125.000</span>
+          </div>
+          <p class="card-spec">100% Cotton Combed 30s • Ribbed Cuffs • Unisex Fit</p>
+
+          <div class="size-picker">
+            <div class="size-picker-head">
+              <span>Pilih Ukuran & Jumlah</span>
+              <button type="button" class="btn-chart-link" onclick="openModal('sizeModal')">Size Chart</button>
             </div>
-            <div class="size-row">
-              <span class="size-label" style="width:110px;">Korek (10k)</span>
-              <div class="qty-control">
-                <button type="button" class="btn-qty" onclick="updateQty('KR-STD', -1)">-</button>
-                <span class="qty-val" id="qty-KR-STD">0</span>
-                <button type="button" class="btn-qty" onclick="updateQty('KR-STD', 1)">+</button>
+            
+            <div class="size-grid">
+              <!-- S -->
+              <div class="size-item" id="item-KJ-S">
+                <span class="size-label">S</span>
+                <div class="qty-controls">
+                  <button type="button" class="btn-mini" onclick="changeQty('KJ-S', -1)">-</button>
+                  <span class="qty-num" id="qty-KJ-S">0</span>
+                  <button type="button" class="btn-mini" onclick="changeQty('KJ-S', 1)">+</button>
+                </div>
               </div>
-            </div>
-            <div class="size-row">
-              <span class="size-label" style="width:110px;">Keychain (20k)</span>
-              <div class="qty-control">
-                <button type="button" class="btn-qty" onclick="updateQty('KC-STD', -1)">-</button>
-                <span class="qty-val" id="qty-KC-STD">0</span>
-                <button type="button" class="btn-qty" onclick="updateQty('KC-STD', 1)">+</button>
+              <!-- M -->
+              <div class="size-item" id="item-KJ-M">
+                <span class="size-label">M</span>
+                <div class="qty-controls">
+                  <button type="button" class="btn-mini" onclick="changeQty('KJ-M', -1)">-</button>
+                  <span class="qty-num" id="qty-KJ-M">0</span>
+                  <button type="button" class="btn-mini" onclick="changeQty('KJ-M', 1)">+</button>
+                </div>
+              </div>
+              <!-- L -->
+              <div class="size-item" id="item-KJ-L">
+                <span class="size-label">L</span>
+                <div class="qty-controls">
+                  <button type="button" class="btn-mini" onclick="changeQty('KJ-L', -1)">-</button>
+                  <span class="qty-num" id="qty-KJ-L">0</span>
+                  <button type="button" class="btn-mini" onclick="changeQty('KJ-L', 1)">+</button>
+                </div>
+              </div>
+              <!-- XL -->
+              <div class="size-item" id="item-KJ-XL">
+                <span class="size-label">XL</span>
+                <div class="qty-controls">
+                  <button type="button" class="btn-mini" onclick="changeQty('KJ-XL', -1)">-</button>
+                  <span class="qty-num" id="qty-KJ-XL">0</span>
+                  <button type="button" class="btn-mini" onclick="changeQty('KJ-XL', 1)">+</button>
+                </div>
+              </div>
+              <!-- XXL -->
+              <div class="size-item" id="item-KJ-XXL">
+                <span class="size-label">XXL</span>
+                <div class="qty-controls">
+                  <button type="button" class="btn-mini" onclick="changeQty('KJ-XXL', -1)">-</button>
+                  <span class="qty-num" id="qty-KJ-XXL">0</span>
+                  <button type="button" class="btn-mini" onclick="changeQty('KJ-XXL', 1)">+</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </article>
+
+      <!-- PRODUCT 3: AKSESORIS -->
+      <article class="card" data-cat="aksesoris">
+        <div class="card-body" style="padding-top:28px;">
+          <div class="card-header">
+            <h3 class="card-title">Official Accessories</h3>
+            <span class="card-price">Pernik MQ</span>
+          </div>
+          <p class="card-spec">Tumbler Stainless, Korek Matchbox, & Acrylic Keychain</p>
+
+          <div style="margin-top:16px;">
+            <!-- Tumbler -->
+            <div class="acc-item">
+              <div class="acc-info">
+                <span class="acc-name">Tumbler Thermal</span>
+                <span class="acc-price">Rp 75.000</span>
+              </div>
+              <div class="acc-controls">
+                <button type="button" class="btn-acc" onclick="changeQty('TB-STD', -1)">-</button>
+                <span class="qty-num" id="qty-TB-STD">0</span>
+                <button type="button" class="btn-acc" onclick="changeQty('TB-STD', 1)">+</button>
+              </div>
+            </div>
+
+            <!-- Korek -->
+            <div class="acc-item">
+              <div class="acc-info">
+                <span class="acc-name">Korek Custom</span>
+                <span class="acc-price">Rp 10.000</span>
+              </div>
+              <div class="acc-controls">
+                <button type="button" class="btn-acc" onclick="changeQty('KR-STD', -1)">-</button>
+                <span class="qty-num" id="qty-KR-STD">0</span>
+                <button type="button" class="btn-acc" onclick="changeQty('KR-STD', 1)">+</button>
+              </div>
+            </div>
+
+            <!-- Keychain -->
+            <div class="acc-item">
+              <div class="acc-info">
+                <span class="acc-name">Gantungan Kunci</span>
+                <span class="acc-price">Rp 20.000</span>
+              </div>
+              <div class="acc-controls">
+                <button type="button" class="btn-acc" onclick="changeQty('KC-STD', -1)">-</button>
+                <span class="qty-num" id="qty-KC-STD">0</span>
+                <button type="button" class="btn-acc" onclick="changeQty('KC-STD', 1)">+</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </article>
 
     </div>
 
-    <!-- DATA PEMESAN FORM -->
-    <section class="form-card">
-      <h2>Data Pemesan</h2>
-      <form id="orderForm">
-        <div class="form-grid">
-          <div class="form-group">
+    <!-- FORM DATA PEMESAN -->
+    <section class="checkout-section" id="formSection">
+      <h2 class="form-title">📋 Data Pemesan & Pengiriman</h2>
+      
+      <form id="checkoutForm" onsubmit="event.preventDefault();">
+        <div class="grid-2">
+          <div class="form-field">
             <label for="nama">Nama Lengkap *</label>
-            <input type="text" id="nama" required placeholder="Contoh: Budi Santoso">
+            <input type="text" id="nama" class="input-control" required placeholder="Contoh: Budi Santoso">
           </div>
-          <div class="form-group">
+
+          <div class="form-field">
             <label for="waInput">Nomor WhatsApp Aktif *</label>
-            <input type="tel" id="waInput" required placeholder="Contoh: 081234567890">
+            <input type="tel" id="waInput" class="input-control" required placeholder="Contoh: 081234567890">
           </div>
-          <div class="form-group">
+        </div>
+
+        <div class="grid-2">
+          <div class="form-field">
             <label for="daerah">Asal Daerah / Kelompok *</label>
-            <input type="text" id="daerah" required placeholder="Contoh: Jakarta Selatan">
+            <input type="text" id="daerah" class="input-control" required placeholder="Contoh: Jakarta Selatan">
           </div>
-          <div class="form-group">
-            <label for="metode">Metode Pengambilan *</label>
-            <select id="metode" onchange="toggleShipping(this.value)">
-              <option value="KIRIM">Kirim via Ekspedisi</option>
-              <option value="AMBIL">Ambil di Lokasi</option>
-            </select>
+
+          <div class="form-field">
+            <label>Metode Pengambilan *</label>
+            <div class="segmented">
+              <button type="button" class="seg-btn active" id="btnKirim" onclick="setDelivery('KIRIM')">🚚 Ekspedisi</button>
+              <button type="button" class="seg-btn" id="btnAmbil" onclick="setDelivery('AMBIL')">📍 Ambil Lokasi</button>
+            </div>
           </div>
         </div>
 
-        <!-- ALAMAT PENGIRIMAN -->
-        <div id="shippingBox" class="shipping-box active">
-          <div class="form-group">
-            <label for="penerima">Nama Penerima *</label>
-            <input type="text" id="penerima" placeholder="Nama penerima paket">
+        <!-- ALAMAT (JIKA DIKIRIM) -->
+        <div class="shipping-details show" id="shippingDetails">
+          <div class="grid-2">
+            <div class="form-field">
+              <label for="penerima">Nama Penerima *</label>
+              <input type="text" id="penerima" class="input-control" placeholder="Nama penerima paket">
+            </div>
+            <div class="form-field">
+              <label for="hpPenerima">No HP Penerima *</label>
+              <input type="tel" id="hpPenerima" class="input-control" placeholder="08xxxxxxxxxx">
+            </div>
           </div>
-          <div class="form-group">
-            <label for="hpPenerima">No HP Penerima *</label>
-            <input type="tel" id="hpPenerima" placeholder="08xxxxxxxxxx">
+
+          <div class="grid-2">
+            <div class="form-field">
+              <label for="provinsi">Provinsi *</label>
+              <input type="text" id="provinsi" class="input-control" placeholder="Jawa Barat">
+            </div>
+            <div class="form-field">
+              <label for="kota">Kota / Kabupaten *</label>
+              <input type="text" id="kota" class="input-control" placeholder="Bandung">
+            </div>
           </div>
-          <div class="form-group">
-            <label for="provinsi">Provinsi *</label>
-            <input type="text" id="provinsi" placeholder="Provinsi">
+
+          <div class="grid-2">
+            <div class="form-field">
+              <label for="kecamatan">Kecamatan *</label>
+              <input type="text" id="kecamatan" class="input-control" placeholder="Coblong">
+            </div>
+            <div class="form-field">
+              <label for="kodePos">Kode Pos *</label>
+              <input type="text" id="kodePos" class="input-control" placeholder="40132">
+            </div>
           </div>
-          <div class="form-group">
-            <label for="kota">Kota / Kabupaten *</label>
-            <input type="text" id="kota" placeholder="Kota / Kabupaten">
-          </div>
-          <div class="form-group">
-            <label for="kecamatan">Kecamatan *</label>
-            <input type="text" id="kecamatan" placeholder="Kecamatan">
-          </div>
-          <div class="form-group">
-            <label for="kodePos">Kode Pos *</label>
-            <input type="text" id="kodePos" placeholder="Kode Pos">
-          </div>
-          <div class="form-group full">
+
+          <div class="form-field">
             <label for="alamat">Alamat Lengkap *</label>
-            <textarea id="alamat" rows="2" placeholder="Nama Jalan, RT/RW, No. Rumah, Patokan"></textarea>
+            <textarea id="alamat" class="input-control" rows="2" placeholder="Nama jalan, RT/RW, nomor rumah, & patokan"></textarea>
           </div>
         </div>
 
-        <div class="form-group full" style="margin-top:16px;">
-          <label for="catatan">Catatan (opsional)</label>
-          <input type="text" id="catatan" placeholder="Catatan khusus pesanan">
+        <div class="form-field">
+          <label for="catatan">Catatan Tambahan (opsional)</label>
+          <input type="text" id="catatan" class="input-control" placeholder="Instruksi khusus pesanan">
         </div>
       </form>
     </section>
 
   </div>
 
-  <!-- STICKY BOTTOM BAR -->
-  <div class="sticky-bar">
-    <div class="sticky-content">
-      <div class="summary-text">
-        <span class="summary-qty" id="summaryQty">0 item terpilih</span>
-        <span class="summary-price" id="summaryPrice">Rp 0</span>
+  <!-- STICKY FLOATING CART BAR -->
+  <div class="floating-bar">
+    <div class="bar-inner">
+      <div class="bar-summary">
+        <span class="bar-items" id="barItems">0 item dipilih</span>
+        <span class="bar-price" id="barPrice">Rp 0</span>
       </div>
-      <button type="button" class="btn-submit" id="btnSubmit" onclick="submitOrder()">Kirim Pesanan 🚀</button>
+      <button type="button" class="btn-checkout" id="btnCheckout" onclick="processOrder()">Pesan Sekarang 🚀</button>
     </div>
   </div>
 
   <!-- MODAL SIZE CHART -->
-  <div class="modal-overlay" id="sizeModal">
-    <div class="modal-card">
-      <div class="modal-title">
-        <span>📐 Size Chart Kaos</span>
+  <div class="modal-backdrop" id="sizeModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">📐 Size Chart Kaos</h3>
         <button class="modal-close" onclick="closeModal('sizeModal')">&times;</button>
       </div>
-      <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:12px;">Ukuran standar Indonesia dalam centimeter (cm):</p>
-      <table class="size-table">
+      <p style="color:var(--text-sub); font-size:0.85rem;">Ukuran standar kaos Indonesia (Lebar Dada x Panjang Badan):</p>
+      <table class="table-chart">
         <thead>
           <tr>
             <th>Ukuran</th>
@@ -717,11 +1046,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>S</td><td>47 cm</td><td>67 cm</td></tr>
-          <tr><td>M</td><td>49 cm</td><td>70 cm</td></tr>
-          <tr><td>L</td><td>52 cm</td><td>73 cm</td></tr>
-          <tr><td>XL</td><td>55 cm</td><td>75 cm</td></tr>
-          <tr><td>XXL</td><td>58 cm</td><td>78 cm</td></tr>
+          <tr><td><strong>S</strong></td><td>47 cm</td><td>67 cm</td></tr>
+          <tr><td><strong>M</strong></td><td>49 cm</td><td>70 cm</td></tr>
+          <tr><td><strong>L</strong></td><td>52 cm</td><td>73 cm</td></tr>
+          <tr><td><strong>XL</strong></td><td>55 cm</td><td>75 cm</td></tr>
+          <tr><td><strong>XXL</strong></td><td>58 cm</td><td>78 cm</td></tr>
         </tbody>
       </table>
       <p style="color:var(--text-muted); font-size:0.75rem; margin-top:12px; text-align:center;">*(Toleransi ukuran ±1-2 cm)*</p>
@@ -729,22 +1058,21 @@
   </div>
 
   <!-- MODAL SUCCESS -->
-  <div class="modal-overlay" id="successModal">
-    <div class="modal-card" style="text-align:center;">
-      <div class="success-icon">✅</div>
-      <h2 style="margin-bottom:8px;">Pesanan Diterima!</h2>
-      <p style="color:var(--text-muted); font-size:0.9rem;">Detail pesanan dan instruksi pembayaran telah dikirim ke WhatsApp kamu.</p>
-      
-      <div class="success-detail" id="successContent">
-        <!-- Filled by JS -->
+  <div class="modal-backdrop" id="successModal">
+    <div class="modal-box" style="text-align:center;">
+      <div style="font-size:3rem; margin-bottom:8px;">🎉</div>
+      <h3 class="modal-title" style="margin-bottom:6px;">Pesanan Diterima!</h3>
+      <p style="color:var(--text-sub); font-size:0.85rem;">Instruksi pembayaran & detail pesanan telah dikirim ke WhatsApp kamu.</p>
+
+      <div class="success-box" id="successBox">
+        <!-- JS fills this -->
       </div>
 
-      <button class="btn-submit" style="width:100%;" onclick="location.reload()">Selesai & Pesan Lagi</button>
+      <button class="btn-checkout" style="width:100%; border-radius:var(--radius-md);" onclick="location.reload()">Selesai & Pesan Lagi</button>
     </div>
   </div>
 
   <script>
-    // URL WEB APP GOOGLE APPS SCRIPT
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzmJSCdPIzbcvqkvk1NXvcgN6Mc97NxhDN159Ubu1qYODPBMx_wvcv5EncUz4UsfTO9iA/exec";
 
     const PRICES = {
@@ -754,15 +1082,25 @@
     };
 
     const cart = {};
+    let deliveryMethod = 'KIRIM';
 
-    function updateQty(sku, delta) {
+    function changeQty(sku, delta) {
       cart[sku] = (cart[sku] || 0) + delta;
       if (cart[sku] <= 0) delete cart[sku];
-      document.getElementById('qty-' + sku).innerText = cart[sku] || 0;
-      updateSummary();
+      
+      const qtyEl = document.getElementById('qty-' + sku);
+      if (qtyEl) qtyEl.innerText = cart[sku] || 0;
+
+      const itemEl = document.getElementById('item-' + sku);
+      if (itemEl) {
+        if (cart[sku] > 0) itemEl.classList.add('has-qty');
+        else itemEl.classList.remove('has-qty');
+      }
+
+      updateBar();
     }
 
-    function updateSummary() {
+    function updateBar() {
       let totalQty = 0;
       let totalPrice = 0;
 
@@ -772,39 +1110,56 @@
         totalPrice += q * (PRICES[sku] || 0);
       });
 
-      document.getElementById('summaryQty').innerText = totalQty + ' item terpilih';
-      document.getElementById('summaryPrice').innerText = 'Rp ' + totalPrice.toLocaleString('id-ID');
+      document.getElementById('barItems').innerText = totalQty + ' item dipilih';
+      document.getElementById('barPrice').innerText = 'Rp ' + totalPrice.toLocaleString('id-ID');
     }
 
-    function toggleShipping(val) {
-      const box = document.getElementById('shippingBox');
-      if (val === 'KIRIM') {
-        box.classList.add('active');
+    function setDelivery(method) {
+      deliveryMethod = method;
+      const btnKirim = document.getElementById('btnKirim');
+      const btnAmbil = document.getElementById('btnAmbil');
+      const details = document.getElementById('shippingDetails');
+
+      if (method === 'KIRIM') {
+        btnKirim.classList.add('active');
+        btnAmbil.classList.remove('active');
+        details.classList.add('show');
       } else {
-        box.classList.remove('active');
+        btnAmbil.classList.add('active');
+        btnKirim.classList.remove('active');
+        details.classList.remove('show');
       }
     }
 
-    function openModal(id) { document.getElementById(id).classList.add('active'); }
-    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+    function filterCategory(cat, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-    async function submitOrder() {
-      const btn = document.getElementById('btnSubmit');
-      
-      // Validation items
+      document.querySelectorAll('.card').forEach(card => {
+        if (cat === 'all' || card.getAttribute('data-cat') === cat) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function openModal(id) { document.getElementById(id).classList.add('open'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+    async function processOrder() {
       const items = Object.keys(cart).map(sku => ({ sku: sku, qty: cart[sku] }));
       if (items.length === 0) {
-        alert('Pilih minimal 1 produk terlebih dahulu.');
+        alert('Silakan pilih minimal 1 item merchandise.');
         return;
       }
 
-      // Validation Form
       const nama = document.getElementById('nama').value.trim();
       const waInput = document.getElementById('waInput').value.trim();
       const daerah = document.getElementById('daerah').value.trim();
-      const metode = document.getElementById('metode').value;
 
       if (!nama || !waInput || !daerah) {
+        document.getElementById('formSection').scrollIntoView({ behavior: 'smooth' });
         alert('Mohon lengkapi Nama, WhatsApp, dan Asal Daerah.');
         return;
       }
@@ -813,12 +1168,12 @@
         nama: nama,
         waInput: waInput,
         daerah: daerah,
-        metode: metode,
+        metode: deliveryMethod,
         catatan: document.getElementById('catatan').value.trim(),
         items: items
       };
 
-      if (metode === 'KIRIM') {
+      if (deliveryMethod === 'KIRIM') {
         payload.penerima = document.getElementById('penerima').value.trim();
         payload.hpPenerima = document.getElementById('hpPenerima').value.trim();
         payload.provinsi = document.getElementById('provinsi').value.trim();
@@ -828,16 +1183,13 @@
         payload.kodePos = document.getElementById('kodePos').value.trim();
 
         if (!payload.penerima || !payload.provinsi || !payload.kota || !payload.alamat) {
+          document.getElementById('formSection').scrollIntoView({ behavior: 'smooth' });
           alert('Mohon lengkapi data alamat pengiriman.');
           return;
         }
       }
 
-      if (WEB_APP_URL === "ISI_URL_WEB_APP_APPS_SCRIPT_DISINI") {
-        alert("⚠️ WEB_APP_URL belum diisi! Silakan deploy Apps Script sebagai Web App dan salin URL-nya ke file index.html.");
-        return;
-      }
-
+      const btn = document.getElementById('btnCheckout');
       btn.disabled = true;
       btn.innerText = "Memproses...";
 
@@ -850,24 +1202,26 @@
 
         const data = await res.json();
         btn.disabled = false;
-        btn.innerText = "Kirim Pesanan 🚀";
+        btn.innerText = "Pesan Sekarang 🚀";
 
         if (data.status === 'success') {
           const waUrl = "https://wa.me/6281259926906?text=" + encodeURIComponent("Halo Admin CS, saya mau kirim bukti transfer untuk Order ID: " + data.orderId + " dengan nominal Rp " + Number(data.totalTf).toLocaleString('id-ID'));
-          document.getElementById('successContent').innerHTML = `
-            <strong>Order ID: ${data.orderId}</strong><br>
-            Total Transfer: <strong style="color:var(--accent); font-size:1.1rem;">Rp ${Number(data.totalTf).toLocaleString('id-ID')}</strong><br>
-            <small>(Termasuk kode unik Rp ${data.kodeUnik})</small><br>
-            <a href="${waUrl}" target="_blank" style="display:inline-block; margin-top:12px; padding:10px 18px; background:#25D366; color:#000; font-weight:700; border-radius:20px; text-decoration:none; font-size:0.85rem;">📲 Kirim Bukti Transfer via WA</a>
+          document.getElementById('successBox').innerHTML = `
+            <div style="font-size:0.85rem; color:var(--text-sub);">ORDER ID</div>
+            <div style="font-family:'Syne',sans-serif; font-size:1.3rem; font-weight:800; color:var(--text);">${data.orderId}</div>
+            <div style="margin-top:10px; font-size:0.85rem; color:var(--text-sub);">TOTAL TRANSFER</div>
+            <div style="font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:800; color:var(--accent);">Rp ${Number(data.totalTf).toLocaleString('id-ID')}</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">(Termasuk 3 digit kode unik Rp ${data.kodeUnik})</div>
+            <a href="${waUrl}" target="_blank" style="display:inline-flex; align-items:center; gap:6px; margin-top:14px; padding:10px 20px; background:#25D366; color:#000; font-weight:800; border-radius:var(--radius-full); text-decoration:none; font-size:0.85rem;">📲 Kirim Bukti Transfer via WA</a>
           `;
           openModal('successModal');
         } else {
-          alert('Gagal mengirim pesanan: ' + (data.message || 'Terjadi kesalahan'));
+          alert('Gagal membuat pesanan: ' + (data.message || 'Terjadi kesalahan'));
         }
       } catch (err) {
         btn.disabled = false;
-        btn.innerText = "Kirim Pesanan 🚀";
-        alert('Terjadi kesalahan koneksi. Pastikan Web App URL Apps Script sudah di-deploy dengan benar.');
+        btn.innerText = "Pesan Sekarang 🚀";
+        alert('Terjadi kesalahan koneksi.');
       }
     }
   </script>
