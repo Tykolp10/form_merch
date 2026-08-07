@@ -136,6 +136,7 @@ function bootstrapSystem() {
   // 2. MEMBUAT SPREADSHEET & TAB
   // --------------------------------------------------------------------------
   const ss = SpreadsheetApp.create('DB PO MERCH MQ 2026');
+  PropertiesService.getScriptProperties().setProperty('SPREADSHEET_ID', ss.getId());
   
   // Hubungkan Form ke Spreadsheet
   form.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());

@@ -148,8 +148,16 @@ function kirimWA_(target, pesan, orderId, jenis) {
   return ok;
 }
 
+function getSS_() {
+  const active = SpreadsheetApp.getActive();
+  if (active) return active;
+  const id = P_('SPREADSHEET_ID', '1MKSkGoOuGqG8NVKm3Ubs3o_LwJQ0vcqCxJLbJHJpak8');
+  if (id) return SpreadsheetApp.openById(id);
+  throw new Error('SPREADSHEET_ID tidak terkonfigurasi');
+}
+
 function logWA_(orderId, target, jenis, status, info) {
-  const sh = SpreadsheetApp.getActive().getSheetByName(SH.LOG);
+  const sh = getSS_().getSheetByName(SH.LOG);
   if (!sh) return;
   sh.appendRow([new Date(), orderId || '', target || '', jenis || '', status, String(info).slice(0, 500)]);
 }
@@ -164,7 +172,7 @@ function doPost(e) {
   }
 
   try {
-    const ss     = SpreadsheetApp.getActive();
+    const ss     = getSS_();
     const shProd = ss.getSheetByName(SH.PRODUK);
     const shOrd  = ss.getSheetByName(SH.ORDERS);
     const shLine = ss.getSheetByName(SH.LINES);
@@ -290,7 +298,7 @@ function prosesBaris_(rowNum) {
   try { lock.waitLock(30000); } catch (err) { return; }
 
   try {
-    const ss     = SpreadsheetApp.getActive();
+    const ss     = getSS_();
     const shResp = ss.getSheetByName(SH.RESP);
     const shProd = ss.getSheetByName(SH.PRODUK);
     const shOrd  = ss.getSheetByName(SH.ORDERS);
@@ -477,7 +485,7 @@ function prosesUlangDialog() {
 }
 
 function kirimUlangGagal() {
-  const sh = SpreadsheetApp.getActive().getSheetByName(SH.LOG);
+  const sh = getSS_().getSheetByName(SH.LOG);
   const last = sh.getLastRow();
   if (last < 2) return;
   const data = sh.getRange(2, 1, last - 1, 6).getValues();
@@ -504,7 +512,7 @@ function tesFonnte() {
 
 /** Jalan tiap jam: hanguskan order lewat batas, kirim reminder H-3 jam */
 function cekExpired() {
-  const sh = SpreadsheetApp.getActive().getSheetByName(SH.ORDERS);
+  const sh = getSS_().getSheetByName(SH.ORDERS);
   const last = sh.getLastRow();
   if (last < 2) return;
 
@@ -541,7 +549,7 @@ function cekExpired() {
 
 /** Broadcast rekap penjualan tiap 12 jam ke akun utama (083830463179) */
 function notifRekap12Jam() {
-  const ss = SpreadsheetApp.getActive();
+  const ss = getSS_();
   const shOrd = ss.getSheetByName(SH.ORDERS);
   if (!shOrd || shOrd.getLastRow() < 2) return;
 
@@ -584,7 +592,7 @@ function healthCheck() {
 
 /** Pasang semua trigger. Jalankan sekali. */
 function pasangTrigger() {
-  const ss = SpreadsheetApp.getActive();
+  const ss = getSS_();
   ScriptApp.getProjectTriggers().forEach(function(t) { ScriptApp.deleteTrigger(t); });
 
   ScriptApp.newTrigger('onFormSubmit').forSpreadsheet(ss).onFormSubmit().create();
