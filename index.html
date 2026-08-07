@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pre-Order Merch MQ 2026 — Official Store</title>
+  <meta name="description" content="Pre-Order Official Merchandise MQ 2026. Kaos Lengan Pendek, Kaos Lengan Panjang, Tumbler, Korek & Keychain.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0b0f19;
+      --card-bg: rgba(22, 28, 45, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent: #e5a93c;
+      --accent-glow: rgba(229, 169, 60, 0.3);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --success: #10b981;
+      --danger: #ef4444;
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(229, 169, 60, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.06) 0%, transparent 40%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      padding-bottom: 100px;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    /* HEADER HERO */
+    .hero {
+      text-align: center;
+      padding: 40px 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      backdrop-filter: blur(12px);
+      margin-bottom: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      background: rgba(229, 169, 60, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(229, 169, 60, 0.3);
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff 0%, #d1d5db 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+
+    .po-date {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .po-date strong {
+      color: var(--text-main);
+    }
+
+    /* SECTION TITLE */
+    .section-head {
+      margin: 32px 0 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .section-head h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .btn-size-chart {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--accent);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    .btn-size-chart:hover {
+      background: rgba(229, 169, 60, 0.15);
+      border-color: var(--accent);
+    }
+
+    /* CATALOG GRID */
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      transition: transform 0.2s, border-color 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      border-color: rgba(229, 169, 60, 0.4);
+      transform: translateY(-4px);
+    }
+
+    .product-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      background: #121624;
+    }
+
+    .product-details {
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .product-price {
+      font-size: 1.1rem;
+      color: var(--accent);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    /* SIZE SELECTOR MATRIX */
+    .size-matrix {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .size-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .size-label {
+      font-weight: 700;
+      font-size: 0.9rem;
+      width: 40px;
+    }
+
+    .qty-control {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-qty {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+
+    .btn-qty:hover {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+    }
+
+    .qty-val {
+      font-weight: 700;
+      font-size: 0.95rem;
+      width: 20px;
+      text-align: center;
+    }
+
+    /* FORM BUYER DATA */
+    .form-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 28px;
+      backdrop-filter: blur(10px);
+      margin-top: 32px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      background: rgba(10, 14, 26, 0.8);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .shipping-box {
+      display: none;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--card-border);
+    }
+
+    .shipping-box.active {
+      display: grid;
+    }
+
+    /* STICKY BOTTOM BAR */
+    .sticky-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(11, 15, 25, 0.92);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid var(--card-border);
+      padding: 16px 24px;
+      z-index: 99;
+    }
+
+    .sticky-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .summary-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .summary-qty {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .summary-price {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, var(--accent) 0%, #c48a28 100%);
+      color: #000;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 8px 20px var(--accent-glow);
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px var(--accent-glow);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* MODAL SIZE CHART & SUCCESS */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: var(--bg-dark);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 28px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    }
+
+    .modal-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .size-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 0.9rem;
+    }
+
+    .size-table th, .size-table td {
+      padding: 10px;
+      border: 1px solid var(--card-border);
+      text-align: center;
+    }
+
+    .size-table th {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--accent);
+    }
+
+    .success-icon {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .success-detail {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed var(--card-border);
+      padding: 16px;
+      border-radius: 12px;
+      margin: 16px 0;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.8rem; }
+      .sticky-content { flex-direction: row; }
+      .btn-submit { padding: 12px 20px; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- HERO -->
+    <header class="hero">
+      <div class="badge">Official Store</div>
+      <h1>PRE-ORDER MERCH MQ 2026</h1>
+      <p>Koleksi Merchandise Eksklusif MQ 2026. Kaos berbahan Premium Cotton Combed 30s Hitam & Aksesoris Official.</p>
+      <div class="po-date">
+        <span>📅 Periode PO: <strong>10 – 27 Agustus 2026</strong></span>
+      </div>
+    </header>
+
+    <!-- SECTION TITLE CATALOG -->
+    <div class="section-head">
+      <h2>Pilih Merchandise</h2>
+      <button type="button" class="btn-size-chart" onclick="openModal('sizeModal')">📐 Size Chart Kaos</button>
+    </div>
+
+    <!-- CATALOG GRID -->
+    <div class="catalog-grid">
+
+      <!-- ITEM 1: KAOS PENDEK -->
+      <div class="product-card">
+        <img src="kaos_pendek_hitam_1786125514461.png" alt="Kaos Lengan Pendek Hitam" class="product-img">
+        <div class="product-details">
+          <div class="product-title">Kaos Lengan Pendek Hitam</div>
+          <div class="product-price">Rp 120.000</div>
+          
+          <div class="size-matrix">
+            <div class="size-row">
+              <span class="size-label">S</span>
+              <div class="qty-control">
+                <button type="button" class="btn-qty" onclick="updateQty('KP-S', -1)">-</button>
+                <span class="qty-val" id="qty-KP-S">0</span>
+                <button type="button" class="btn-qty" onclick="updateQty('KP-S', 1)">+</button>
+              </div>
+            </div>
+            <div class="size-row">
+              <span class="size-label">M</span>
+              <div class="qty-control">
+                <button type="button" class="btn-qty" onclick="updateQty('KP-M', -1)">-</button>
+                <span class="qty-val" id="qty-KP-M">0</span>
+                <button type="button" class="btn-qty" onclick="updateQty('KP-M', 1)">+</button>
+              </div>
+            </div>
+            <div class="size-row">
+              <span class="size-label">L</span>
+              <div class="qty-control">
+                <button type="button" class="btn-qty" onclick="updateQty('KP-L', -1)">-</button>
+                <span class="qty-val" id="qty-KP-L">0</span>
+                <button type="button" class="btn-qty" onclick="updateQty('KP-L', 1)">+</button>
+              </div>
+            </div>
+            <div class="size-row">
+              <span class="size-label">XL</span>
+              <div class="qty-control">
+                <button type="button" class="btn-qty" onclick="updateQty('KP-XL', -1)">-</button>
+                <span class="qty-val" id="qty-KP-XL">0</span>
+                <button type="button" class="btn-qty" onclick="updateQty('KP-XL', 1)">+</button>
+              </div>
+            </div>
+            <div class="size-row">
+              <span class="size-label">XXL</span>
+              <div class="qty-control">
+                <button type="button" class="btn-qty" onclick="updateQty('KP-XXL', -1)">-</button>
+                <span class="qty-val" id="qty-KP-XXL">0</span>
+                <button type="button" class="btn-qty" onclick="updateQty('KP-XXL', 1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 2: KAOS PANJANG -->
+      <div class="product-card">
+        <img src="kaos_panjang_hitam_1786125528433.png" alt="Kaos Lengan Panjang Hitam" class="product-img">
+        <div class="product-details">
+          <div class="product-title">Kaos Lengan Panjang Hitam</div>
+          <div class="product-price">Rp 125.000</div>
+          
+          <div class="size-matrix">
+            <div class="size-row">
+              <span class="size-label">S</span>
+              <div class="qty-control">
+                <button type="button" class="btn-qty" onclick="updateQty('KJ-S', -1)">-</button>
+                <span class="qty-val" id="qty-KJ-S">0</span>
+                <button type="button" class="btn-qty" onclick="updateQty('KJ-S', 1)">+</button>
+              </div>
+            </div>
+            <div class="size-row">
+              <span class="size-label">M</span>
+              <div class="qty-control">
+                <button type="button" class="btn-qty" onclick="updateQty('KJ-M', -1)">-</button>
+                <span class="qty-val" id="qty-KJ-M">0</span>
+                <button type="button" class="btn-qty" onclick="updateQty('KJ-M', 1)">+</button>
+              </div>
+            </div>
+            <div class="size-row">
+              <span class="size-label">L</span>
+              <div class="qty-control">
+                <button type="button" class="btn-qty" onclick="updateQty('KJ-L', -1)">-</button>
+                <span class="qty-val" id="qty-KJ-L">0</span>
+                <button type="button" class="btn-qty" onclick="updateQty('KJ-L', 1)">+</button>
+              </div>
+            </div>
+            <div class="size-row">
+              <span class="size-label">XL</span>
+              <div class="qty-control">
+                <button type="button" class="btn-qty" onclick="updateQty('KJ-XL', -1)">-</button>
+                <span class="qty-val" id="qty-KJ-XL">0</span>
+                <button type="button" class="btn-qty" onclick="updateQty('KJ-XL', 1)">+</button>
+              </div>
+            </div>
+            <div class="size-row">
+              <span class="size-label">XXL</span>
+              <div class="qty-control">
+                <button type="button" class="btn-qty" onclick="updateQty('KJ-XXL', -1)">-</button>
+                <span class="qty-val" id="qty-KJ-XXL">0</span>
+                <button type="button" class="btn-qty" onclick="updateQty('KJ-XXL', 1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 3: AKSESORIS -->
+      <div class="product-card">
+        <div class="product-img" style="display:flex; align-items:center; justify-content:center; font-size:3rem;">🎁</div>
+        <div class="product-details">
+          <div class="product-title">Official Merchandise</div>
+          <div class="product-price">Tumbler, Korek & Keychain</div>
+          
+          <div class="size-matrix">
+            <div class="size-row">
+              <span class="size-label" style="width:110px;">Tumbler (75k)</span>
+              <div class="qty-control">
+                <button type="button" class="btn-qty" onclick="updateQty('TB-STD', -1)">-</button>
+                <span class="qty-val" id="qty-TB-STD">0</span>
+                <button type="button" class="btn-qty" onclick="updateQty('TB-STD', 1)">+</button>
+              </div>
+            </div>
+            <div class="size-row">
+              <span class="size-label" style="width:110px;">Korek (10k)</span>
+              <div class="qty-control">
+                <button type="button" class="btn-qty" onclick="updateQty('KR-STD', -1)">-</button>
+                <span class="qty-val" id="qty-KR-STD">0</span>
+                <button type="button" class="btn-qty" onclick="updateQty('KR-STD', 1)">+</button>
+              </div>
+            </div>
+            <div class="size-row">
+              <span class="size-label" style="width:110px;">Keychain (20k)</span>
+              <div class="qty-control">
+                <button type="button" class="btn-qty" onclick="updateQty('KC-STD', -1)">-</button>
+                <span class="qty-val" id="qty-KC-STD">0</span>
+                <button type="button" class="btn-qty" onclick="updateQty('KC-STD', 1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- DATA PEMESAN FORM -->
+    <section class="form-card">
+      <h2>Data Pemesan</h2>
+      <form id="orderForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="nama">Nama Lengkap *</label>
+            <input type="text" id="nama" required placeholder="Contoh: Budi Santoso">
+          </div>
+          <div class="form-group">
+            <label for="waInput">Nomor WhatsApp Aktif *</label>
+            <input type="tel" id="waInput" required placeholder="Contoh: 081234567890">
+          </div>
+          <div class="form-group">
+            <label for="daerah">Asal Daerah / Kelompok *</label>
+            <input type="text" id="daerah" required placeholder="Contoh: Jakarta Selatan">
+          </div>
+          <div class="form-group">
+            <label for="metode">Metode Pengambilan *</label>
+            <select id="metode" onchange="toggleShipping(this.value)">
+              <option value="KIRIM">Kirim via Ekspedisi</option>
+              <option value="AMBIL">Ambil di Lokasi</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- ALAMAT PENGIRIMAN -->
+        <div id="shippingBox" class="shipping-box active">
+          <div class="form-group">
+            <label for="penerima">Nama Penerima *</label>
+            <input type="text" id="penerima" placeholder="Nama penerima paket">
+          </div>
+          <div class="form-group">
+            <label for="hpPenerima">No HP Penerima *</label>
+            <input type="tel" id="hpPenerima" placeholder="08xxxxxxxxxx">
+          </div>
+          <div class="form-group">
+            <label for="provinsi">Provinsi *</label>
+            <input type="text" id="provinsi" placeholder="Provinsi">
+          </div>
+          <div class="form-group">
+            <label for="kota">Kota / Kabupaten *</label>
+            <input type="text" id="kota" placeholder="Kota / Kabupaten">
+          </div>
+          <div class="form-group">
+            <label for="kecamatan">Kecamatan *</label>
+            <input type="text" id="kecamatan" placeholder="Kecamatan">
+          </div>
+          <div class="form-group">
+            <label for="kodePos">Kode Pos *</label>
+            <input type="text" id="kodePos" placeholder="Kode Pos">
+          </div>
+          <div class="form-group full">
+            <label for="alamat">Alamat Lengkap *</label>
+            <textarea id="alamat" rows="2" placeholder="Nama Jalan, RT/RW, No. Rumah, Patokan"></textarea>
+          </div>
+        </div>
+
+        <div class="form-group full" style="margin-top:16px;">
+          <label for="catatan">Catatan (opsional)</label>
+          <input type="text" id="catatan" placeholder="Catatan khusus pesanan">
+        </div>
+      </form>
+    </section>
+
+  </div>
+
+  <!-- STICKY BOTTOM BAR -->
+  <div class="sticky-bar">
+    <div class="sticky-content">
+      <div class="summary-text">
+        <span class="summary-qty" id="summaryQty">0 item terpilih</span>
+        <span class="summary-price" id="summaryPrice">Rp 0</span>
+      </div>
+      <button type="button" class="btn-submit" id="btnSubmit" onclick="submitOrder()">Kirim Pesanan 🚀</button>
+    </div>
+  </div>
+
+  <!-- MODAL SIZE CHART -->
+  <div class="modal-overlay" id="sizeModal">
+    <div class="modal-card">
+      <div class="modal-title">
+        <span>📐 Size Chart Kaos</span>
+        <button class="modal-close" onclick="closeModal('sizeModal')">&times;</button>
+      </div>
+      <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:12px;">Ukuran standar Indonesia dalam centimeter (cm):</p>
+      <table class="size-table">
+        <thead>
+          <tr>
+            <th>Ukuran</th>
+            <th>Lebar Dada</th>
+            <th>Panjang Badan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>S</td><td>47 cm</td><td>67 cm</td></tr>
+          <tr><td>M</td><td>49 cm</td><td>70 cm</td></tr>
+          <tr><td>L</td><td>52 cm</td><td>73 cm</td></tr>
+          <tr><td>XL</td><td>55 cm</td><td>75 cm</td></tr>
+          <tr><td>XXL</td><td>58 cm</td><td>78 cm</td></tr>
+        </tbody>
+      </table>
+      <p style="color:var(--text-muted); font-size:0.75rem; margin-top:12px; text-align:center;">*(Toleransi ukuran ±1-2 cm)*</p>
+    </div>
+  </div>
+
+  <!-- MODAL SUCCESS -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-card" style="text-align:center;">
+      <div class="success-icon">✅</div>
+      <h2 style="margin-bottom:8px;">Pesanan Diterima!</h2>
+      <p style="color:var(--text-muted); font-size:0.9rem;">Detail pesanan dan instruksi pembayaran telah dikirim ke WhatsApp kamu.</p>
+      
+      <div class="success-detail" id="successContent">
+        <!-- Filled by JS -->
+      </div>
+
+      <button class="btn-submit" style="width:100%;" onclick="location.reload()">Selesai & Pesan Lagi</button>
+    </div>
+  </div>
+
+  <script>
+    // URL WEB APP GOOGLE APPS SCRIPT
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzmJSCdPIzbcvqkvk1NXvcgN6Mc97NxhDN159Ubu1qYODPBMx_wvcv5EncUz4UsfTO9iA/exec";
+
+    const PRICES = {
+      'KP-S': 120000, 'KP-M': 120000, 'KP-L': 120000, 'KP-XL': 120000, 'KP-XXL': 120000,
+      'KJ-S': 125000, 'KJ-M': 125000, 'KJ-L': 125000, 'KJ-XL': 125000, 'KJ-XXL': 125000,
+      'TB-STD': 75000, 'KR-STD': 10000, 'KC-STD': 20000
+    };
+
+    const cart = {};
+
+    function updateQty(sku, delta) {
+      cart[sku] = (cart[sku] || 0) + delta;
+      if (cart[sku] <= 0) delete cart[sku];
+      document.getElementById('qty-' + sku).innerText = cart[sku] || 0;
+      updateSummary();
+    }
+
+    function updateSummary() {
+      let totalQty = 0;
+      let totalPrice = 0;
+
+      Object.keys(cart).forEach(sku => {
+        const q = cart[sku];
+        totalQty += q;
+        totalPrice += q * (PRICES[sku] || 0);
+      });
+
+      document.getElementById('summaryQty').innerText = totalQty + ' item terpilih';
+      document.getElementById('summaryPrice').innerText = 'Rp ' + totalPrice.toLocaleString('id-ID');
+    }
+
+    function toggleShipping(val) {
+      const box = document.getElementById('shippingBox');
+      if (val === 'KIRIM') {
+        box.classList.add('active');
+      } else {
+        box.classList.remove('active');
+      }
+    }
+
+    function openModal(id) { document.getElementById(id).classList.add('active'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+    async function submitOrder() {
+      const btn = document.getElementById('btnSubmit');
+      
+      // Validation items
+      const items = Object.keys(cart).map(sku => ({ sku: sku, qty: cart[sku] }));
+      if (items.length === 0) {
+        alert('Pilih minimal 1 produk terlebih dahulu.');
+        return;
+      }
+
+      // Validation Form
+      const nama = document.getElementById('nama').value.trim();
+      const waInput = document.getElementById('waInput').value.trim();
+      const daerah = document.getElementById('daerah').value.trim();
+      const metode = document.getElementById('metode').value;
+
+      if (!nama || !waInput || !daerah) {
+        alert('Mohon lengkapi Nama, WhatsApp, dan Asal Daerah.');
+        return;
+      }
+
+      const payload = {
+        nama: nama,
+        waInput: waInput,
+        daerah: daerah,
+        metode: metode,
+        catatan: document.getElementById('catatan').value.trim(),
+        items: items
+      };
+
+      if (metode === 'KIRIM') {
+        payload.penerima = document.getElementById('penerima').value.trim();
+        payload.hpPenerima = document.getElementById('hpPenerima').value.trim();
+        payload.provinsi = document.getElementById('provinsi').value.trim();
+        payload.kota = document.getElementById('kota').value.trim();
+        payload.kecamatan = document.getElementById('kecamatan').value.trim();
+        payload.alamat = document.getElementById('alamat').value.trim();
+        payload.kodePos = document.getElementById('kodePos').value.trim();
+
+        if (!payload.penerima || !payload.provinsi || !payload.kota || !payload.alamat) {
+          alert('Mohon lengkapi data alamat pengiriman.');
+          return;
+        }
+      }
+
+      if (WEB_APP_URL === "ISI_URL_WEB_APP_APPS_SCRIPT_DISINI") {
+        alert("⚠️ WEB_APP_URL belum diisi! Silakan deploy Apps Script sebagai Web App dan salin URL-nya ke file index.html.");
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerText = "Memproses...";
+
+      try {
+        const res = await fetch(WEB_APP_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+        btn.disabled = false;
+        btn.innerText = "Kirim Pesanan 🚀";
+
+        if (data.status === 'success') {
+          document.getElementById('successContent').innerHTML = `
+            <strong>Order ID: ${data.orderId}</strong><br>
+            Total Transfer: <strong style="color:var(--accent); font-size:1.1rem;">Rp ${Number(data.totalTf).toLocaleString('id-ID')}</strong><br>
+            <small>(Termasuk kode unik Rp ${data.kodeUnik})</small>
+          `;
+          openModal('successModal');
+        } else {
+          alert('Gagal mengirim pesanan: ' + (data.message || 'Terjadi kesalahan'));
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerText = "Kirim Pesanan 🚀";
+        alert('Terjadi kesalahan koneksi. Pastikan Web App URL Apps Script sudah di-deploy dengan benar.');
+      }
+    }
+  </script>
+</body>
+</html>
