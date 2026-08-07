@@ -16,13 +16,13 @@ const TZ = 'Asia/Jakarta';
 // ====== KONFIGURASI AWAL — JALANKAN SEKALI ======
 function setupProperties() {
   PropertiesService.getScriptProperties().setProperties({
-    FONNTE_TOKEN   : 'ISI_TOKEN_FONNTE_DISINI',
+    FONNTE_TOKEN   : 'GCASAboTL7iPJj3NpQkj',
     ADMIN_WA       : '6283199861947',
     NOTIF_REKAP_WA : '6283830463179,6281358385254',
     CS_WA          : '081259926906',
-    NAMA_BANK      : 'BCA',
-    NOMOR_REKENING : '1234567890',
-    ATAS_NAMA      : 'Nama Pemilik Rekening',
+    NAMA_BANK      : 'BRI',
+    NOMOR_REKENING : '203201008844502',
+    ATAS_NAMA      : 'Abidatul Faricha Ch',
     BATAS_JAM      : '24',
     PAKAI_KODE_UNIK: 'YA',
     ORDER_COUNTER  : '0',
