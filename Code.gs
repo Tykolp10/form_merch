@@ -28,7 +28,15 @@ function setupProperties() {
     ORDER_COUNTER  : '0',
     NOTIF_ADMIN    : 'YA'
   });
-  SpreadsheetApp.getUi().alert('Konfigurasi tersimpan. Ganti nilainya di Project Settings → Script Properties.');
+  alertOrLog_('Konfigurasi tersimpan. Ganti nilainya di Project Settings → Script Properties.');
+}
+
+function alertOrLog_(pesan) {
+  try {
+    SpreadsheetApp.getUi().alert(pesan);
+  } catch (e) {
+    Logger.log('INFO: ' + pesan);
+  }
 }
 
 function P_(k, def) {
@@ -497,13 +505,13 @@ function kirimUlangGagal() {
       n++;
     }
   });
-  SpreadsheetApp.getUi().alert('Berhasil kirim ulang: ' + n);
+  alertOrLog_('Berhasil kirim ulang: ' + n);
 }
 
 function tesFonnte() {
   const ok = kirimWA_(P_('ADMIN_WA'), '🧪 Tes koneksi Fonnte — ' +
     Utilities.formatDate(new Date(), TZ, 'dd/MM/yyyy HH:mm') + ' WIB', 'TES', 'TES');
-  SpreadsheetApp.getUi().alert(ok
+  alertOrLog_(ok
     ? 'Berhasil. Cek WhatsApp admin.'
     : 'GAGAL. Buka tab LOG_WA, baca kolom Respons_API.');
 }
@@ -600,5 +608,5 @@ function pasangTrigger() {
   ScriptApp.newTrigger('notifRekap12Jam').timeBased().everyHours(12).create();
   ScriptApp.newTrigger('healthCheck').timeBased().atHour(8).everyDays(1).inTimezone(TZ).create();
 
-  SpreadsheetApp.getUi().alert('4 trigger terpasang:\n• onFormSubmit\n• cekExpired (tiap jam)\n• notifRekap12Jam (tiap 12 jam)\n• healthCheck (tiap 08:00)');
+  alertOrLog_('4 trigger terpasang:\n• onFormSubmit\n• cekExpired (tiap jam)\n• notifRekap12Jam (tiap 12 jam)\n• healthCheck (tiap 08:00)');
 }

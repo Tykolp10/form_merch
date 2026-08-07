@@ -31,7 +31,7 @@ function resetDataUji() {
   // Reset counter
   PropertiesService.getScriptProperties().setProperty('ORDER_COUNTER', '0');
 
-  SpreadsheetApp.getUi().alert('🧹 Data uji berhasil direset! Counter order kembali ke 0.');
+  alertOrLog_('🧹 Data uji berhasil direset! Counter order kembali ke 0.');
 }
 
 /**
@@ -145,5 +145,5 @@ function testSkenario6_Expired() {
 function jalankanSemuaPengujian() {
   testSkenario1_MultiVarian();
   testSkenario6_Expired();
-  SpreadsheetApp.getUi().alert('Pengujian selesai. Cek Apps Script Execution Logs.');
+  alertOrLog_('Pengujian selesai. Cek Apps Script Execution Logs.');
 }
