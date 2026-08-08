@@ -638,21 +638,32 @@ function onEditTrigger(e) {
 
   const val = String(e.value).trim().toUpperCase();
 
-  // Jika Kolom T (Status_Bayar) diubah jadi LUNAS / TRUE (centang checkbox)
-  if (col === 20 && (val === 'LUNAS' || val === 'TRUE' || val === 'YA')) {
-    sh.getRange(row, 20).setValue('LUNAS');
-    sh.getRange(row, 22).setValue(new Date()); // V: Tgl_Verifikasi
+  // Jika Kolom T (Status_Bayar) diubah
+  if (col === 20) {
+    if (val === 'LUNAS' || val === 'TRUE' || val === 'YA') {
+      sh.getRange(row, 20).setValue('LUNAS');
+      sh.getRange(row, 22).setValue(new Date()); // V: Tgl_Verifikasi
 
-    const d = sh.getRange(row, 1, 1, 26).getValues()[0];
-    const waSent = String(sh.getRange(row, 25).getValue()); // Y: Catatan_Admin
+      const d = sh.getRange(row, 1, 1, 26).getValues()[0];
+      const waSent = String(sh.getRange(row, 25).getValue()); // Y: Catatan_Admin
 
-    if (waSent !== 'NOTIF_LUNAS_TERKIRIM') {
-      const pesan = '*PEMBAYARAN TERVERIFIKASI* ✅\n\nOrder ' + d[0] + '\na.n. ' + d[2] +
-                    '\n' + d[14] + ' pcs • ' + rupiah_(d[18]) +
-                    '\n\nPesananmu telah masuk daftar produksi. Untuk informasi kelanjutan pengiriman & resi, silakan hubungi CS WA (' + P_('CS_WA', '0895330478397') + ').\n\nTerima kasih 🙏';
-      if (kirimWA_(d[4], pesan, d[0], 'LUNAS')) {
-        sh.getRange(row, 25).setValue('NOTIF_LUNAS_TERKIRIM');
+      if (waSent !== 'NOTIF_LUNAS_TERKIRIM') {
+        const pesan = '*PEMBAYARAN TERVERIFIKASI* ✅\n\nOrder ' + d[0] + '\na.n. ' + d[2] +
+                      '\n' + d[14] + ' pcs • ' + rupiah_(d[18]) +
+                      '\n\nPesananmu telah masuk daftar produksi. Untuk informasi kelanjutan pengiriman & resi, silakan hubungi CS WA (' + P_('CS_WA', '0895330478397') + ').\n\nTerima kasih 🙏';
+        if (kirimWA_(d[4], pesan, d[0], 'LUNAS')) {
+          sh.getRange(row, 25).setValue('NOTIF_LUNAS_TERKIRIM');
+        }
       }
+    } else if (val === 'BATAL') {
+      sh.getRange(row, 20).setValue('BATAL');
+      sh.getRange(row, 23).setValue('BATAL');
+    } else if (val === 'EXPIRED') {
+      sh.getRange(row, 20).setValue('EXPIRED');
+    } else if (val.indexOf('MENUNGGU') >= 0) {
+      sh.getRange(row, 20).setValue('MENUNGGU_VERIFIKASI');
+    } else if (val.indexOf('BELUM') >= 0) {
+      sh.getRange(row, 20).setValue('BELUM_BAYAR');
     }
   }
 }
