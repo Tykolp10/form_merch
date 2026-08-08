@@ -787,17 +787,34 @@
       transition: var(--transition);
     }
 
-    .modal-backdrop.open { opacity: 1; pointer-events: auto; }
+    /* TOAST NOTIFICATION SYSTEM */
+    .toast-notification {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      color: #ffffff;
+      padding: 10px 22px;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 700;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+      z-index: 99999;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 0;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-    .modal-box {
-      background: var(--glass-surface);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-lg);
-      width: 100%;
-      max-width: 480px;
-      padding: 24px;
-      box-shadow: 0 24px 48px rgba(0,0,0,0.6);
-      position: relative;
+    .toast-notification.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
     }
 
     .modal-header {
@@ -882,7 +899,7 @@
       <p class="hero-subtitle">Koleksi pakaian & aksoris resmi. Dibuat dengan spesifikasi Premium Cotton Combed 30s & cetak DTF High Density.</p>
       <div class="info-bar">
         <span>⏱️ Batas Pembayaran: <strong>1x24 Jam</strong></span>
-        <span>🚚 Pengiriman: <strong>Ekspedisi / Ambil Lokasi</strong></span>
+        <span>💬 Info Detail Pengiriman: <a href="https://wa.me/6281259926906?text=Halo%20Admin%20CS,%20saya%20mau%20tanya%20detail%20pengiriman%20merchandise" target="_blank" style="color:#25D366; font-weight:800; text-decoration:underline;">Tanya CS WA 💬</a></span>
       </div>
     </section>
 
@@ -979,7 +996,7 @@
       <!-- PRODUCT 2: KAOS PANJANG -->
       <article class="card" data-cat="panjang" id="card-KJ">
         <div class="card-img-wrap">
-          <span class="card-badge">Long Sleeve</span>
+          <span class="card-badge">✨ Premium Cotton 30s</span>
           <img id="img-KJ" src="https://raw.githubusercontent.com/Tykolp10/form_merch/main/kaos_panjang_hitam.png" alt="Kaos Lengan Panjang" class="card-img">
           <div class="img-slide-tag" onclick="toggleView('KJ')">Tampak: <span id="view-KJ">Depan</span> (Klik putar) 🔄</div>
         </div>
@@ -1058,7 +1075,7 @@
       <!-- PRODUCT 3: TUMBLER -->
       <article class="card" data-cat="aksesoris">
         <div class="card-img-wrap">
-          <span class="card-badge">Limited Edition</span>
+          <span class="card-badge">🧊 Stainless 500ml</span>
           <img src="https://raw.githubusercontent.com/Tykolp10/form_merch/main/tumbler.png" alt="Tumbler Thermal Stainless" class="card-img">
         </div>
         <div class="card-body">
@@ -1090,7 +1107,7 @@
       <!-- PRODUCT 4: KOREK CUSTOM -->
       <article class="card" data-cat="aksesoris">
         <div class="card-img-wrap">
-          <span class="card-badge">Accessories</span>
+          <span class="card-badge">🎨 Custom Print</span>
           <img src="https://raw.githubusercontent.com/Tykolp10/form_merch/main/korek.png" alt="Korek Custom MQ" class="card-img">
         </div>
         <div class="card-body">
@@ -1119,11 +1136,11 @@
         </div>
       </article>
 
-      <!-- PRODUCT 5: GANTUNGAN KUNCI -->
+      <!-- PRODUCT 5: KEYCHAIN ACRYLIC -->
       <article class="card" data-cat="aksesoris">
         <div class="card-img-wrap">
-          <span class="card-badge">Merchandise</span>
-          <img src="https://raw.githubusercontent.com/Tykolp10/form_merch/main/keychain.png" alt="Gantungan Kunci Acrylic" class="card-img">
+          <span class="card-badge">🔑 Acrylic 3D</span>
+          <img src="https://raw.githubusercontent.com/Tykolp10/form_merch/main/keychain.png" alt="Keychain Acrylic Custom" class="card-img">
         </div>
         <div class="card-body">
           <div class="card-header">
@@ -1479,14 +1496,39 @@
         btn.innerText = "Pesan Sekarang 🚀";
 
         if (data.status === 'success') {
+          const itemSummaryText = items.map(it => {
+            let label = it.sku;
+            if (it.sku.startsWith('KP')) label = 'Kaos Pendek (' + activeColors['KP'] + ' - ' + it.sku.replace('KP-', '') + ')';
+            else if (it.sku.startsWith('KJ')) label = 'Kaos Panjang (' + activeColors['KJ'] + ' - ' + it.sku.replace('KJ-', '') + ')';
+            else if (it.sku === 'TB-STD') label = 'Tumbler Stainless';
+            else if (it.sku === 'KR-STD') label = 'Korek Custom';
+            else if (it.sku === 'KC-STD') label = 'Keychain Acrylic';
+            return `<div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--text-sub); margin-bottom:4px;"><span>• ${it.qty}x ${label}</span><span>Rp ${(PRICES[it.sku] * it.qty).toLocaleString('id-ID')}</span></div>`;
+          }).join('');
+
           const waUrl = "https://wa.me/6281259926906?text=" + encodeURIComponent("Halo Admin CS, saya mau kirim bukti transfer untuk Order ID: " + data.orderId + " dengan nominal Rp " + Number(data.totalTf).toLocaleString('id-ID'));
+          
           document.getElementById('successBox').innerHTML = `
-            <div style="font-size:0.85rem; color:var(--text-sub);">ORDER ID</div>
-            <div style="font-family:'Inter',sans-serif; font-size:1.3rem; font-weight:800; color:var(--text);">${data.orderId}</div>
-            <div style="margin-top:10px; font-size:0.85rem; color:var(--text-sub);">TOTAL TRANSFER</div>
-            <div style="font-family:'Inter',sans-serif; font-size:1.5rem; font-weight:800; color:var(--accent);">Rp ${Number(data.totalTf).toLocaleString('id-ID')}</div>
-            <div style="font-size:0.75rem; color:var(--text-muted);">(Termasuk 3 digit kode unik Rp ${data.kodeUnik})</div>
-            <a href="${waUrl}" target="_blank" style="display:inline-flex; align-items:center; gap:6px; margin-top:14px; padding:10px 20px; background:#25D366; color:#000; font-weight:800; border-radius:var(--radius-full); text-decoration:none; font-size:0.85rem;">📲 Kirim Bukti Transfer via WA</a>
+            <div style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.04em;">ORDER ID</div>
+            <div style="font-size:1.3rem; font-weight:800; color:var(--text); margin-bottom:12px;">${data.orderId}</div>
+            
+            <div style="background:rgba(15,23,42,0.7); border:1px solid var(--glass-border); border-radius:var(--radius-md); padding:12px; margin-bottom:14px; text-align:left;">
+              <div style="font-size:0.75rem; font-weight:700; color:#fff; margin-bottom:8px; text-transform:uppercase;">🧾 Rincian Pesanan:</div>
+              ${itemSummaryText}
+              <div style="border-top:1px dashed var(--glass-border); margin-top:8px; padding-top:8px; display:flex; justify-content:space-between; font-weight:800; font-size:0.9rem; color:#fff;">
+                <span>Total Tagihan</span>
+                <span>Rp ${Number(data.totalTf).toLocaleString('id-ID')}</span>
+              </div>
+            </div>
+
+            <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:var(--radius-md); padding:14px; margin-bottom:16px;">
+              <div style="font-size:0.75rem; font-weight:700; color:var(--text-sub); text-transform:uppercase;">Pembayaran Bank BRI</div>
+              <div style="font-size:1.25rem; font-weight:800; color:#ffffff; letter-spacing:1px; margin:4px 0;">203201008844502</div>
+              <div style="font-size:0.8rem; color:var(--text-sub); margin-bottom:8px;">a.n. Abidatul Faricha Ch</div>
+              <button type="button" onclick="copyRekening('203201008844502')" style="padding:6px 16px; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:var(--radius-full); color:#fff; font-size:0.78rem; font-weight:700; cursor:pointer; transition:all 0.2s;">📋 Salin No. Rekening</button>
+            </div>
+
+            <a href="${waUrl}" target="_blank" style="display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:12px 20px; background:#25D366; color:#000; font-weight:800; border-radius:var(--radius-full); text-decoration:none; font-size:0.88rem; box-shadow:0 8px 24px rgba(37,211,102,0.35);">📲 Kirim Bukti Transfer via WA</a>
           `;
           openModal('successModal');
         } else {
@@ -1497,6 +1539,33 @@
         btn.innerText = "Pesan Sekarang 🚀";
         alert('Terjadi kesalahan koneksi.');
       }
+    }
+
+    function copyRekening(norek) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(norek);
+      } else {
+        const input = document.createElement('input');
+        input.value = norek;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+      }
+      showToast('📋 No. Rekening BRI (' + norek + ') Berhasil Disalin!');
+    }
+
+    function showToast(msg) {
+      let t = document.getElementById('toast');
+      if (!t) {
+        t = document.createElement('div');
+        t.id = 'toast';
+        t.className = 'toast-notification';
+        document.body.appendChild(t);
+      }
+      t.innerHTML = '✨ ' + msg;
+      t.classList.add('show');
+      setTimeout(() => { t.classList.remove('show'); }, 3000);
     }
   </script>
 </body>
