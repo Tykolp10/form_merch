@@ -638,11 +638,12 @@ function pasangTrigger() {
   const ss = getSS_();
   ScriptApp.getProjectTriggers().forEach(function(t) { ScriptApp.deleteTrigger(t); });
 
+  ScriptApp.newTrigger('onOpen').forSpreadsheet(ss).onOpen().create();
   ScriptApp.newTrigger('onFormSubmit').forSpreadsheet(ss).onFormSubmit().create();
   ScriptApp.newTrigger('onEditTrigger').forSpreadsheet(ss).onEdit().create();
   ScriptApp.newTrigger('cekExpired').timeBased().everyHours(1).create();
   ScriptApp.newTrigger('notifRekap12Jam').timeBased().everyHours(12).create();
   ScriptApp.newTrigger('healthCheck').timeBased().atHour(8).everyDays(1).inTimezone(TZ).create();
 
-  alertOrLog_('5 trigger terpasang:\n• onFormSubmit\n• onEdit (auto WA saat LUNAS)\n• cekExpired (tiap jam)\n• notifRekap12Jam (tiap 12 jam)\n• healthCheck (tiap 08:00)');
+  alertOrLog_('6 trigger terpasang:\n• onOpen (Menu Admin)\n• onFormSubmit\n• onEdit (auto WA saat LUNAS)\n• cekExpired (tiap jam)\n• notifRekap12Jam (tiap 12 jam)\n• healthCheck (tiap 08:00)');
 }
