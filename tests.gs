@@ -307,6 +307,26 @@ function simulasiMultiPersonaDanDaerah() {
           { sku: 'KR-STD', qty: 1 }
         ]
       }
+    },
+    {
+      deskripsi: '6. Pembeli Paket Bundling Hemat (Surabaya, Jawa Timur)',
+      payload: {
+        nama: 'Rahmat Hidayat',
+        waInput: '081233445566',
+        daerah: 'Surabaya - Jawa Timur',
+        metode: 'KIRIM',
+        penerima: 'Rahmat Hidayat',
+        hpPenerima: '081233445566',
+        provinsi: 'Jawa Timur',
+        kota: 'Surabaya',
+        kecamatan: 'Tegalsari',
+        alamat: 'Jl. Basuki Rahmat No. 12',
+        kodePos: '60261',
+        catatan: 'Paket bundling hemat 200rb.',
+        items: [
+          { sku: 'BD-KP-L', qty: 1 } // 1 Paket Bundling Kaos Pendek L (Rp 200.000)
+        ]
+      }
     }
   ];
 

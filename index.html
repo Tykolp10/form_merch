@@ -942,6 +942,7 @@
     <!-- CATEGORY TABS -->
     <div class="tabs-container">
       <button class="tab-btn active" onclick="filterCategory('all', this)">Semua Product</button>
+      <button class="tab-btn" onclick="filterCategory('bundling', this)">🔥 Paket Bundling (Hemat)</button>
       <button class="tab-btn" onclick="filterCategory('pendek', this)">Kaos Lengan Pendek</button>
       <button class="tab-btn" onclick="filterCategory('panjang', this)">Kaos Lengan Panjang</button>
       <button class="tab-btn" onclick="filterCategory('aksesoris', this)">Aksesoris</button>
@@ -949,6 +950,68 @@
 
     <!-- CATALOG GRID -->
     <div class="catalog-grid">
+
+      <!-- PRODUCT 0: PAKET BUNDLING -->
+      <article class="card" data-cat="bundling" id="card-BD" style="border: 1px solid rgba(245, 158, 11, 0.4); background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);">
+        <div class="card-img-wrap">
+          <img id="img-BD" src="https://raw.githubusercontent.com/Tykolp10/form_merch/main/kaos_pendek_hitam.png" alt="Paket Bundling Complete" class="card-img">
+          <div class="img-slide-tag" onclick="toggleView('BD')">Tampak: <span id="view-BD">Depan</span> (Klik putar) 🔄</div>
+          <div style="position:absolute; top:12px; left:12px; background:linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color:#000; font-size:0.75rem; font-weight:800; padding:4px 10px; border-radius:var(--radius-full); box-shadow:0 4px 12px rgba(245,158,11,0.4);">🔥 HEMAT Rp 25.000</div>
+        </div>
+        <div class="card-body">
+          <div class="card-header">
+            <h3 class="card-title" id="title-BD">Paket Bundling Merch (Kaos Pendek Hitam)</h3>
+            <div style="display:flex; flex-direction:column; align-items:flex-end;">
+              <span class="card-price" style="color:#f59e0b;">Rp 200.000</span>
+              <span style="font-size:0.72rem; color:var(--text-sub); text-decoration:line-through;">Rp 225.000</span>
+            </div>
+          </div>
+          <p class="card-spec">🎁 Paket Lengkap: 1x Kaos + 1x Tumbler Stainless + 1x Korek Custom + 1x Keychain Acrylic</p>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
+            <div>
+              <span style="font-size:0.72rem; font-weight:700; color:var(--text-sub); text-transform:uppercase; display:block; margin-bottom:6px;">Model Kaos:</span>
+              <div style="display:flex; gap:4px;">
+                <button type="button" class="color-pill active" style="padding:4px 8px; font-size:0.75rem;" onclick="switchBundleModel('KP', this)">Pendek</button>
+                <button type="button" class="color-pill" style="padding:4px 8px; font-size:0.75rem;" onclick="switchBundleModel('KJ', this)">Panjang</button>
+              </div>
+            </div>
+            <div>
+              <span style="font-size:0.72rem; font-weight:700; color:var(--text-sub); text-transform:uppercase; display:block; margin-bottom:6px;">Warna Kaos:</span>
+              <div style="display:flex; gap:4px;">
+                <button type="button" class="color-pill active" style="padding:4px 8px; font-size:0.75rem;" onclick="selectColor('BD', 'hitam', this)">⚫ Hitam</button>
+                <button type="button" class="color-pill" style="padding:4px 8px; font-size:0.75rem;" onclick="selectColor('BD', 'merah', this)">🔴 Merah</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="size-picker">
+            <div class="size-picker-head">
+              <span>Pilih Ukuran Kaos & Qty Paket</span>
+              <button type="button" class="btn-chart-link" onclick="openModal('sizeModal')">Size Chart</button>
+            </div>
+            
+            <!-- SIZE GRID BUNDLE KAOS PENDEK (KP) -->
+            <div class="size-grid" id="grid-BD-KP">
+              <div class="size-item" id="item-BD-KP-S"><span class="size-label">S</span><div class="qty-controls"><button type="button" class="btn-mini" onclick="changeQty('BD-KP-S', -1)">-</button><span class="qty-num" id="qty-BD-KP-S">0</span><button type="button" class="btn-mini" onclick="changeQty('BD-KP-S', 1)">+</button></div></div>
+              <div class="size-item" id="item-BD-KP-M"><span class="size-label">M</span><div class="qty-controls"><button type="button" class="btn-mini" onclick="changeQty('BD-KP-M', -1)">-</button><span class="qty-num" id="qty-BD-KP-M">0</span><button type="button" class="btn-mini" onclick="changeQty('BD-KP-M', 1)">+</button></div></div>
+              <div class="size-item" id="item-BD-KP-L"><span class="size-label">L</span><div class="qty-controls"><button type="button" class="btn-mini" onclick="changeQty('BD-KP-L', -1)">-</button><span class="qty-num" id="qty-BD-KP-L">0</span><button type="button" class="btn-mini" onclick="changeQty('BD-KP-L', 1)">+</button></div></div>
+              <div class="size-item" id="item-BD-KP-XL"><span class="size-label">XL</span><div class="qty-controls"><button type="button" class="btn-mini" onclick="changeQty('BD-KP-XL', -1)">-</button><span class="qty-num" id="qty-BD-KP-XL">0</span><button type="button" class="btn-mini" onclick="changeQty('BD-KP-XL', 1)">+</button></div></div>
+              <div class="size-item" id="item-BD-KP-XXL"><span class="size-label">XXL</span><div class="qty-controls"><button type="button" class="btn-mini" onclick="changeQty('BD-KP-XXL', -1)">-</button><span class="qty-num" id="qty-BD-KP-XXL">0</span><button type="button" class="btn-mini" onclick="changeQty('BD-KP-XXL', 1)">+</button></div></div>
+            </div>
+
+            <!-- SIZE GRID BUNDLE KAOS PANJANG (KJ) -->
+            <div class="size-grid" id="grid-BD-KJ" style="display:none;">
+              <div class="size-item" id="item-BD-KJ-S"><span class="size-label">S</span><div class="qty-controls"><button type="button" class="btn-mini" onclick="changeQty('BD-KJ-S', -1)">-</button><span class="qty-num" id="qty-BD-KJ-S">0</span><button type="button" class="btn-mini" onclick="changeQty('BD-KJ-S', 1)">+</button></div></div>
+              <div class="size-item" id="item-BD-KJ-M"><span class="size-label">M</span><div class="qty-controls"><button type="button" class="btn-mini" onclick="changeQty('BD-KJ-M', -1)">-</button><span class="qty-num" id="qty-BD-KJ-M">0</span><button type="button" class="btn-mini" onclick="changeQty('BD-KJ-M', 1)">+</button></div></div>
+              <div class="size-item" id="item-BD-KJ-L"><span class="size-label">L</span><div class="qty-controls"><button type="button" class="btn-mini" onclick="changeQty('BD-KJ-L', -1)">-</button><span class="qty-num" id="qty-BD-KJ-L">0</span><button type="button" class="btn-mini" onclick="changeQty('BD-KJ-L', 1)">+</button></div></div>
+              <div class="size-item" id="item-BD-KJ-XL"><span class="size-label">XL</span><div class="qty-controls"><button type="button" class="btn-mini" onclick="changeQty('BD-KJ-XL', -1)">-</button><span class="qty-num" id="qty-BD-KJ-XL">0</span><button type="button" class="btn-mini" onclick="changeQty('BD-KJ-XL', 1)">+</button></div></div>
+              <div class="size-item" id="item-BD-KJ-XXL"><span class="size-label">XXL</span><div class="qty-controls"><button type="button" class="btn-mini" onclick="changeQty('BD-KJ-XXL', -1)">-</button><span class="qty-num" id="qty-BD-KJ-XXL">0</span><button type="button" class="btn-mini" onclick="changeQty('BD-KJ-XXL', 1)">+</button></div></div>
+            </div>
+
+          </div>
+        </div>
+      </article>
 
       <!-- PRODUCT 1: KAOS PENDEK -->
       <article class="card" data-cat="pendek" id="card-KP">
@@ -1349,7 +1412,9 @@
     const PRICES = {
       'KP-S': 120000, 'KP-M': 120000, 'KP-L': 120000, 'KP-XL': 120000, 'KP-XXL': 120000,
       'KJ-S': 125000, 'KJ-M': 125000, 'KJ-L': 125000, 'KJ-XL': 125000, 'KJ-XXL': 125000,
-      'TB-STD': 75000, 'KR-STD': 10000, 'KC-STD': 20000
+      'TB-STD': 75000, 'KR-STD': 10000, 'KC-STD': 20000,
+      'BD-KP-S': 200000, 'BD-KP-M': 200000, 'BD-KP-L': 200000, 'BD-KP-XL': 200000, 'BD-KP-XXL': 200000,
+      'BD-KJ-S': 200000, 'BD-KJ-M': 200000, 'BD-KJ-L': 200000, 'BD-KJ-XL': 200000, 'BD-KJ-XXL': 200000
     };
 
     const cart = {};
@@ -1414,8 +1479,42 @@
       }
     }
 
-    const activeColors = { 'KP': 'hitam', 'KJ': 'hitam' };
-    const currentViews = { 'KP': 'Depan', 'KJ': 'Depan' };
+    const activeColors = { 'KP': 'hitam', 'KJ': 'hitam', 'BD': 'hitam' };
+    const currentViews = { 'KP': 'Depan', 'KJ': 'Depan', 'BD': 'Depan' };
+    let activeBundleModel = 'KP';
+
+    function switchBundleModel(model, btn) {
+      const container = btn.parentElement;
+      container.querySelectorAll('.color-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      activeBundleModel = model;
+      const gridKP = document.getElementById('grid-BD-KP');
+      const gridKJ = document.getElementById('grid-BD-KJ');
+
+      if (model === 'KP') {
+        if (gridKP) gridKP.style.display = 'grid';
+        if (gridKJ) gridKJ.style.display = 'none';
+      } else {
+        if (gridKP) gridKP.style.display = 'none';
+        if (gridKJ) gridKJ.style.display = 'grid';
+      }
+
+      const color = activeColors['BD'] || 'hitam';
+      const colorLabel = color === 'hitam' ? 'Hitam' : 'Merah';
+      const titleEl = document.getElementById('title-BD');
+      const imgEl = document.getElementById('img-BD');
+      const viewEl = document.getElementById('view-BD');
+      const isKP = model === 'KP';
+      const baseName = isKP ? 'kaos_pendek_' : 'kaos_panjang_';
+
+      if (titleEl) titleEl.innerText = 'Paket Bundling Merch (Kaos ' + (isKP ? 'Pendek ' : 'Panjang ') + colorLabel + ')';
+      if (imgEl) {
+        const isDepan = viewEl ? viewEl.innerText === 'Depan' : true;
+        const suffix = isDepan ? '.png' : '_belakang.png';
+        imgEl.src = 'https://raw.githubusercontent.com/Tykolp10/form_merch/main/' + baseName + color + suffix;
+      }
+    }
 
     function selectColor(prod, color, btn) {
       const container = btn.parentElement;
@@ -1428,6 +1527,18 @@
       const imgEl = document.getElementById('img-' + prod);
       const titleEl = document.getElementById('title-' + prod);
       const viewEl = document.getElementById('view-' + prod);
+
+      if (prod === 'BD') {
+        const colorLabel = color === 'hitam' ? 'Hitam' : 'Merah';
+        const isKP = activeBundleModel === 'KP';
+        if (titleEl) titleEl.innerText = 'Paket Bundling Merch (Kaos ' + (isKP ? 'Pendek ' : 'Panjang ') + colorLabel + ')';
+        if (imgEl) {
+          const baseName = isKP ? 'kaos_pendek_' : 'kaos_panjang_';
+          imgEl.src = 'https://raw.githubusercontent.com/Tykolp10/form_merch/main/' + baseName + color + '.png';
+        }
+        if (viewEl) viewEl.innerText = 'Depan';
+        return;
+      }
 
       const isKP = prod === 'KP';
       const colorLabel = color === 'hitam' ? 'Hitam' : 'Merah';
@@ -1454,7 +1565,8 @@
       viewEl.innerText = newView;
 
       const color = activeColors[prod] || 'hitam';
-      const isKP = prod === 'KP';
+      const isBD = prod === 'BD';
+      const isKP = isBD ? (activeBundleModel === 'KP') : (prod === 'KP');
       const baseName = isKP ? 'kaos_pendek_' : 'kaos_panjang_';
       const suffix = newView === 'Belakang' ? '_belakang.png' : '.png';
 
@@ -1556,7 +1668,9 @@
           orderCompleted = true;
           const itemSummaryText = items.map(it => {
             let label = it.sku;
-            if (it.sku.startsWith('KP')) label = 'Kaos Pendek (' + activeColors['KP'] + ' - ' + it.sku.replace('KP-', '') + ')';
+            if (it.sku.startsWith('BD-KP')) label = 'Paket Bundling (Kaos Pendek ' + (activeColors['BD'] || 'hitam') + ' ' + it.sku.replace('BD-KP-', '') + ' + Tumbler + Korek + Keychain)';
+            else if (it.sku.startsWith('BD-KJ')) label = 'Paket Bundling (Kaos Panjang ' + (activeColors['BD'] || 'hitam') + ' ' + it.sku.replace('BD-KJ-', '') + ' + Tumbler + Korek + Keychain)';
+            else if (it.sku.startsWith('KP')) label = 'Kaos Pendek (' + activeColors['KP'] + ' - ' + it.sku.replace('KP-', '') + ')';
             else if (it.sku.startsWith('KJ')) label = 'Kaos Panjang (' + activeColors['KJ'] + ' - ' + it.sku.replace('KJ-', '') + ')';
             else if (it.sku === 'TB-STD') label = 'Tumbler Stainless';
             else if (it.sku === 'KR-STD') label = 'Korek Custom';

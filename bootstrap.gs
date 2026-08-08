@@ -188,7 +188,17 @@ function bootstrapSystem() {
     ['KJ-XXL', 'Kaos Lengan Panjang', 'XXL', 125000, titleGridPanjang + ' [XXL]', 'YA'],
     ['TB-STD', 'Tumbler',            '—',   75000,  titleTumbler,                'YA'],
     ['KR-STD', 'Korek',              '—',   10000,  titleKorek,                  'YA'],
-    ['KC-STD', 'Keychain',           '—',   20000,  titleKeychain,               'YA']
+    ['KC-STD', 'Keychain',           '—',   20000,  titleKeychain,               'YA'],
+    ['BD-KP-S',   'Paket Bundling (Kaos Pendek + Tumbler + Korek + Keychain)', 'S',   200000, 'Paket Bundling Pendek [S]',   'YA'],
+    ['BD-KP-M',   'Paket Bundling (Kaos Pendek + Tumbler + Korek + Keychain)', 'M',   200000, 'Paket Bundling Pendek [M]',   'YA'],
+    ['BD-KP-L',   'Paket Bundling (Kaos Pendek + Tumbler + Korek + Keychain)', 'L',   200000, 'Paket Bundling Pendek [L]',   'YA'],
+    ['BD-KP-XL',  'Paket Bundling (Kaos Pendek + Tumbler + Korek + Keychain)', 'XL',  200000, 'Paket Bundling Pendek [XL]',  'YA'],
+    ['BD-KP-XXL', 'Paket Bundling (Kaos Pendek + Tumbler + Korek + Keychain)', 'XXL', 200000, 'Paket Bundling Pendek [XXL]', 'YA'],
+    ['BD-KJ-S',   'Paket Bundling (Kaos Panjang + Tumbler + Korek + Keychain)', 'S',   200000, 'Paket Bundling Panjang [S]',   'YA'],
+    ['BD-KJ-M',   'Paket Bundling (Kaos Panjang + Tumbler + Korek + Keychain)', 'M',   200000, 'Paket Bundling Panjang [M]',   'YA'],
+    ['BD-KJ-L',   'Paket Bundling (Kaos Panjang + Tumbler + Korek + Keychain)', 'L',   200000, 'Paket Bundling Panjang [L]',   'YA'],
+    ['BD-KJ-XL',  'Paket Bundling (Kaos Panjang + Tumbler + Korek + Keychain)', 'XL',  200000, 'Paket Bundling Panjang [XL]',  'YA'],
+    ['BD-KJ-XXL', 'Paket Bundling (Kaos Panjang + Tumbler + Korek + Keychain)', 'XXL', 200000, 'Paket Bundling Panjang [XXL]', 'YA']
   ];
 
   shProd.getRange(2, 1, katalogData.length, 6).setValues(katalogData);
