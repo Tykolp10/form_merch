@@ -56,6 +56,7 @@ function onOpen() {
       .addSeparator()
       .addItem('🔄 Proses ulang baris Form', 'prosesUlangDialog')
       .addItem('📤 Kirim ulang WA yang gagal', 'kirimUlangGagal')
+      .addItem('🎁 Sync SKU Paket Bundling', 'updateMasterProdukBundling')
       .addSeparator()
       .addItem('🧪 Tes koneksi Fonnte', 'tesFonnte')
       .addItem('⏰ Pasang trigger otomatis', 'pasangTrigger')
@@ -686,4 +687,46 @@ function pasangTrigger() {
   ScriptApp.newTrigger('healthCheck').timeBased().atHour(8).everyDays(1).inTimezone(TZ).create();
 
   alertOrLog_('6 trigger terpasang:\n• onOpen (Menu Admin)\n• onFormSubmit\n• onEdit (auto WA saat LUNAS)\n• cekExpired (tiap jam)\n• notifRekap12Jam (tiap 12 jam)\n• healthCheck (tiap 08:00)');
+}
+
+/**
+ * Jalankan SEKALI untuk mengisikan SKU Paket Bundling ke tab MASTER_PRODUK di Google Sheets
+ */
+function updateMasterProdukBundling() {
+  const ss = getSS_();
+  const shProd = ss.getSheetByName(SH.PRODUK);
+  if (!shProd) {
+    alertOrLog_('Tab MASTER_PRODUK tidak ditemukan.');
+    return;
+  }
+
+  const existingLast = shProd.getLastRow();
+  const existingSKUs = {};
+  if (existingLast > 1) {
+    const existingData = shProd.getRange(2, 1, existingLast - 1, 1).getValues();
+    existingData.forEach(r => { existingSKUs[String(r[0]).trim()] = true; });
+  }
+
+  const bundleRows = [
+    ['BD-KP-S',   'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'S',   200000, 'Paket Bundling Pendek [S]',   'YA'],
+    ['BD-KP-M',   'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'M',   200000, 'Paket Bundling Pendek [M]',   'YA'],
+    ['BD-KP-L',   'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'L',   200000, 'Paket Bundling Pendek [L]',   'YA'],
+    ['BD-KP-XL',  'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'XL',  200000, 'Paket Bundling Pendek [XL]',  'YA'],
+    ['BD-KP-XXL', 'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'XXL', 200000, 'Paket Bundling Pendek [XXL]', 'YA'],
+    ['BD-KJ-S',   'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'S',   200000, 'Paket Bundling Panjang [S]',   'YA'],
+    ['BD-KJ-M',   'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'M',   200000, 'Paket Bundling Panjang [M]',   'YA'],
+    ['BD-KJ-L',   'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'L',   200000, 'Paket Bundling Panjang [L]',   'YA'],
+    ['BD-KJ-XL',  'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'XL',  200000, 'Paket Bundling Panjang [XL]',  'YA'],
+    ['BD-KJ-XXL', 'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'XXL', 200000, 'Paket Bundling Panjang [XXL]', 'YA']
+  ];
+
+  const newRows = bundleRows.filter(r => !existingSKUs[r[0]]);
+  if (newRows.length > 0) {
+    const nextRow = existingLast + 1;
+    shProd.getRange(nextRow, 1, newRows.length, 6).setValues(newRows);
+    shProd.getRange(nextRow, 4, newRows.length, 1).setNumberFormat('Rp #,##0');
+    alertOrLog_('✅ ' + newRows.length + ' SKU Paket Bundling berhasil ditambahkan ke MASTER_PRODUK!');
+  } else {
+    alertOrLog_('ℹ️ SKU Paket Bundling sudah ada di MASTER_PRODUK.');
+  }
 }
