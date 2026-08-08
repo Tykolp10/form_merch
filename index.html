@@ -20,13 +20,13 @@
       --glass-surface: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%), rgba(10, 16, 31, 0.65);
       --glass-surface-hover: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%), rgba(15, 23, 42, 0.8);
       --glass-border: rgba(255, 255, 255, 0.14);
-      --glass-border-hover: rgba(139, 92, 246, 0.45);
+      --glass-border-hover: rgba(255, 255, 255, 0.4);
       --glass-shadow: 0 20px 48px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.28), inset 0 -1px 1px rgba(0, 0, 0, 0.4);
       
-      --accent: #d4af37; /* Metallic Warm Gold */
+      --accent: #ffffff; /* Natural Minimalist Pure White */
       --accent-blue: #3b82f6;
       --accent-purple: #8b5cf6;
-      --accent-glow: rgba(59, 130, 246, 0.25);
+      --accent-glow: rgba(255, 255, 255, 0.2);
       
       --text: #f8fafc;
       --text-sub: #cbd5e1;
@@ -248,9 +248,10 @@
     }
 
     .tab-btn.active, .tab-btn:hover {
-      background: var(--accent);
-      color: #000;
-      border-color: var(--accent);
+      background: #ffffff;
+      color: #000000;
+      border-color: #ffffff;
+      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.25);
     }
 
     /* PRODUCT CATALOG GRID */
@@ -305,13 +306,35 @@
       left: 14px;
       background: rgba(8, 11, 17, 0.75);
       backdrop-filter: blur(8px);
-      border: 1px solid var(--border);
+      border: 1px solid var(--glass-border);
       color: var(--text);
       font-size: 0.7rem;
       font-weight: 700;
       padding: 4px 10px;
       border-radius: var(--radius-full);
       text-transform: uppercase;
+    }
+
+    .img-slide-tag {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(6, 9, 20, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      transition: var(--transition);
+    }
+
+    .img-slide-tag:hover {
+      background: rgba(255, 255, 255, 0.2);
     }
 
     .card-body {
@@ -663,10 +686,10 @@
     }
 
     .color-pill.active {
-      background: rgba(59, 130, 246, 0.25);
-      border-color: #3b82f6;
+      background: rgba(255, 255, 255, 0.2);
+      border-color: #ffffff;
       color: #ffffff;
-      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+      box-shadow: 0 4px 14px rgba(255, 255, 255, 0.2);
     }
 
     .btn-checkout:disabled {
@@ -816,14 +839,15 @@
     <div class="catalog-grid">
 
       <!-- PRODUCT 1: KAOS PENDEK -->
-      <article class="card" data-cat="pendek">
+      <article class="card" data-cat="pendek" id="card-KP">
         <div class="card-img-wrap">
           <span class="card-badge">Best Seller</span>
-          <img src="https://raw.githubusercontent.com/Tykolp10/form_merch/main/kaos_pendek_hitam.png" alt="Kaos Lengan Pendek Hitam" class="card-img">
+          <img id="img-KP" src="https://raw.githubusercontent.com/Tykolp10/form_merch/main/kaos_pendek_hitam.png" alt="Kaos Lengan Pendek" class="card-img">
+          <div class="img-slide-tag" onclick="toggleView('KP')">Tampak: <span id="view-KP">Depan</span> (Klik putar) 🔄</div>
         </div>
         <div class="card-body">
           <div class="card-header">
-            <h3 class="card-title">Kaos Lengan Pendek Hitam</h3>
+            <h3 class="card-title" id="title-KP">Kaos Lengan Pendek (Hitam)</h3>
             <span class="card-price">Rp 120.000</span>
           </div>
           <p class="card-spec">100% Cotton Combed 30s • Unisex Fit • Sablon Premium</p>
@@ -831,8 +855,8 @@
           <div class="color-picker" style="margin-bottom:12px;">
             <span style="font-size:0.75rem; font-weight:700; color:var(--text-sub); text-transform:uppercase; display:block; margin-bottom:6px;">Warna Kaos:</span>
             <div style="display:flex; gap:8px;">
-              <button type="button" class="color-pill active" onclick="selectColor(this)">⚫ Hitam (Black)</button>
-              <button type="button" class="color-pill" onclick="selectColor(this)">🔴 Merah (Red)</button>
+              <button type="button" class="color-pill active" onclick="selectColor('KP', 'hitam', this)">⚫ Hitam (Black)</button>
+              <button type="button" class="color-pill" onclick="selectColor('KP', 'merah', this)">🔴 Merah (Red)</button>
             </div>
           </div>
 
@@ -894,14 +918,15 @@
       </article>
 
       <!-- PRODUCT 2: KAOS PANJANG -->
-      <article class="card" data-cat="panjang">
+      <article class="card" data-cat="panjang" id="card-KJ">
         <div class="card-img-wrap">
           <span class="card-badge">Long Sleeve</span>
-          <img src="https://raw.githubusercontent.com/Tykolp10/form_merch/main/kaos_panjang_hitam.png" alt="Kaos Lengan Panjang Hitam" class="card-img">
+          <img id="img-KJ" src="https://raw.githubusercontent.com/Tykolp10/form_merch/main/kaos_panjang_hitam.png" alt="Kaos Lengan Panjang" class="card-img">
+          <div class="img-slide-tag" onclick="toggleView('KJ')">Tampak: <span id="view-KJ">Depan</span> (Klik putar) 🔄</div>
         </div>
         <div class="card-body">
           <div class="card-header">
-            <h3 class="card-title">Kaos Lengan Panjang Hitam</h3>
+            <h3 class="card-title" id="title-KJ">Kaos Lengan Panjang (Hitam)</h3>
             <span class="card-price">Rp 125.000</span>
           </div>
           <p class="card-spec">100% Cotton Combed 30s • Ribbed Cuffs • Unisex Fit</p>
@@ -909,8 +934,8 @@
           <div class="color-picker" style="margin-bottom:12px;">
             <span style="font-size:0.75rem; font-weight:700; color:var(--text-sub); text-transform:uppercase; display:block; margin-bottom:6px;">Warna Kaos:</span>
             <div style="display:flex; gap:8px;">
-              <button type="button" class="color-pill active" onclick="selectColor(this)">⚫ Hitam (Black)</button>
-              <button type="button" class="color-pill" onclick="selectColor(this)">🔴 Merah (Red)</button>
+              <button type="button" class="color-pill active" onclick="selectColor('KJ', 'hitam', this)">⚫ Hitam (Black)</button>
+              <button type="button" class="color-pill" onclick="selectColor('KJ', 'merah', this)">🔴 Merah (Red)</button>
             </div>
           </div>
 
@@ -1264,10 +1289,54 @@
       }
     }
 
-    function selectColor(btn) {
+    const activeColors = { 'KP': 'hitam', 'KJ': 'hitam' };
+    const currentViews = { 'KP': 'Depan', 'KJ': 'Depan' };
+
+    function selectColor(prod, color, btn) {
       const container = btn.parentElement;
       container.querySelectorAll('.color-pill').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+
+      activeColors[prod] = color;
+      currentViews[prod] = 'Depan';
+
+      const imgEl = document.getElementById('img-' + prod);
+      const titleEl = document.getElementById('title-' + prod);
+      const viewEl = document.getElementById('view-' + prod);
+
+      const isKP = prod === 'KP';
+      const colorLabel = color === 'hitam' ? 'Hitam' : 'Merah';
+      const baseName = isKP ? 'kaos_pendek_' : 'kaos_panjang_';
+
+      if (titleEl) {
+        titleEl.innerText = (isKP ? 'Kaos Lengan Pendek (' : 'Kaos Lengan Panjang (') + colorLabel + ')';
+      }
+
+      if (imgEl) {
+        imgEl.src = 'https://raw.githubusercontent.com/Tykolp10/form_merch/main/' + baseName + color + '.png';
+      }
+
+      if (viewEl) viewEl.innerText = 'Depan';
+    }
+
+    function toggleView(prod) {
+      const viewEl = document.getElementById('view-' + prod);
+      const imgEl = document.getElementById('img-' + prod);
+      if (!viewEl || !imgEl) return;
+
+      const isDepan = viewEl.innerText === 'Depan';
+      const newView = isDepan ? 'Belakang' : 'Depan';
+      viewEl.innerText = newView;
+
+      const color = activeColors[prod] || 'hitam';
+      const isKP = prod === 'KP';
+      const baseName = isKP ? 'kaos_pendek_' : 'kaos_panjang_';
+
+      imgEl.style.opacity = '0.5';
+      setTimeout(() => {
+        imgEl.src = 'https://raw.githubusercontent.com/Tykolp10/form_merch/main/' + baseName + color + '.png';
+        imgEl.style.opacity = '1';
+      }, 150);
     }
 
     function filterCategory(cat, btn) {
