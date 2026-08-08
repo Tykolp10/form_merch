@@ -474,10 +474,14 @@ function tandaiMenunggu() {
 
 function batalkanOrder() {
   const a = barisAktif_(); if (!a) return;
-  const ui = SpreadsheetApp.getUi();
-  if (ui.alert('Batalkan order ini?', ui.ButtonSet.YES_NO) !== ui.Button.YES) return;
+  try {
+    const ui = SpreadsheetApp.getUi();
+    if (ui.alert('Batalkan order ini?', ui.ButtonSet.YES_NO) !== ui.Button.YES) return;
+  } catch (e) {}
+
+  a.sh.getRange(a.row, 20).setValue('BATAL');      // T: Status_Bayar
   a.sh.getRange(a.row, 23).setValue('BATAL');      // W: Status_Order
-  SpreadsheetApp.getActive().toast('Order dibatalkan.');
+  SpreadsheetApp.getActive().toast('Order dibatalkan (Status Bayar & Order → BATAL).');
 }
 
 function tandaiDuplikat() {
