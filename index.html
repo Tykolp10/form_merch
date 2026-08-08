@@ -1354,6 +1354,14 @@
 
     const cart = {};
     let deliveryMethod = 'KIRIM';
+    let orderCompleted = false;
+
+    window.addEventListener('beforeunload', (e) => {
+      if (Object.keys(cart).length > 0 && !orderCompleted) {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    });
 
     function changeQty(sku, delta) {
       cart[sku] = (cart[sku] || 0) + delta;
@@ -1545,6 +1553,7 @@
         isSubmitting = false;
 
         if (data.status === 'success') {
+          orderCompleted = true;
           const itemSummaryText = items.map(it => {
             let label = it.sku;
             if (it.sku.startsWith('KP')) label = 'Kaos Pendek (' + activeColors['KP'] + ' - ' + it.sku.replace('KP-', '') + ')';
