@@ -65,14 +65,16 @@
 
     /* TOP MOTTO BANNER */
     .top-motto-banner {
-      background: linear-gradient(90deg, #b8860b 0%, #d4af37 50%, #b8860b 100%);
-      color: #000;
+      background: linear-gradient(90deg, #0f172a 0%, #1e3a8a 35%, #2563eb 50%, #1e3a8a 65%, #0f172a 100%);
+      color: #ffffff;
       font-size: clamp(0.72rem, 2.8vw, 0.88rem);
       font-weight: 800;
       text-align: center;
-      padding: 6px 12px;
-      letter-spacing: 1px;
+      padding: 7px 12px;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
     }
 
     /* HEADER & NAVBAR */
@@ -630,21 +632,41 @@
     }
 
     .btn-checkout {
-      background: linear-gradient(135deg, var(--accent) 0%, #b8860b 100%);
-      color: #000;
-      border: none;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
       padding: 12px 28px;
       border-radius: var(--radius-full);
       font-size: 0.95rem;
       font-weight: 800;
       cursor: pointer;
       transition: var(--transition);
-      box-shadow: 0 8px 24px var(--accent-glow);
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.35);
     }
 
     .btn-checkout:hover {
+      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
       transform: translateY(-2px);
-      box-shadow: 0 12px 28px var(--accent-glow);
+      box-shadow: 0 12px 28px rgba(16, 185, 129, 0.45);
+    }
+
+    .color-pill {
+      padding: 6px 14px;
+      background: var(--glass-surface);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-full);
+      color: var(--text-sub);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .color-pill.active {
+      background: rgba(59, 130, 246, 0.25);
+      border-color: #3b82f6;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
     }
 
     .btn-checkout:disabled {
@@ -806,6 +828,14 @@
           </div>
           <p class="card-spec">100% Cotton Combed 30s • Unisex Fit • Sablon Premium</p>
 
+          <div class="color-picker" style="margin-bottom:12px;">
+            <span style="font-size:0.75rem; font-weight:700; color:var(--text-sub); text-transform:uppercase; display:block; margin-bottom:6px;">Warna Kaos:</span>
+            <div style="display:flex; gap:8px;">
+              <button type="button" class="color-pill active">⚫ Hitam (Black)</button>
+              <button type="button" class="color-pill">⚪ Putih (White)</button>
+            </div>
+          </div>
+
           <div class="size-picker">
             <div class="size-picker-head">
               <span>Pilih Ukuran & Jumlah</span>
@@ -875,6 +905,14 @@
             <span class="card-price">Rp 125.000</span>
           </div>
           <p class="card-spec">100% Cotton Combed 30s • Ribbed Cuffs • Unisex Fit</p>
+
+          <div class="color-picker" style="margin-bottom:12px;">
+            <span style="font-size:0.75rem; font-weight:700; color:var(--text-sub); text-transform:uppercase; display:block; margin-bottom:6px;">Warna Kaos:</span>
+            <div style="display:flex; gap:8px;">
+              <button type="button" class="color-pill active">⚫ Hitam (Black)</button>
+              <button type="button" class="color-pill">⚪ Putih (White)</button>
+            </div>
+          </div>
 
           <div class="size-picker">
             <div class="size-picker-head">
