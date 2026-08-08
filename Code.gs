@@ -227,7 +227,7 @@ function doPost(e) {
       if (!p && it.sku && it.sku.indexOf('BD-') === 0) {
         const isKP = it.sku.indexOf('BD-KP') === 0;
         const size = it.sku.replace(/^BD-K[PJ]-/, '');
-        p = [it.sku, 'Paket Bundling (' + (isKP ? 'Kaos Pendek' : 'Kaos Panjang') + ' + Tumbler + Korek + Keychain)', size, 200000, '', 'YA'];
+        p = [it.sku, 'Paket Bundling (' + (isKP ? 'Kaos Pendek' : 'Kaos Panjang') + ' + Tumbler 750ml + Korek + Keychain + Goodie Bag)', size, 200000, '', 'YA'];
       }
       if (!p || String(p[5]).toUpperCase() !== 'YA') return;
       const qty = parseInt(it.qty, 10);

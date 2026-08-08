@@ -916,7 +916,7 @@
   <nav class="nav">
     <div class="nav-container">
       <div class="logo">
-        MQ 12 MERCH <span class="logo-badge">'26</span>
+        MERCH SAFARI HWMI <span class="logo-badge">2026</span>
       </div>
       <div class="status-pill">
         <div class="pulse-dot"></div>
@@ -966,7 +966,7 @@
               <span style="font-size:0.72rem; color:var(--text-sub); text-decoration:line-through;">Rp 225.000</span>
             </div>
           </div>
-          <p class="card-spec">🎁 Paket Lengkap: 1x Kaos + 1x Tumbler Stainless + 1x Korek Custom + 1x Keychain Acrylic</p>
+          <p class="card-spec">🎁 Paket Lengkap: 1x Kaos + 1x Tumbler 750ml + 1x Korek + 1x Keychain + 1x Goodie Bag</p>
 
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
             <div>
@@ -1179,7 +1179,7 @@
             <h3 class="card-title">Tumbler Thermal Stainless</h3>
             <span class="card-price">Rp 75.000</span>
           </div>
-          <p class="card-spec">Stainless 500ml • Stainless Steel 304 • Tahan Panas & Dingin</p>
+          <p class="card-spec">Stainless Steel 304 • Kapasitas 750 ML • Tahan Panas &amp; Dingin up to 8 jam</p>
 
           <div class="size-picker">
             <div class="size-picker-head">
@@ -1668,8 +1668,8 @@
           orderCompleted = true;
           const itemSummaryText = items.map(it => {
             let label = it.sku;
-            if (it.sku.startsWith('BD-KP')) label = 'Paket Bundling (Kaos Pendek ' + (activeColors['BD'] || 'hitam') + ' ' + it.sku.replace('BD-KP-', '') + ' + Tumbler + Korek + Keychain)';
-            else if (it.sku.startsWith('BD-KJ')) label = 'Paket Bundling (Kaos Panjang ' + (activeColors['BD'] || 'hitam') + ' ' + it.sku.replace('BD-KJ-', '') + ' + Tumbler + Korek + Keychain)';
+            if (it.sku.startsWith('BD-KP')) label = 'Paket Bundling (Kaos Pendek ' + (activeColors['BD'] || 'hitam') + ' ' + it.sku.replace('BD-KP-', '') + ' + Tumbler 750ml + Korek + Keychain + Goodie Bag)';
+            else if (it.sku.startsWith('BD-KJ')) label = 'Paket Bundling (Kaos Panjang ' + (activeColors['BD'] || 'hitam') + ' ' + it.sku.replace('BD-KJ-', '') + ' + Tumbler 750ml + Korek + Keychain + Goodie Bag)';
             else if (it.sku.startsWith('KP')) label = 'Kaos Pendek (' + activeColors['KP'] + ' - ' + it.sku.replace('KP-', '') + ')';
             else if (it.sku.startsWith('KJ')) label = 'Kaos Panjang (' + activeColors['KJ'] + ' - ' + it.sku.replace('KJ-', '') + ')';
             else if (it.sku === 'TB-STD') label = 'Tumbler Stainless';
