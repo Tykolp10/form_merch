@@ -46,20 +46,24 @@ function P_(k, def) {
 
 // ====== MENU ADMIN ======
 function onOpen() {
-  SpreadsheetApp.getUi()
-    .createMenu('⚙️ ADMIN MERCH')
-    .addItem('✅ Tandai LUNAS (baris terpilih)', 'tandaiLunas')
-    .addItem('🕐 Tandai MENUNGGU VERIFIKASI', 'tandaiMenunggu')
-    .addSeparator()
-    .addItem('❌ Batalkan Order', 'batalkanOrder')
-    .addItem('👥 Tandai DUPLIKAT', 'tandaiDuplikat')
-    .addSeparator()
-    .addItem('🔄 Proses ulang baris Form', 'prosesUlangDialog')
-    .addItem('📤 Kirim ulang WA yang gagal', 'kirimUlangGagal')
-    .addSeparator()
-    .addItem('🧪 Tes koneksi Fonnte', 'tesFonnte')
-    .addItem('⏰ Pasang trigger otomatis', 'pasangTrigger')
-    .addToUi();
+  try {
+    SpreadsheetApp.getUi()
+      .createMenu('⚙️ ADMIN MERCH')
+      .addItem('✅ Tandai LUNAS (baris terpilih)', 'tandaiLunas')
+      .addItem('🕐 Tandai MENUNGGU VERIFIKASI', 'tandaiMenunggu')
+      .addSeparator()
+      .addItem('❌ Batalkan Order', 'batalkanOrder')
+      .addItem('👥 Tandai DUPLIKAT', 'tandaiDuplikat')
+      .addSeparator()
+      .addItem('🔄 Proses ulang baris Form', 'prosesUlangDialog')
+      .addItem('📤 Kirim ulang WA yang gagal', 'kirimUlangGagal')
+      .addSeparator()
+      .addItem('🧪 Tes koneksi Fonnte', 'tesFonnte')
+      .addItem('⏰ Pasang trigger otomatis', 'pasangTrigger')
+      .addToUi();
+  } catch (e) {
+    Logger.log('INFO: onOpen UI skipped in standalone context');
+  }
 }
 
 // ====== UTILITAS ======
