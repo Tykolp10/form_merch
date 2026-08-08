@@ -790,6 +790,7 @@
       inset: 0;
       background: rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       z-index: 999;
       display: flex;
       align-items: center;
@@ -798,6 +799,28 @@
       opacity: 0;
       pointer-events: none;
       transition: var(--transition);
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      background: #0f172a;
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      position: relative;
+      transform: scale(0.95);
+      transition: transform 0.2s ease-out;
+    }
+
+    .modal-backdrop.open .modal-box {
+      transform: scale(1);
     }
 
     /* TOAST NOTIFICATION SYSTEM */
@@ -1278,7 +1301,7 @@
   </div>
 
   <!-- MODAL SIZE CHART -->
-  <div class="modal-backdrop" id="sizeModal">
+  <div class="modal-backdrop" id="sizeModal" onclick="if(event.target === this) closeModal('sizeModal')">
     <div class="modal-box">
       <div class="modal-header">
         <h3 class="modal-title">📐 Size Chart Kaos</h3>
@@ -1306,7 +1329,7 @@
   </div>
 
   <!-- MODAL SUCCESS -->
-  <div class="modal-backdrop" id="successModal">
+  <div class="modal-backdrop" id="successModal" onclick="if(event.target === this) closeModal('successModal')">
     <div class="modal-box" style="text-align:center;">
       <div style="font-size:3rem; margin-bottom:8px;">🎉</div>
       <h3 class="modal-title" style="margin-bottom:6px;">Pesanan Diterima!</h3>

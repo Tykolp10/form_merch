@@ -12,20 +12,29 @@ function resetDataUji() {
   
   // Kosongkan ORDERS (sisakan header)
   const shOrd = ss.getSheetByName(SH.ORDERS);
-  if (shOrd && shOrd.getLastRow() > 1) {
-    shOrd.getRange(2, 1, shOrd.getLastRow() - 1, shOrd.getLastColumn()).clearContent();
+  if (shOrd) {
+    const lastRealOrd = getRealLastRow_(shOrd, 1);
+    if (lastRealOrd > 1) {
+      shOrd.getRange(2, 1, lastRealOrd - 1, shOrd.getLastColumn()).clearContent();
+    }
   }
 
   // Kosongkan ORDER_LINES (sisakan header & rumus K1:L1)
   const shLine = ss.getSheetByName(SH.LINES);
-  if (shLine && shLine.getLastRow() > 1) {
-    shLine.getRange(2, 1, shLine.getLastRow() - 1, 10).clearContent();
+  if (shLine) {
+    const lastRealLine = getRealLastRow_(shLine, 1);
+    if (lastRealLine > 1) {
+      shLine.getRange(2, 1, lastRealLine - 1, 10).clearContent();
+    }
   }
 
   // Kosongkan LOG_WA (sisakan header)
   const shLog = ss.getSheetByName(SH.LOG);
-  if (shLog && shLog.getLastRow() > 1) {
-    shLog.getRange(2, 1, shLog.getLastRow() - 1, shLog.getLastColumn()).clearContent();
+  if (shLog) {
+    const lastRealLog = getRealLastRow_(shLog, 1);
+    if (lastRealLog > 1) {
+      shLog.getRange(2, 1, lastRealLog - 1, shLog.getLastColumn()).clearContent();
+    }
   }
 
   // Reset counter
