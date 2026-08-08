@@ -19,7 +19,7 @@ function setupProperties() {
     FONNTE_TOKEN   : 'GCASAboTL7iPJj3NpQkj',
     ADMIN_WA       : '6283199861947',
     NOTIF_REKAP_WA : '6283830463179,6281358385254',
-    CS_WA          : '081259926906',
+    CS_WA          : '0895330478397',
     NAMA_BANK      : 'BRI',
     NOMOR_REKENING : '203201008844502',
     ATAS_NAMA      : 'Abidatul Faricha Ch',
@@ -446,7 +446,7 @@ function pesanOrderMasuk_(o) {
   t += '\n*REKENING*\n';
   t += P_('NAMA_BANK') + '\n' + P_('NOMOR_REKENING') + '\na.n. ' + P_('ATAS_NAMA') + '\n';
   t += '\n⏰ *Batas pembayaran:*\n' + Utilities.formatDate(o.batas, TZ, 'EEEE, dd MMMM yyyy, HH:mm') + ' WIB\n';
-  t += '\nSetelah transfer, *kirim bukti ke chat CS ini (' + P_('CS_WA', '081259926906') + ')* untuk konfirmasi pengiriman & informasi lanjutan.\n';
+  t += '\nSetelah transfer, *kirim bukti ke chat CS ini (' + P_('CS_WA', '0895330478397') + ')* untuk konfirmasi pengiriman & informasi lanjutan.\n';
   t += '\nPengambilan: ' + (o.metode === 'KIRIM' ? 'Dikirim via ekspedisi (detail resi & estimasi dikonfirmasi via CS WA)' : 'Ambil di lokasi (jadwal penyerahan dikonfirmasi via CS WA)') + '\n';
   return t;
 }
@@ -481,7 +481,7 @@ function tandaiLunas() {
   const d = a.sh.getRange(a.row, 1, 1, 26).getValues()[0];
   const pesan = '*PEMBAYARAN TERVERIFIKASI* ✅\n\nOrder ' + d[0] + '\na.n. ' + d[2] +
                 '\n' + d[14] + ' pcs • ' + rupiah_(d[18]) +
-                '\n\nPesananmu telah masuk daftar produksi. Untuk informasi kelanjutan pengiriman & resi, silakan hubungi CS WA (' + P_('CS_WA', '081259926906') + ').\n\nTerima kasih 🙏';
+                '\n\nPesananmu telah masuk daftar produksi. Untuk informasi kelanjutan pengiriman & resi, silakan hubungi CS WA (' + P_('CS_WA', '0895330478397') + ').\n\nTerima kasih 🙏';
   kirimWA_(d[4], pesan, d[0], 'LUNAS');
   SpreadsheetApp.getActive().toast('Order ' + d[0] + ' → LUNAS');
 }
@@ -649,7 +649,7 @@ function onEditTrigger(e) {
     if (waSent !== 'NOTIF_LUNAS_TERKIRIM') {
       const pesan = '*PEMBAYARAN TERVERIFIKASI* ✅\n\nOrder ' + d[0] + '\na.n. ' + d[2] +
                     '\n' + d[14] + ' pcs • ' + rupiah_(d[18]) +
-                    '\n\nPesananmu telah masuk daftar produksi. Untuk informasi kelanjutan pengiriman & resi, silakan hubungi CS WA (' + P_('CS_WA', '081259926906') + ').\n\nTerima kasih 🙏';
+                    '\n\nPesananmu telah masuk daftar produksi. Untuk informasi kelanjutan pengiriman & resi, silakan hubungi CS WA (' + P_('CS_WA', '0895330478397') + ').\n\nTerima kasih 🙏';
       if (kirimWA_(d[4], pesan, d[0], 'LUNAS')) {
         sh.getRange(row, 25).setValue('NOTIF_LUNAS_TERKIRIM');
       }

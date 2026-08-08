@@ -27,7 +27,7 @@ function bootstrapSystem() {
     'Detail pesanan + nomor rekening + nominal transfer sedang dikirim ke WhatsApp kamu (maksimal 2 menit).\n\n' +
     '⏰ Batas pembayaran: 1x24 jam sejak sekarang.\n' +
     'Lewat batas, pesanan otomatis dibatalkan.\n\n' +
-    'Belum menerima WhatsApp setelah 5 menit? Hubungi Admin CS: 081259926906'
+    'Belum menerima WhatsApp setelah 5 menit? Hubungi Admin CS: 0895330478397'
   );
 
   // BAGIAN 1 — Informasi & Ketentuan
@@ -49,7 +49,7 @@ function bootstrapSystem() {
     '• Batas pembayaran 1x24 jam sejak form dikirim.\n' +
     '• Lewat batas waktu, pesanan otomatis dibatalkan sistem.\n' +
     '• Transfer sesuai NOMINAL UNIK yang tertera di WhatsApp (ada 3 digit terakhir yang berbeda). Ini untuk mempercepat verifikasi.\n' +
-    '• Kirim bukti transfer ke WhatsApp Admin CS: 081259926906\n\n' +
+    '• Kirim bukti transfer ke WhatsApp Admin CS: 0895330478397\n\n' +
     'PENGAMBILAN & ONGKIR\n' +
     '• Kirim via ekspedisi (ongkir akan diinformasikan oleh admin saat pengiriman/resi), atau\n' +
     '• Ambil langsung di lokasi\n\n' +
