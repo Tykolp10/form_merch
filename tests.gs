@@ -98,8 +98,8 @@ function testSkenario1_MultiVarian() {
   const shOrd = SpreadsheetApp.getActive().getSheetByName(SH.ORDERS);
   const shLine = SpreadsheetApp.getActive().getSheetByName(SH.LINES);
 
-  const ordRows = shOrd.getLastRow() - 1;
-  const lineRows = shLine.getLastRow() - 1;
+  const ordRows = getRealLastRow_(shOrd, 1) - 1;
+  const lineRows = getRealLastRow_(shLine, 1) - 1;
 
   Logger.log('Hasil Skenario 1:');
   Logger.log('- Baris ORDERS      : ' + ordRows + ' (Ekspektasi: 1)');

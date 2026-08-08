@@ -24,7 +24,7 @@ function setupProperties() {
     NOMOR_REKENING : '203201008844502',
     ATAS_NAMA      : 'Abidatul Faricha Ch',
     BATAS_JAM      : '24',
-    PAKAI_KODE_UNIK: 'YA',
+    PAKAI_KODE_UNIK: 'TIDAK',
     ORDER_COUNTER  : '0',
     NOTIF_ADMIN    : 'YA'
   });
