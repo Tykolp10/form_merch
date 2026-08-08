@@ -831,8 +831,8 @@
           <div class="color-picker" style="margin-bottom:12px;">
             <span style="font-size:0.75rem; font-weight:700; color:var(--text-sub); text-transform:uppercase; display:block; margin-bottom:6px;">Warna Kaos:</span>
             <div style="display:flex; gap:8px;">
-              <button type="button" class="color-pill active">⚫ Hitam (Black)</button>
-              <button type="button" class="color-pill">⚪ Putih (White)</button>
+              <button type="button" class="color-pill active" onclick="selectColor(this)">⚫ Hitam (Black)</button>
+              <button type="button" class="color-pill" onclick="selectColor(this)">🔴 Merah (Red)</button>
             </div>
           </div>
 
@@ -909,8 +909,8 @@
           <div class="color-picker" style="margin-bottom:12px;">
             <span style="font-size:0.75rem; font-weight:700; color:var(--text-sub); text-transform:uppercase; display:block; margin-bottom:6px;">Warna Kaos:</span>
             <div style="display:flex; gap:8px;">
-              <button type="button" class="color-pill active">⚫ Hitam (Black)</button>
-              <button type="button" class="color-pill">⚪ Putih (White)</button>
+              <button type="button" class="color-pill active" onclick="selectColor(this)">⚫ Hitam (Black)</button>
+              <button type="button" class="color-pill" onclick="selectColor(this)">🔴 Merah (Red)</button>
             </div>
           </div>
 
@@ -1262,6 +1262,12 @@
         btnKirim.classList.remove('active');
         details.classList.remove('show');
       }
+    }
+
+    function selectColor(btn) {
+      const container = btn.parentElement;
+      container.querySelectorAll('.color-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
     }
 
     function filterCategory(cat, btn) {
