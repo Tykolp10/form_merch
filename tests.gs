@@ -140,6 +140,43 @@ function testSkenario6_Expired() {
 }
 
 /**
+ * Simulasi Pengiriman Order Langsung dari Web Store
+ * Menguji bahwa 1 Order di ORDERS akan menghasilkan 3 baris rincian di ORDER_LINES
+ */
+function tesSimulasiWebStore() {
+  Logger.log('\n--- Running Simulasi Web Store ---');
+  
+  const mockWebPayload = {
+    postData: {
+      contents: JSON.stringify({
+        nama: 'Ahmad Fauzi (Tes Web)',
+        waInput: '081234567890',
+        daerah: 'Surabaya',
+        metode: 'KIRIM',
+        penerima: 'Ahmad Fauzi',
+        hpPenerima: '081234567890',
+        provinsi: 'Jawa Timur',
+        kota: 'Surabaya',
+        kecamatan: 'Gubeng',
+        alamat: 'Jl. Pemuda No. 45',
+        kodePos: '60271',
+        catatan: 'Simulasi Order dari Web Store',
+        items: [
+          { sku: 'KP-M', qty: 2 },  // 2 Kaos Pendek M
+          { sku: 'KJ-XL', qty: 1 }, // 1 Kaos Panjang XL
+          { sku: 'TB-STD', qty: 1 } // 1 Tumbler
+        ]
+      })
+    }
+  };
+
+  const response = doPost(mockWebPayload);
+  Logger.log('Respons Web Store: ' + response.getContent());
+
+  alertOrLog_('🧪 Simulasi Web Store Selesai!\nCek tab ORDERS (1 baris baru) dan tab ORDER_LINES (3 baris rincian baru).');
+}
+
+/**
  * Jalankan Seluruh Skenario Pengujian
  */
 function jalankanSemuaPengujian() {
