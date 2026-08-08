@@ -1296,7 +1296,7 @@
         <span class="bar-items" id="barItems">0 item dipilih</span>
         <span class="bar-price" id="barPrice">Rp 0</span>
       </div>
-      <button type="button" class="btn-checkout" id="btnCheckout" onclick="processOrder()">Pesan Sekarang 🚀</button>
+      <button type="button" class="btn-checkout" id="btnCheckout" onclick="processOrder()">Pesan Sekarang 🛒</button>
     </div>
   </div>
 
@@ -1541,7 +1541,7 @@
 
         const data = await res.json();
         btn.disabled = false;
-        btn.innerText = "Pesan Sekarang 🚀";
+        btn.innerText = "Pesan Sekarang 🛒";
         isSubmitting = false;
 
         if (data.status === 'success') {
@@ -1585,7 +1585,7 @@
         }
       } catch (err) {
         btn.disabled = false;
-        btn.innerText = "Pesan Sekarang 🚀";
+        btn.innerText = "Pesan Sekarang 🛒";
         isSubmitting = false;
         alert('Terjadi kesalahan koneksi.');
       }
