@@ -598,15 +598,47 @@ function healthCheck() {
     'HEALTH', 'TES');
 }
 
+/** Trigger installable saat admin mengetik LUNAS / centang Checkbox di Spreadsheet */
+function onEditTrigger(e) {
+  if (!e || !e.range) return;
+  const sh = e.range.getSheet();
+  if (sh.getName() !== SH.ORDERS) return;
+
+  const col = e.range.getColumn();
+  const row = e.range.getRow();
+  if (row < 2) return;
+
+  const val = String(e.value).trim().toUpperCase();
+
+  // Jika Kolom T (Status_Bayar) diubah jadi LUNAS / TRUE (centang checkbox)
+  if (col === 20 && (val === 'LUNAS' || val === 'TRUE' || val === 'YA')) {
+    sh.getRange(row, 20).setValue('LUNAS');
+    sh.getRange(row, 22).setValue(new Date()); // V: Tgl_Verifikasi
+
+    const d = sh.getRange(row, 1, 1, 26).getValues()[0];
+    const waSent = String(sh.getRange(row, 25).getValue()); // Y: Catatan_Admin
+
+    if (waSent !== 'NOTIF_LUNAS_TERKIRIM') {
+      const pesan = '*PEMBAYARAN TERVERIFIKASI* ✅\n\nOrder ' + d[0] + '\na.n. ' + d[2] +
+                    '\n' + d[14] + ' pcs • ' + rupiah_(d[18]) +
+                    '\n\nPesananmu masuk daftar produksi. Info berikutnya akan kami kabari lewat chat ini.\n\nTerima kasih 🙏';
+      if (kirimWA_(d[4], pesan, d[0], 'LUNAS')) {
+        sh.getRange(row, 25).setValue('NOTIF_LUNAS_TERKIRIM');
+      }
+    }
+  }
+}
+
 /** Pasang semua trigger. Jalankan sekali. */
 function pasangTrigger() {
   const ss = getSS_();
   ScriptApp.getProjectTriggers().forEach(function(t) { ScriptApp.deleteTrigger(t); });
 
   ScriptApp.newTrigger('onFormSubmit').forSpreadsheet(ss).onFormSubmit().create();
+  ScriptApp.newTrigger('onEditTrigger').forSpreadsheet(ss).onEdit().create();
   ScriptApp.newTrigger('cekExpired').timeBased().everyHours(1).create();
   ScriptApp.newTrigger('notifRekap12Jam').timeBased().everyHours(12).create();
   ScriptApp.newTrigger('healthCheck').timeBased().atHour(8).everyDays(1).inTimezone(TZ).create();
 
-  alertOrLog_('4 trigger terpasang:\n• onFormSubmit\n• cekExpired (tiap jam)\n• notifRekap12Jam (tiap 12 jam)\n• healthCheck (tiap 08:00)');
+  alertOrLog_('5 trigger terpasang:\n• onFormSubmit\n• onEdit (auto WA saat LUNAS)\n• cekExpired (tiap jam)\n• notifRekap12Jam (tiap 12 jam)\n• healthCheck (tiap 08:00)');
 }
