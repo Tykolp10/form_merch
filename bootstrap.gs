@@ -68,7 +68,7 @@ function bootstrapSystem() {
     .build();
   qWA.setValidation(waRegex);
 
-  const qDaerah = form.addTextItem().setTitle('Asal Daerah / Kelompok').setRequired(true);
+  const qDaerah = form.addTextItem().setTitle('Asal Daerah').setRequired(true);
 
   // BAGIAN 3 — Pesanan
   const sec3 = form.addPageBreakItem().setTitle('BAGIAN 3 — Pesanan');

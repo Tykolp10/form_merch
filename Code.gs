@@ -346,7 +346,7 @@ function prosesBaris_(rowNum) {
     const nama      = String(get('Nama Lengkap')).trim();
     const waInput   = String(get('Nomor WhatsApp Aktif')).trim();
     const waNormal  = normalisasiWA_(waInput);
-    const daerah    = String(get('Asal Daerah / Kelompok')).trim();
+    const daerah    = String(get('Asal Daerah') || get('Asal Daerah / Kelompok')).trim();
     const catatan   = String(get('Catatan (opsional)')).trim();
 
     // --- pengambilan ---

@@ -83,7 +83,7 @@ function testSkenario1_MultiVarian() {
     'Timestamp': new Date(),
     'Nama Lengkap': 'Budi Santoso',
     'Nomor WhatsApp Aktif': '081234567890',
-    'Asal Daerah / Kelompok': 'Jakarta Selatan',
+    'Asal Daerah': 'Jakarta Selatan',
     'Metode Pengambilan': 'Kirim via Ekspedisi',
     'Nama Penerima': 'Budi Santoso',
     'No HP Penerima': '081234567890',
