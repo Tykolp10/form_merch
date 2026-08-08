@@ -168,6 +168,16 @@ function getSS_() {
   throw new Error('SPREADSHEET_ID tidak terkonfigurasi');
 }
 
+function getRealLastRow_(sheet, colIndex) {
+  const col = colIndex || 1;
+  const last = Math.max(sheet.getLastRow(), 100);
+  const values = sheet.getRange(1, col, last, 1).getValues();
+  for (let i = values.length - 1; i >= 0; i--) {
+    if (values[i][0] !== null && String(values[i][0]).trim() !== '') return i + 1;
+  }
+  return 1;
+}
+
 function logWA_(orderId, target, jenis, status, info) {
   const sh = getSS_().getSheetByName(SH.LOG);
   if (!sh) return;
@@ -261,7 +271,8 @@ function doPost(e) {
         l.sku, l.nama, l.ukuran, l.qty, l.harga, l.sub
       ];
     });
-    shLine.getRange(shLine.getLastRow() + 1, 1, barisLine.length, 10).setValues(barisLine);
+    const nextLineRow = getRealLastRow_(shLine, 1) + 1;
+    shLine.getRange(nextLineRow, 1, barisLine.length, 10).setValues(barisLine);
 
     // Kirim WA
     const pesan = pesanOrderMasuk_({
@@ -393,7 +404,8 @@ function prosesBaris_(rowNum) {
         l.sku, l.nama, l.ukuran, l.qty, l.harga, l.sub
       ];
     });
-    shLine.getRange(shLine.getLastRow() + 1, 1, barisLine.length, 10).setValues(barisLine);
+    const nextLineRow = getRealLastRow_(shLine, 1) + 1;
+    shLine.getRange(nextLineRow, 1, barisLine.length, 10).setValues(barisLine);
 
     // --- kirim WhatsApp ---
     const pesan = pesanOrderMasuk_({
