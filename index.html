@@ -1376,6 +1376,10 @@
         btnAmbil.classList.add('active');
         btnKirim.classList.remove('active');
         details.classList.remove('show');
+        ['penerima', 'hpPenerima', 'provinsi', 'kota', 'kecamatan', 'alamat', 'kodePos'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.value = '';
+        });
       }
     }
 
@@ -1446,7 +1450,11 @@
     function openModal(id) { document.getElementById(id).classList.add('open'); }
     function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
+    let isSubmitting = false;
+
     async function processOrder() {
+      if (isSubmitting) return;
+
       const items = Object.keys(cart).map(sku => ({ sku: sku, qty: cart[sku] }));
       if (items.length === 0) {
         alert('Silakan pilih minimal 1 item merchandise.');
@@ -1460,6 +1468,14 @@
       if (!nama || !waInput || !daerah) {
         document.getElementById('formSection').scrollIntoView({ behavior: 'smooth' });
         alert('Mohon lengkapi Nama, WhatsApp, dan Asal Daerah.');
+        return;
+      }
+
+      // Validasi Regex Nomor WhatsApp Aktif (Berawalan 08 / 628 / +628)
+      const waRegex = /^(\+62|62|0)8[0-9\s\-]{7,13}$/;
+      if (!waRegex.test(waInput)) {
+        document.getElementById('formSection').scrollIntoView({ behavior: 'smooth' });
+        alert('Mohon masukkan nomor WhatsApp aktif yang valid (contoh: 081234567890).');
         return;
       }
 
@@ -1488,6 +1504,7 @@
         }
       }
 
+      isSubmitting = true;
       const btn = document.getElementById('btnCheckout');
       btn.disabled = true;
       btn.innerText = "Memproses...";
@@ -1502,6 +1519,7 @@
         const data = await res.json();
         btn.disabled = false;
         btn.innerText = "Pesan Sekarang 🚀";
+        isSubmitting = false;
 
         if (data.status === 'success') {
           const itemSummaryText = items.map(it => {
@@ -1545,6 +1563,7 @@
       } catch (err) {
         btn.disabled = false;
         btn.innerText = "Pesan Sekarang 🚀";
+        isSubmitting = false;
         alert('Terjadi kesalahan koneksi.');
       }
     }

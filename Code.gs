@@ -33,10 +33,9 @@ function setupProperties() {
 
 function alertOrLog_(pesan) {
   try {
-    SpreadsheetApp.getUi().alert(pesan);
-  } catch (e) {
-    Logger.log('INFO: ' + pesan);
-  }
+    SpreadsheetApp.getActive().toast(pesan, 'MERCH MQ', 5);
+  } catch (e) {}
+  Logger.log('INFO: ' + pesan);
 }
 
 function P_(k, def) {
@@ -467,6 +466,16 @@ function barisAktif_() {
 
 function tandaiLunas() {
   const a = barisAktif_(); if (!a) return;
+  const currentStatus = String(a.sh.getRange(a.row, 20).getValue()).toUpperCase();
+  if (currentStatus === 'EXPIRED' || currentStatus === 'BATAL') {
+    try {
+      const ui = SpreadsheetApp.getUi();
+      if (ui.alert('⚠️ PERINGATAN', 'Order ini berstatus ' + currentStatus + '. Yakin ingin mengubahnya menjadi LUNAS?', ui.ButtonSet.YES_NO) !== ui.Button.YES) {
+        return;
+      }
+    } catch (e) {}
+  }
+
   a.sh.getRange(a.row, 20).setValue('LUNAS');      // T: Status_Bayar
   a.sh.getRange(a.row, 22).setValue(new Date());   // V: Tgl_Verifikasi
   const d = a.sh.getRange(a.row, 1, 1, 26).getValues()[0];
