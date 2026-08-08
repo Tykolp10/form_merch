@@ -692,6 +692,31 @@
       box-shadow: 0 4px 14px rgba(255, 255, 255, 0.2);
     }
 
+    /* FLOATING WA CS WIDGET */
+    .floating-wa-btn {
+      position: fixed;
+      bottom: 84px;
+      right: 20px;
+      z-index: 99;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #25D366;
+      color: #000000;
+      padding: 10px 18px;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+      transition: var(--transition);
+    }
+
+    .floating-wa-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 12px 28px rgba(37, 211, 102, 0.55);
+    }
+
     .btn-checkout:disabled {
       opacity: 0.5;
       cursor: not-allowed;
@@ -1176,6 +1201,12 @@
 
   </div>
 
+  <!-- FLOATING WA CS BUTTON -->
+  <a href="https://wa.me/6281259926906?text=Halo%20Admin%20CS%20Merch%20MQ,%20saya%20mau%20tanya%20seputar%20produk%20merchandise" target="_blank" class="floating-wa-btn" title="Tanya CS via WhatsApp">
+    <span class="wa-icon">💬</span>
+    <span class="wa-text">Tanya CS (WA)</span>
+  </a>
+
   <!-- STICKY FLOATING CART BAR -->
   <div class="floating-bar">
     <div class="bar-inner">
@@ -1331,10 +1362,11 @@
       const color = activeColors[prod] || 'hitam';
       const isKP = prod === 'KP';
       const baseName = isKP ? 'kaos_pendek_' : 'kaos_panjang_';
+      const suffix = newView === 'Belakang' ? '_belakang.png' : '.png';
 
-      imgEl.style.opacity = '0.5';
+      imgEl.style.opacity = '0.4';
       setTimeout(() => {
-        imgEl.src = 'https://raw.githubusercontent.com/Tykolp10/form_merch/main/' + baseName + color + '.png';
+        imgEl.src = 'https://raw.githubusercontent.com/Tykolp10/form_merch/main/' + baseName + color + suffix;
         imgEl.style.opacity = '1';
       }, 150);
     }
