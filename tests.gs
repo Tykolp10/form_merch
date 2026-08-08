@@ -191,5 +191,153 @@ function tesSimulasiWebStore() {
 function jalankanSemuaPengujian() {
   testSkenario1_MultiVarian();
   testSkenario6_Expired();
+  simulasiMultiPersonaDanDaerah();
   alertOrLog_('Pengujian selesai. Cek Apps Script Execution Logs.');
 }
+
+/**
+ * SIMULASI G-STACK: Multi-Persona & Geografis Berbeda (Papua, Aceh, Bali, Kalimantan, Sulawesi)
+ * Menguji daya tahan sistem terhadap berbagai variasi format nomor HP, pesanan borongan vs eceran,
+ * serta metode pengiriman (Ekspedisi vs Ambil di Lokasi).
+ */
+function simulasiMultiPersonaDanDaerah() {
+  Logger.log('\n=======================================================');
+  Logger.log('🚀 SIMULASI G-STACK: MULTI-PERSONA & DAERAH BERBEDA');
+  Logger.log('=======================================================\n');
+
+  const daftarPersona = [
+    {
+      deskripsi: '1. Tokoh Adat / Pembeli Jumlah Besar (Jayapura, Papua)',
+      payload: {
+        nama: 'Yohanes Wenda',
+        waInput: '081298765432',
+        daerah: 'Jayapura - Papua',
+        metode: 'KIRIM',
+        penerima: 'Yohanes Wenda',
+        hpPenerima: '081298765432',
+        provinsi: 'Papua',
+        kota: 'Kota Jayapura',
+        kecamatan: 'Abepura',
+        alamat: 'Jl. Raya Abepura No. 88, Distrik Abepura',
+        kodePos: '99351',
+        catatan: 'Mohon dipacking kayu / bubble wrap tebal untuk pengiriman ke Papua.',
+        items: [
+          { sku: 'KP-L', qty: 5 },   // 5 Kaos Pendek L
+          { sku: 'KJ-XXL', qty: 5 }, // 5 Kaos Panjang XXL
+          { sku: 'TB-STD', qty: 3 }  // 3 Tumbler
+        ]
+      }
+    },
+    {
+      deskripsi: '2. Jamaah / Pengajian (Banda Aceh, Aceh) — Format WA +62',
+      payload: {
+        nama: 'Cut Teuku Aris',
+        waInput: '+62 852-1122-3344',
+        daerah: 'Banda Aceh - Aceh',
+        metode: 'KIRIM',
+        penerima: 'Cut Teuku Aris',
+        hpPenerima: '085211223344',
+        provinsi: 'Aceh',
+        kota: 'Banda Aceh',
+        kecamatan: 'Syiah Kuala',
+        alamat: 'Jl. T. Nyak Arief No. 14, Kopelma Darussalam',
+        kodePos: '23111',
+        catatan: 'Tolong konfirmasi resi ekspedisi via WA jika sudah dikirim.',
+        items: [
+          { sku: 'KJ-M', qty: 2 },  // 2 Kaos Panjang M
+          { sku: 'KJ-L', qty: 2 }   // 2 Kaos Panjang L
+        ]
+      }
+    },
+    {
+      deskripsi: '3. Mahasiswa / Kolektor (Denpasar, Bali) — Format WA 8xxx tanpa 0',
+      payload: {
+        nama: 'I Gusti Ngurah Made Wira',
+        waInput: '89512345678',
+        daerah: 'Denpasar - Bali',
+        metode: 'KIRIM',
+        penerima: 'I Gusti Ngurah Made Wira',
+        hpPenerima: '089512345678',
+        provinsi: 'Bali',
+        kota: 'Denpasar',
+        kecamatan: 'Denpasar Barat',
+        alamat: 'Jl. Teuku Umar No. 200, Dauh Puri Kauh',
+        kodePos: '80113',
+        catatan: 'Kirim saat jam kerja kantor ya kak.',
+        items: [
+          { sku: 'KP-S', qty: 1 },
+          { sku: 'KR-STD', qty: 2 },
+          { sku: 'KC-STD', qty: 2 }
+        ]
+      }
+    },
+    {
+      deskripsi: '4. Ambil di Lokasi (Pontianak, Kalimantan Barat)',
+      payload: {
+        nama: 'Siti Nurhaliza',
+        waInput: '081377889900',
+        daerah: 'Pontianak - Kalimantan Barat',
+        metode: 'AMBIL',
+        catatan: 'Nanti diambil langsung saat booth PO dibuka.',
+        items: [
+          { sku: 'KP-M', qty: 1 },
+          { sku: 'TB-STD', qty: 1 }
+        ]
+      }
+    },
+    {
+      deskripsi: '5. Pengusaha Muda (Makassar, Sulawesi Selatan)',
+      payload: {
+        nama: 'Daeng Andi Sultan',
+        waInput: '628114455667',
+        daerah: 'Makassar - Sulawesi Selatan',
+        metode: 'KIRIM',
+        penerima: 'Daeng Andi Sultan',
+        hpPenerima: '08114455667',
+        provinsi: 'Sulawesi Selatan',
+        kota: 'Makassar',
+        kecamatan: 'Panakkukang',
+        alamat: 'Jl. AP Pettarani No. 55, Tamamaung',
+        kodePos: '90231',
+        catatan: 'Mantap merchandise-nya, diprioritaskan ya admin!',
+        items: [
+          { sku: 'KP-XL', qty: 3 },
+          { sku: 'KJ-XL', qty: 2 },
+          { sku: 'TB-STD', qty: 1 },
+          { sku: 'KR-STD', qty: 1 }
+        ]
+      }
+    }
+  ];
+
+  let totalBerhasil = 0;
+
+  daftarPersona.forEach(function(item, idx) {
+    Logger.log('\n--- [' + (idx + 1) + '/' + daftarPersona.length + '] ' + item.deskripsi + ' ---');
+    
+    const eMock = {
+      postData: {
+        contents: JSON.stringify(item.payload)
+      }
+    };
+
+    try {
+      const response = doPost(eMock);
+      const resData = JSON.parse(response.getContent());
+
+      if (resData.status === 'success') {
+        totalBerhasil++;
+        Logger.log('✅ SUKSES | Order ID: ' + resData.orderId + ' | Total: Rp ' + Number(resData.totalTf).toLocaleString('id-ID'));
+      } else {
+        Logger.log('❌ GAGAL  | Message: ' + resData.message);
+      }
+    } catch (err) {
+      Logger.log('💥 ERROR EXCEPTION: ' + err.message);
+    }
+  });
+
+  Logger.log('\n=======================================================');
+  Logger.log('📊 HASIL SIMULASI: ' + totalBerhasil + '/' + daftarPersona.length + ' ORDER BERHASIL DIBUAT!');
+  Logger.log('=======================================================\n');
+}
+
