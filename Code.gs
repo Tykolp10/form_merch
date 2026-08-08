@@ -438,7 +438,7 @@ function pesanOrderMasuk_(o) {
   let t = '';
   t += '*PESANAN DITERIMA* ✅\n';
   t += 'Order ID: *' + o.orderId + '*\n\n';
-  t += 'Halo ' + o.nama + ', terima kasih sudah memesan Merch MQ.\n\n';
+  t += 'Halo ' + o.nama + ', terima kasih sudah memesan Merch Safari MQ 12.\n\n';
   t += '*RINCIAN PESANAN*\n';
   o.lines.forEach(function(l) {
     const label = l.ukuran && l.ukuran !== '—' ? l.nama + ' ' + l.ukuran : l.nama;
