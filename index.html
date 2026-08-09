@@ -1009,18 +1009,29 @@
     .hero-card {
       background: #f7f7f7;
       border: 1px solid var(--color-border);
-      border-radius: 4px;
-      padding: clamp(24px, 4vw, 44px);
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 36px;
+      border-radius: 6px;
+      padding: clamp(28px, 4vw, 44px) 0 0 0;
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-text-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 680px;
+      padding: 0 24px;
+      margin-bottom: 20px;
     }
 
     .hero-tag {
       font-size: 0.72rem;
       font-weight: 800;
-      letter-spacing: 0.12rem;
+      letter-spacing: 0.14rem;
       text-transform: uppercase;
       color: var(--color-muted);
       margin-bottom: 8px;
@@ -1028,7 +1039,7 @@
 
     .hero-headline {
       font-family: var(--font-heading-family);
-      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-size: clamp(2.4rem, 5.5vw, 3.6rem);
       font-weight: 800;
       line-height: 1.1;
       color: var(--color-base-text);
@@ -1041,14 +1052,18 @@
       color: var(--color-muted);
       line-height: 1.6;
       margin-bottom: 24px;
-      max-width: 480px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .hero-btn-group {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 12px;
       flex-wrap: wrap;
+      margin-bottom: 8px;
     }
 
     .btn-hero-primary {
@@ -1085,26 +1100,25 @@
 
     .hero-image-wrapper {
       width: 100%;
-      height: 320px;
+      height: auto;
       background: transparent;
       border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: block;
       overflow: hidden;
+      margin-top: 12px;
     }
 
     .hero-image-wrapper img {
       width: 100%;
-      height: 100%;
-      object-fit: contain;
-      padding: 16px;
-      box-sizing: border-box;
-      transition: transform 0.6s ease;
+      height: auto;
+      max-height: 560px;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     .hero-card:hover .hero-image-wrapper img {
-      transform: scale(1.04);
+      transform: scale(1.02);
     }
 
     /* RESPONSIVE DESIGN & FINE-TUNED LAYOUT AUDIT */
@@ -1121,7 +1135,7 @@
         transform: translateY(-4px);
       }
       .hero-card {
-        padding: 48px;
+        padding: 48px 0 0 0;
       }
       .input-control {
         font-size: 0.92rem;
@@ -1170,10 +1184,12 @@
 
       .hero-editorial { padding: 18px 0 12px; }
       .hero-card {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 20px 16px;
+        padding: 24px 0 0 0;
         border-radius: 6px;
+      }
+      .hero-text-content {
+        padding: 0 14px;
+        margin-bottom: 16px;
       }
       .hero-headline { font-size: 1.85rem; margin-bottom: 10px; }
       .hero-subtext { font-size: 0.88rem; margin-bottom: 18px; }
@@ -1351,7 +1367,7 @@
           </div>
         </div>
         <div class="hero-image-wrapper">
-          <img src="kaos_pendek_hitam.png?v=3" alt="Merch MQ 2026 Hero Showcase">
+          <img src="home_hero.png?v=5" alt="Merch MQ 2026 Hero Showcase">
         </div>
       </div>
     </section>
