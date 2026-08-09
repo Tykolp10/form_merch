@@ -1349,7 +1349,7 @@
           </div>
         </div>
         <div class="hero-image-wrapper">
-          <img src="kaos_pendek_hitam.png" alt="Merch MQ 2026 Hero Showcase">
+          <img src="kaos_pendek_hitam.png?v=2" alt="Merch MQ 2026 Hero Showcase">
         </div>
       </div>
     </section>
@@ -1382,7 +1382,7 @@
       <div class="card-wrapper" data-cat="bundling" id="card-BD">
         <div class="card-badge" style="background:#d97706;">HEMAT Rp 25.000</div>
         <div class="card__media" onclick="openZoomModal('BD')">
-          <img id="img-BD" src="kaos_pendek_hitam.png" alt="Paket Bundling Complete">
+          <img id="img-BD" src="kaos_pendek_hitam.png?v=2" alt="Paket Bundling Complete">
           <div class="zoom-hint-btn">🔍 Zoom Detail</div>
         </div>
         <h3 class="card-information__text" id="title-BD">Paket Bundling Merch</h3>
@@ -1398,7 +1398,7 @@
       <div class="card-wrapper" data-cat="pendek" id="card-KP">
         <div class="card-badge">BEST SELLER</div>
         <div class="card__media" onclick="openZoomModal('KP')">
-          <img id="img-KP" src="kaos_pendek_hitam.png" alt="Kaos Lengan Pendek">
+          <img id="img-KP" src="kaos_pendek_hitam.png?v=2" alt="Kaos Lengan Pendek">
           <div class="zoom-hint-btn">🔍 Zoom Detail</div>
         </div>
         <h3 class="card-information__text" id="title-KP">Kaos Lengan Pendek</h3>
@@ -1411,7 +1411,7 @@
       <div class="card-wrapper" data-cat="panjang" id="card-KJ">
         <div class="card-badge">RIBBED CUFFS</div>
         <div class="card__media" onclick="openZoomModal('KJ')">
-          <img id="img-KJ" src="kaos_panjang_hitam.png" alt="Kaos Lengan Panjang">
+          <img id="img-KJ" src="kaos_panjang_hitam.png?v=2" alt="Kaos Lengan Panjang">
           <div class="zoom-hint-btn">🔍 Zoom Detail</div>
         </div>
         <h3 class="card-information__text" id="title-KJ">Kaos Lengan Panjang</h3>
@@ -1424,7 +1424,7 @@
       <div class="card-wrapper" data-cat="aksesoris">
         <div class="card-badge">STAINLESS 304</div>
         <div class="card__media" onclick="openZoomModal('TB')">
-          <img src="tumbler.png" alt="Tumbler Thermal Stainless">
+          <img src="tumbler.png?v=2" alt="Tumbler Thermal Stainless">
           <div class="zoom-hint-btn">🔍 Zoom Detail</div>
         </div>
         <h3 class="card-information__text">Tumbler Thermal Stainless</h3>
@@ -1437,7 +1437,7 @@
       <div class="card-wrapper" data-cat="aksesoris">
         <div class="card-badge">CUSTOM PRINT</div>
         <div class="card__media" onclick="openZoomModal('KR')">
-          <img src="korek.png" alt="Korek Custom MQ">
+          <img src="korek.png?v=2" alt="Korek Custom MQ">
           <div class="zoom-hint-btn">🔍 Zoom Detail</div>
         </div>
         <h3 class="card-information__text">Korek Custom MQ</h3>
@@ -1450,7 +1450,7 @@
       <div class="card-wrapper" data-cat="aksesoris">
         <div class="card-badge">ACRYLIC 3D</div>
         <div class="card__media" onclick="openZoomModal('KC')">
-          <img src="keychain.png" alt="Keychain Acrylic Custom">
+          <img src="keychain.png?v=2" alt="Keychain Acrylic Custom">
           <div class="zoom-hint-btn">🔍 Zoom Detail</div>
         </div>
         <h3 class="card-information__text">Gantungan Kunci Acrylic</h3>
@@ -2081,10 +2081,10 @@
       const baseName = isKP ? 'kaos_pendek_' : 'kaos_panjang_';
       const suffix = currentZoomView === 'Belakang' ? '_belakang.png' : '.png';
       
-      const imgUrl = (currentZoomProduct === 'TB') ? 'tumbler.png' :
-                     (currentZoomProduct === 'KR') ? 'korek.png' :
-                     (currentZoomProduct === 'KC') ? 'keychain.png' :
-                     baseName + currentZoomColor + suffix;
+      const imgUrl = (currentZoomProduct === 'TB') ? 'tumbler.png?v=2' :
+                     (currentZoomProduct === 'KR') ? 'korek.png?v=2' :
+                     (currentZoomProduct === 'KC') ? 'keychain.png?v=2' :
+                     baseName + currentZoomColor + suffix + '?v=2';
 
       const zoomImg = document.getElementById('zoomImg');
       if (zoomImg) zoomImg.src = imgUrl;
