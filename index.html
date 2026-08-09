@@ -2011,11 +2011,12 @@
       const pdpTitle = document.getElementById('pdpTitle');
       const pdpSizeChartLink = document.getElementById('pdpSizeChartLink');
 
-      const isApparel = (prodKey === 'KP' || prodKey === 'KJ' || prodKey === 'BD');
+      const isSingleApparel = (prodKey === 'KP' || prodKey === 'KJ');
+      const isApparel = (isSingleApparel || prodKey === 'BD');
       const isBundle = (prodKey === 'BD');
 
       if (colorGroup) colorGroup.style.display = isApparel ? 'flex' : 'none';
-      if (viewGroup) viewGroup.style.display = isApparel ? 'flex' : 'none';
+      if (viewGroup) viewGroup.style.display = isSingleApparel ? 'flex' : 'none';
       if (modelGroup) modelGroup.style.display = isBundle ? 'flex' : 'none';
       if (pdpSizeChartLink) pdpSizeChartLink.style.display = isApparel ? 'inline-block' : 'none';
 
