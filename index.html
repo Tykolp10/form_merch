@@ -1384,7 +1384,7 @@
       <div class="card-wrapper" data-cat="bundling" id="card-BD">
         <div class="card-badge" style="background:#d97706;">HEMAT Rp 25.000</div>
         <div class="card__media" onclick="openZoomModal('BD')">
-          <img id="img-BD" src="kaos_pendek_hitam.png?v=3" alt="Paket Bundling Complete">
+          <img id="img-BD" src="bundling.png?v=4" alt="Paket Bundling Complete">
           <div class="zoom-hint-btn">🔍 Zoom Detail</div>
         </div>
         <h3 class="card-information__text" id="title-BD">Paket Bundling Merch</h3>
@@ -2083,10 +2083,11 @@
       const baseName = isKP ? 'kaos_pendek_' : 'kaos_panjang_';
       const suffix = currentZoomView === 'Belakang' ? '_belakang.png' : '.png';
       
-      const imgUrl = (currentZoomProduct === 'TB') ? 'tumbler.png?v=3' :
-                     (currentZoomProduct === 'KR') ? 'korek.png?v=3' :
-                     (currentZoomProduct === 'KC') ? 'keychain.png?v=3' :
-                     baseName + currentZoomColor + suffix + '?v=3';
+      const imgUrl = (currentZoomProduct === 'BD') ? 'bundling.png?v=4' :
+                     (currentZoomProduct === 'TB') ? 'tumbler.png?v=4' :
+                     (currentZoomProduct === 'KR') ? 'korek.png?v=4' :
+                     (currentZoomProduct === 'KC') ? 'keychain.png?v=4' :
+                     baseName + currentZoomColor + suffix + '?v=4';
 
       const zoomImg = document.getElementById('zoomImg');
       if (zoomImg) zoomImg.src = imgUrl;
