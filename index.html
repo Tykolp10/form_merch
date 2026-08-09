@@ -1435,29 +1435,29 @@
         <button type="button" class="btn-checkout" style="width:100%; border-radius:2px; font-size:0.85rem; padding:10px; margin-top:auto;" onclick="openZoomModal('TB')">Pilih Kuantitas &rarr;</button>
       </div>
 
-      <!-- PRODUCT 4: KOREK CUSTOM -->
+      <!-- PRODUCT 4: KOREK CRICKET -->
       <div class="card-wrapper" data-cat="aksesoris">
-        <div class="card-badge">CUSTOM PRINT</div>
+        <div class="card-badge">CRICKET</div>
         <div class="card__media" onclick="openZoomModal('KR')">
-          <img src="korek.png?v=3" alt="Korek Custom MQ">
+          <img src="korek.png?v=3" alt="Korek Cricket">
           <div class="zoom-hint-btn">🔍 Zoom Detail</div>
         </div>
-        <h3 class="card-information__text">Korek Custom MQ</h3>
+        <h3 class="card-information__text">Korek Cricket</h3>
         <div class="price-item">Rp 10.000</div>
-        <p class="card-spec">Custom Print • Matte Black Finish • Refillable Lighter</p>
+        <p class="card-spec">Cricket Original • Custom Print Finish • Refillable Lighter</p>
         <button type="button" class="btn-checkout" style="width:100%; border-radius:2px; font-size:0.85rem; padding:10px; margin-top:auto;" onclick="openZoomModal('KR')">Pilih Kuantitas &rarr;</button>
       </div>
 
-      <!-- PRODUCT 5: KEYCHAIN ACRYLIC -->
+      <!-- PRODUCT 5: KEYCHAIN PARACORD -->
       <div class="card-wrapper" data-cat="aksesoris">
-        <div class="card-badge">ACRYLIC 3D</div>
+        <div class="card-badge">HANDMADE</div>
         <div class="card__media" onclick="openZoomModal('KC')">
-          <img src="keychain.png?v=3" alt="Keychain Acrylic Custom">
+          <img src="keychain.png?v=3" alt="Safari Keychain / Bag Charm Tali Ikat Paracord">
           <div class="zoom-hint-btn">🔍 Zoom Detail</div>
         </div>
-        <h3 class="card-information__text">Gantungan Kunci Acrylic</h3>
+        <h3 class="card-information__text">Safari Keychain / Bag Charm Tali Ikat Paracord</h3>
         <div class="price-item">Rp 20.000</div>
-        <p class="card-spec">Acrylic 3D • Premium Clear Acrylic • Double-Sided Print</p>
+        <p class="card-spec">Polylactic Acid &amp; Maroon Logo Safari • Digunakan Pada Tas/Kunci • Handmade by Our Team</p>
         <button type="button" class="btn-checkout" style="width:100%; border-radius:2px; font-size:0.85rem; padding:10px; margin-top:auto;" onclick="openZoomModal('KC')">Pilih Kuantitas &rarr;</button>
       </div>
 
@@ -1863,11 +1863,11 @@
           title = 'Tumbler Thermal Stainless';
           sub = 'Capacity: 750ml';
         } else if (sku === 'KR-STD') {
-          title = 'Korek Custom MQ';
-          sub = 'Standard Lighter';
+          title = 'Korek Cricket';
+          sub = 'Cricket Lighter';
         } else if (sku === 'KC-STD') {
-          title = 'Gantungan Kunci Acrylic';
-          sub = 'Standard 3D Acrylic';
+          title = 'Safari Keychain Paracord';
+          sub = 'Handmade Bag Charm';
         }
 
         return `
@@ -2024,7 +2024,7 @@
                              (prodKey === 'KP') ? 'Kaos Lengan Pendek' :
                              (prodKey === 'KJ') ? 'Kaos Lengan Panjang' :
                              (prodKey === 'TB') ? 'Tumbler Thermal Stainless' :
-                             (prodKey === 'KR') ? 'Korek Custom MQ' : 'Gantungan Kunci Acrylic';
+                             (prodKey === 'KR') ? 'Korek Cricket' : 'Safari Keychain / Bag Charm Paracord';
       }
 
       renderPdpSizeGrid();
@@ -2234,8 +2234,8 @@
             else if (it.sku.startsWith('KP')) label = 'Kaos Pendek (' + activeColors['KP'] + ' - ' + it.sku.replace('KP-', '') + ')';
             else if (it.sku.startsWith('KJ')) label = 'Kaos Panjang (' + activeColors['KJ'] + ' - ' + it.sku.replace('KJ-', '') + ')';
             else if (it.sku === 'TB-STD') label = 'Tumbler Stainless';
-            else if (it.sku === 'KR-STD') label = 'Korek Custom';
-            else if (it.sku === 'KC-STD') label = 'Keychain Acrylic';
+            else if (it.sku === 'KR-STD') label = 'Korek Cricket';
+            else if (it.sku === 'KC-STD') label = 'Safari Keychain Paracord';
             return `<div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--color-muted); margin-bottom:4px;"><span>• ${it.qty}x ${label}</span><span>Rp ${(PRICES[it.sku] * it.qty).toLocaleString('id-ID')}</span></div>`;
           }).join('');
 
