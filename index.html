@@ -1472,7 +1472,7 @@
       <div class="card-wrapper" data-cat="panjang" id="card-KJ">
         <div class="card-badge">RIBBED CUFFS</div>
         <div class="card__media" onclick="openZoomModal('KJ')">
-          <img id="img-KJ" src="kaos_panjang_hitam.png?v=3" alt="Kaos Lengan Panjang">
+          <img id="img-KJ" src="kaos_panjang_hitam.png?v=5" alt="Kaos Lengan Panjang">
           <div class="zoom-hint-btn">🔍 Zoom Detail</div>
         </div>
         <h3 class="card-information__text" id="title-KJ">Kaos Lengan Panjang</h3>
@@ -1482,13 +1482,13 @@
       </div>
 
       <!-- PRODUCT 3: TUMBLER -->
-      <div class="card-wrapper" data-cat="aksesoris">
+      <div class="card-wrapper" data-cat="aksesoris" id="card-TB">
         <div class="card-badge">STAINLESS 304</div>
         <div class="card__media" onclick="openZoomModal('TB')">
-          <img src="tumbler.png?v=3" alt="Tumbler Thermal Stainless">
+          <img id="img-TB" src="tumbler_depan.png?v=5" alt="Tumbler Thermal Stainless">
           <div class="zoom-hint-btn">🔍 Zoom Detail</div>
         </div>
-        <h3 class="card-information__text">Tumbler Thermal Stainless</h3>
+        <h3 class="card-information__text" id="title-TB">Tumbler Thermal Stainless</h3>
         <div class="price-item">Rp 75.000</div>
         <p class="card-spec">Stainless Steel 304 • Kapasitas 750 ML • Tahan Panas &amp; Dingin up to 8 jam</p>
         <button type="button" class="btn-checkout" style="width:100%; border-radius:2px; font-size:0.85rem; padding:10px; margin-top:auto;" onclick="openZoomModal('TB')">Pilih Kuantitas &rarr;</button>
@@ -2003,7 +2003,7 @@
     }
 
     const activeColors = { 'KP': 'hitam', 'KJ': 'hitam', 'BD': 'hitam' };
-    const currentViews = { 'KP': 'Depan', 'KJ': 'Depan', 'BD': 'Depan' };
+    const currentViews = { 'KP': 'Depan', 'KJ': 'Depan', 'BD': 'Depan', 'TB': 'Depan' };
     let activeBundleModel = 'KP';
 
     function filterCategory(cat, btn) {
@@ -2071,9 +2071,10 @@
       const isSingleApparel = (prodKey === 'KP' || prodKey === 'KJ');
       const isApparel = (isSingleApparel || prodKey === 'BD');
       const isBundle = (prodKey === 'BD');
+      const hasViewToggle = (isSingleApparel || prodKey === 'TB');
 
       if (colorGroup) colorGroup.style.display = isApparel ? 'flex' : 'none';
-      if (viewGroup) viewGroup.style.display = isSingleApparel ? 'flex' : 'none';
+      if (viewGroup) viewGroup.style.display = hasViewToggle ? 'flex' : 'none';
       if (modelGroup) modelGroup.style.display = isBundle ? 'flex' : 'none';
       if (pdpSizeChartLink) pdpSizeChartLink.style.display = isApparel ? 'inline-block' : 'none';
 
@@ -2154,11 +2155,11 @@
       const baseName = isKP ? 'kaos_pendek_' : 'kaos_panjang_';
       const suffix = currentZoomView === 'Belakang' ? '_belakang.png' : '.png';
       
-      const imgUrl = (currentZoomProduct === 'BD') ? 'bundling.png?v=4' :
-                     (currentZoomProduct === 'TB') ? 'tumbler.png?v=4' :
-                     (currentZoomProduct === 'KR') ? 'korek.png?v=4' :
-                     (currentZoomProduct === 'KC') ? 'keychain.png?v=4' :
-                     baseName + currentZoomColor + suffix + '?v=4';
+      const imgUrl = (currentZoomProduct === 'BD') ? 'bundling.png?v=5' :
+                     (currentZoomProduct === 'TB') ? (currentZoomView === 'Belakang' ? 'tumbler_belakang.png?v=5' : 'tumbler_depan.png?v=5') :
+                     (currentZoomProduct === 'KR') ? 'korek.png?v=5' :
+                     (currentZoomProduct === 'KC') ? 'keychain.png?v=5' :
+                     baseName + currentZoomColor + suffix + '?v=5';
 
       const zoomImg = document.getElementById('zoomImg');
       if (zoomImg) zoomImg.src = imgUrl;
@@ -2312,6 +2313,7 @@
           }).join('');
 
           const waUrl = "https://wa.me/62895330478397?text=" + encodeURIComponent("Halo Admin CS, saya mau kirim bukti transfer untuk Order ID: " + data.orderId + " dengan nominal Rp " + Number(data.totalTf).toLocaleString('id-ID'));
+
           
           document.getElementById('successBox').innerHTML = `
             <div style="font-size:0.75rem; color:var(--color-muted); text-transform:uppercase; letter-spacing:0.04em;">ORDER ID</div>
