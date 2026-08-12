@@ -503,8 +503,8 @@ function pesanOrderMasuk_(o) {
   if (o.kodeUnik > 0) t += 'Kode unik: ' + o.kodeUnik + '\n';
   t += '\n*TOTAL TRANSFER*\n*' + rupiah_(o.totalTf) + '*\n';
   t += '\n⚠️ Transfer *sesuai nominal di atas sampai digit terakhir*. Kode unik ini yang membuat pembayaranmu langsung terverifikasi.\n';
-  t += '\n*REKENING*\n';
-  t += P_('NAMA_BANK') + '\n' + P_('NOMOR_REKENING') + '\na.n. ' + P_('ATAS_NAMA') + '\n';
+  t += '*REKENING PEMBAYARAN*\n';
+  t += P_('NAMA_BANK') + ': *' + P_('NOMOR_REKENING') + '*\na.n. ' + P_('ATAS_NAMA') + '\n*(⚠️ Pilih menu Transfer Rekening Bank, BUKAN Virtual Account/VA)*\n';
   t += '\n⏰ *Batas pembayaran:*\n' + Utilities.formatDate(o.batas, TZ, 'EEEE, dd MMMM yyyy, HH:mm') + ' WIB\n';
   t += '\nSetelah transfer, *kirim bukti ke chat CS ini (' + P_('CS_WA', '0895330478397') + ')* untuk konfirmasi pengiriman & informasi lanjutan.\n';
   t += '\nPengambilan: ' + (o.metode === 'KIRIM' ? 'Dikirim via ekspedisi (detail resi & estimasi dikonfirmasi via CS WA)' : 'Ambil di lokasi (jadwal penyerahan dikonfirmasi via CS WA)') + '\n';
