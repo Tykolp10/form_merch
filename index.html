@@ -1425,7 +1425,7 @@
           </div>
         </div>
         <div class="hero-image-wrapper">
-          <img src="home_hero.png?v=5" alt="Merch MQ 2026 Hero Showcase">
+          <img src="home_hero.webp?v=6" alt="Merch MQ 2026 Hero Showcase" loading="eager" fetchpriority="high">
         </div>
       </div>
     </section>
@@ -1458,7 +1458,7 @@
       <div class="card-wrapper" data-cat="bundling" id="card-BD">
         <div class="card-badge" style="background:#d97706;">HEMAT HINGGA Rp 30.000</div>
         <div class="card__media" onclick="openZoomModal('BD')">
-          <img id="img-BD" src="bundling.png?v=4" alt="Paket Bundling Complete">
+          <img id="img-BD" src="bundling.webp?v=6" alt="Paket Bundling Complete" loading="lazy">
           <div class="zoom-hint-btn">🔍 Zoom Detail</div>
         </div>
         <h3 class="card-information__text" id="title-BD">Paket Bundling Merch</h3>
@@ -1474,7 +1474,7 @@
       <div class="card-wrapper" data-cat="pendek" id="card-KP">
         <div class="card-badge">BEST SELLER</div>
         <div class="card__media" onclick="openZoomModal('KP')">
-          <img id="img-KP" src="kaos_pendek_hitam.png?v=3" alt="Kaos Lengan Pendek">
+          <img id="img-KP" src="kaos_pendek_hitam.webp?v=6" alt="Kaos Lengan Pendek" loading="lazy">
           <div class="zoom-hint-btn">🔍 Zoom Detail</div>
         </div>
         <h3 class="card-information__text" id="title-KP">Kaos Lengan Pendek</h3>
@@ -1487,7 +1487,7 @@
       <div class="card-wrapper" data-cat="panjang" id="card-KJ">
         <div class="card-badge">RIBBED CUFFS</div>
         <div class="card__media" onclick="openZoomModal('KJ')">
-          <img id="img-KJ" src="kaos_panjang_hitam.png?v=5" alt="Kaos Lengan Panjang">
+          <img id="img-KJ" src="kaos_panjang_hitam.webp?v=6" alt="Kaos Lengan Panjang" loading="lazy">
           <div class="zoom-hint-btn">🔍 Zoom Detail</div>
         </div>
         <h3 class="card-information__text" id="title-KJ">Kaos Lengan Panjang</h3>
@@ -1500,7 +1500,7 @@
       <div class="card-wrapper" data-cat="aksesoris" id="card-TB">
         <div class="card-badge">STAINLESS 304</div>
         <div class="card__media" onclick="openZoomModal('TB')">
-          <img id="img-TB" src="tumbler_depan.png?v=5" alt="Tumbler Thermal Stainless">
+          <img id="img-TB" src="tumbler_depan.webp?v=6" alt="Tumbler Thermal Stainless" loading="lazy">
           <div class="zoom-hint-btn">🔍 Zoom Detail</div>
         </div>
         <h3 class="card-information__text" id="title-TB">Tumbler Thermal Stainless</h3>
@@ -1513,7 +1513,7 @@
       <div class="card-wrapper" data-cat="aksesoris">
         <div class="card-badge">CRICKET</div>
         <div class="card__media" onclick="openZoomModal('KR')">
-          <img src="korek.png?v=3" alt="Korek Cricket">
+          <img src="korek.webp?v=6" alt="Korek Cricket" loading="lazy">
           <div class="zoom-hint-btn">🔍 Zoom Detail</div>
         </div>
         <h3 class="card-information__text">Korek Cricket</h3>
@@ -1526,7 +1526,7 @@
       <div class="card-wrapper" data-cat="aksesoris">
         <div class="card-badge">HANDMADE</div>
         <div class="card__media" onclick="openZoomModal('KC')">
-          <img src="keychain.png?v=3" alt="Safari Keychain / Bag Charm Tali Ikat Paracord">
+          <img src="keychain.webp?v=6" alt="Safari Keychain / Bag Charm Tali Ikat Paracord" loading="lazy">
           <div class="zoom-hint-btn">🔍 Zoom Detail</div>
         </div>
         <h3 class="card-information__text">Safari Keychain / Bag Charm Tali Ikat Paracord</h3>
@@ -2169,13 +2169,13 @@
       const isBD = currentZoomProduct === 'BD';
       const isKP = isBD ? (activeBundleModel === 'KP') : (currentZoomProduct === 'KP');
       const baseName = isKP ? 'kaos_pendek_' : 'kaos_panjang_';
-      const suffix = currentZoomView === 'Belakang' ? '_belakang.png' : '.png';
+      const suffix = currentZoomView === 'Belakang' ? '_belakang.webp' : '.webp';
       
-      const imgUrl = (currentZoomProduct === 'BD') ? 'bundling.png?v=5' :
-                     (currentZoomProduct === 'TB') ? (currentZoomView === 'Belakang' ? 'tumbler_belakang.png?v=5' : 'tumbler_depan.png?v=5') :
-                     (currentZoomProduct === 'KR') ? 'korek.png?v=5' :
-                     (currentZoomProduct === 'KC') ? 'keychain.png?v=5' :
-                     baseName + currentZoomColor + suffix + '?v=5';
+      const imgUrl = (currentZoomProduct === 'BD') ? 'bundling.webp?v=6' :
+                     (currentZoomProduct === 'TB') ? (currentZoomView === 'Belakang' ? 'tumbler_belakang.webp?v=6' : 'tumbler_depan.webp?v=6') :
+                     (currentZoomProduct === 'KR') ? 'korek.webp?v=6' :
+                     (currentZoomProduct === 'KC') ? 'keychain.webp?v=6' :
+                     baseName + currentZoomColor + suffix + '?v=6';
 
       const zoomImg = document.getElementById('zoomImg');
       if (zoomImg) zoomImg.src = imgUrl;
@@ -2212,17 +2212,23 @@
       updateZoomDisplay();
     }
 
+    let zoomRaf = null;
     function handleZoomMove(e) {
-      const viewport = document.getElementById('zoomViewport');
-      const img = document.getElementById('zoomImg');
-      if (!viewport || !img) return;
+      const clientX = e.clientX;
+      const clientY = e.clientY;
+      if (zoomRaf) cancelAnimationFrame(zoomRaf);
+      zoomRaf = requestAnimationFrame(() => {
+        const viewport = document.getElementById('zoomViewport');
+        const img = document.getElementById('zoomImg');
+        if (!viewport || !img) return;
 
-      const rect = viewport.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
+        const rect = viewport.getBoundingClientRect();
+        const x = ((clientX - rect.left) / rect.width) * 100;
+        const y = ((clientY - rect.top) / rect.height) * 100;
 
-      viewport.classList.add('zoomed');
-      img.style.transformOrigin = `${x}% ${y}%`;
+        viewport.classList.add('zoomed');
+        img.style.transformOrigin = `${x}% ${y}%`;
+      });
     }
 
     function handleZoomTouch(e) {
@@ -2233,6 +2239,7 @@
     }
 
     function resetZoom() {
+      if (zoomRaf) cancelAnimationFrame(zoomRaf);
       const viewport = document.getElementById('zoomViewport');
       const img = document.getElementById('zoomImg');
       if (viewport) viewport.classList.remove('zoomed');
