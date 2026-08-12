@@ -690,7 +690,7 @@ function pasangTrigger() {
 }
 
 /**
- * Jalankan SEKALI untuk mengisikan SKU Paket Bundling ke tab MASTER_PRODUK di Google Sheets
+ * Meng-update harga SKU Paket Bundling (210.000) dan Tumbler (85.000) di tab MASTER_PRODUK Google Sheets
  */
 function updateMasterProdukBundling() {
   const ss = getSS_();
@@ -700,33 +700,22 @@ function updateMasterProdukBundling() {
     return;
   }
 
-  const existingLast = shProd.getLastRow();
-  const existingSKUs = {};
-  if (existingLast > 1) {
-    const existingData = shProd.getRange(2, 1, existingLast - 1, 1).getValues();
-    existingData.forEach(r => { existingSKUs[String(r[0]).trim()] = true; });
-  }
+  const lastRow = shProd.getLastRow();
+  if (lastRow < 2) return;
 
-  const bundleRows = [
-    ['BD-KP-S',   'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'S',   210000, 'Paket Bundling Pendek [S]',   'YA'],
-    ['BD-KP-M',   'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'M',   210000, 'Paket Bundling Pendek [M]',   'YA'],
-    ['BD-KP-L',   'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'L',   210000, 'Paket Bundling Pendek [L]',   'YA'],
-    ['BD-KP-XL',  'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'XL',  210000, 'Paket Bundling Pendek [XL]',  'YA'],
-    ['BD-KP-XXL', 'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'XXL', 210000, 'Paket Bundling Pendek [XXL]', 'YA'],
-    ['BD-KJ-S',   'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'S',   210000, 'Paket Bundling Panjang [S]',   'YA'],
-    ['BD-KJ-M',   'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'M',   210000, 'Paket Bundling Panjang [M]',   'YA'],
-    ['BD-KJ-L',   'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'L',   210000, 'Paket Bundling Panjang [L]',   'YA'],
-    ['BD-KJ-XL',  'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'XL',  210000, 'Paket Bundling Panjang [XL]',  'YA'],
-    ['BD-KJ-XXL', 'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'XXL', 210000, 'Paket Bundling Panjang [XXL]', 'YA']
-  ];
+  const data = shProd.getRange(2, 1, lastRow - 1, 6).getValues();
+  let updatedCount = 0;
 
-  const newRows = bundleRows.filter(r => !existingSKUs[r[0]]);
-  if (newRows.length > 0) {
-    const nextRow = existingLast + 1;
-    shProd.getRange(nextRow, 1, newRows.length, 6).setValues(newRows);
-    shProd.getRange(nextRow, 4, newRows.length, 1).setNumberFormat('Rp #,##0');
-    alertOrLog_('✅ ' + newRows.length + ' SKU Paket Bundling berhasil ditambahkan ke MASTER_PRODUK!');
-  } else {
-    alertOrLog_('ℹ️ SKU Paket Bundling sudah ada di MASTER_PRODUK.');
-  }
+  data.forEach(function(r, i) {
+    const sku = String(r[0]).trim();
+    if (sku.indexOf('BD-') === 0) {
+      shProd.getRange(i + 2, 4).setValue(210000); // Kolom D: Harga Bundling
+      updatedCount++;
+    } else if (sku === 'TB-STD') {
+      shProd.getRange(i + 2, 4).setValue(85000);   // Kolom D: Harga Tumbler
+      updatedCount++;
+    }
+  });
+
+  alertOrLog_('✅ Harga ' + updatedCount + ' SKU (Bundling 210rb & Tumbler 85rb) berhasil diperbarui di MASTER_PRODUK!');
 }
