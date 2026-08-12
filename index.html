@@ -435,20 +435,28 @@
     .size-grid {
       display: grid;
       grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 4px;
+      gap: 6px;
     }
 
     .size-item {
       background: #ffffff;
       border: 1px solid var(--color-border);
-      border-radius: 2px;
-      padding: 5px 2px;
+      border-radius: 4px;
+      padding: 8px 4px;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 3px;
+      justify-content: center;
+      gap: 6px;
       transition: var(--transition);
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .size-item:hover {
+      border-color: #000000;
     }
 
     .size-item.has-qty {
@@ -458,29 +466,30 @@
     }
 
     .size-label {
-      font-size: 0.78rem;
-      font-weight: 700;
+      font-size: 0.88rem;
+      font-weight: 800;
     }
 
     .qty-controls {
       display: flex;
       align-items: center;
-      gap: 2px;
+      gap: 3px;
     }
 
     .btn-mini {
-      width: 18px;
-      height: 18px;
-      border-radius: 2px;
+      min-width: 26px;
+      min-height: 26px;
+      border-radius: 3px;
       background: #f3f3f3;
       border: none;
       color: #000000;
-      font-size: 0.78rem;
+      font-size: 0.88rem;
       font-weight: 800;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
+      touch-action: manipulation;
     }
 
     .size-item.has-qty .btn-mini {
@@ -493,11 +502,52 @@
       color: #ffffff;
     }
 
+    .btn-mini:active {
+      transform: scale(0.92);
+    }
+
     .qty-num {
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       font-weight: 700;
-      width: 12px;
+      width: 14px;
       text-align: center;
+    }
+
+    .cart-color-badge {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 2px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .cart-color-badge.hitam {
+      background: #000000;
+      color: #ffffff;
+    }
+    .cart-color-badge.merah {
+      background: #dc2626;
+      color: #ffffff;
+    }
+
+    @media (max-width: 540px) {
+      .size-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+      .size-item {
+        padding: 10px 6px;
+      }
+      .btn-mini {
+        min-width: 32px;
+        min-height: 32px;
+        font-size: 1rem;
+      }
+      .qty-num {
+        font-size: 0.9rem;
+        width: 18px;
+      }
     }
 
     /* CHECKOUT FORM SECTION */
@@ -1849,6 +1899,17 @@
       }
     }
 
+    function getPrice(sku) {
+      if (PRICES[sku]) return PRICES[sku];
+      if (sku.startsWith('KP-')) return 120000;
+      if (sku.startsWith('KJ-')) return 125000;
+      if (sku.startsWith('BD-')) return 210000;
+      if (sku === 'TB-STD') return 85000;
+      if (sku === 'KR-STD') return 10000;
+      if (sku === 'KC-STD') return 20000;
+      return 0;
+    }
+
     function changeQty(sku, delta) {
       cart[sku] = (cart[sku] || 0) + delta;
       if (cart[sku] <= 0) delete cart[sku];
@@ -1865,6 +1926,10 @@
       updateBar();
       updatePdpCountLabel();
       renderCartDrawer();
+    }
+
+    function handleSizeCardClick(e, sku) {
+      changeQty(sku, 1);
     }
 
     function removeItemFromCart(sku) {
@@ -1913,7 +1978,7 @@
 
       container.innerHTML = skus.map(sku => {
         const qty = cart[sku];
-        const unitPrice = PRICES[sku] || 0;
+        const unitPrice = getPrice(sku);
         const lineTotal = unitPrice * qty;
         totalPrice += lineTotal;
 
@@ -1921,17 +1986,29 @@
         let sub = '';
 
         if (sku.startsWith('BD-KP')) {
+          const parts = sku.replace('BD-KP-', '').split('-');
+          const col = parts.length > 1 ? parts[0] : (activeColors['BD'] || 'hitam');
+          const sz = parts.length > 1 ? parts[1] : parts[0];
           title = 'Paket Bundling (Kaos Pendek)';
-          sub = 'Ukuran: ' + sku.replace('BD-KP-', '') + ' • Warna: ' + (activeColors['BD'] || 'Hitam');
+          sub = 'Ukuran: ' + sz + ' • Warna: <span class="cart-color-badge ' + col + '">' + col.toUpperCase() + '</span>';
         } else if (sku.startsWith('BD-KJ')) {
+          const parts = sku.replace('BD-KJ-', '').split('-');
+          const col = parts.length > 1 ? parts[0] : (activeColors['BD'] || 'hitam');
+          const sz = parts.length > 1 ? parts[1] : parts[0];
           title = 'Paket Bundling (Kaos Panjang)';
-          sub = 'Ukuran: ' + sku.replace('BD-KJ-', '') + ' • Warna: ' + (activeColors['BD'] || 'Hitam');
-        } else if (sku.startsWith('KP')) {
+          sub = 'Ukuran: ' + sz + ' • Warna: <span class="cart-color-badge ' + col + '">' + col.toUpperCase() + '</span>';
+        } else if (sku.startsWith('KP-')) {
+          const parts = sku.replace('KP-', '').split('-');
+          const col = parts.length > 1 ? parts[0] : (activeColors['KP'] || 'hitam');
+          const sz = parts.length > 1 ? parts[1] : parts[0];
           title = 'Kaos Lengan Pendek';
-          sub = 'Ukuran: ' + sku.replace('KP-', '') + ' • Warna: ' + (activeColors['KP'] || 'Hitam');
-        } else if (sku.startsWith('KJ')) {
+          sub = 'Ukuran: ' + sz + ' • Warna: <span class="cart-color-badge ' + col + '">' + col.toUpperCase() + '</span>';
+        } else if (sku.startsWith('KJ-')) {
+          const parts = sku.replace('KJ-', '').split('-');
+          const col = parts.length > 1 ? parts[0] : (activeColors['KJ'] || 'hitam');
+          const sz = parts.length > 1 ? parts[1] : parts[0];
           title = 'Kaos Lengan Panjang';
-          sub = 'Ukuran: ' + sku.replace('KJ-', '') + ' • Warna: ' + (activeColors['KJ'] || 'Hitam');
+          sub = 'Ukuran: ' + sz + ' • Warna: <span class="cart-color-badge ' + col + '">' + col.toUpperCase() + '</span>';
         } else if (sku === 'TB-STD') {
           title = 'Tumbler Thermal Stainless';
           sub = 'Capacity: 750ml';
@@ -1952,11 +2029,11 @@
             </div>
             <div style="display:flex; align-items:center; gap:8px;">
               <div class="qty-controls" style="gap:4px;">
-                <button type="button" class="btn-mini" style="width:22px; height:22px;" onclick="changeQty('${sku}', -1)">-</button>
-                <span class="qty-num" style="width:16px; font-size:0.82rem;">${qty}</span>
-                <button type="button" class="btn-mini" style="width:22px; height:22px;" onclick="changeQty('${sku}', 1)">+</button>
+                <button type="button" class="btn-mini" style="min-width:26px; min-height:26px;" onclick="changeQty('${sku}', -1)">-</button>
+                <span class="qty-num" style="width:16px; font-size:0.85rem; text-align:center;">${qty}</span>
+                <button type="button" class="btn-mini" style="min-width:26px; min-height:26px;" onclick="changeQty('${sku}', 1)">+</button>
               </div>
-              <button type="button" class="btn-delete-item" onclick="removeItemFromCart('${sku}')" title="Hapus dari keranjang">&times; Hapus</button>
+              <button type="button" class="btn-delete-item" onclick="removeItemFromCart('${sku}')" title="Hapus dari keranjang">&times;</button>
             </div>
           </div>
         `;
@@ -1985,7 +2062,7 @@
       Object.keys(cart).forEach(sku => {
         const q = cart[sku];
         totalQty += q;
-        totalPrice += q * (PRICES[sku] || 0);
+        totalPrice += q * getPrice(sku);
       });
 
       const headerBadge = document.getElementById('headerCartBadge');
@@ -2126,30 +2203,64 @@
       if (!container) return;
 
       const prod = currentZoomProduct;
+      const col = currentZoomColor;
+
       if (prod === 'BD') {
         const activeM = activeBundleModel;
-        const prefix = 'BD-' + activeM + '-';
+        const prefix = 'BD-' + activeM + '-' + col + '-';
         const sizes = ['S', 'M', 'L', 'XL', '2XL', '3XL'];
         container.innerHTML = sizes.map(sz => {
           const sku = prefix + sz;
-          const q = cart[sku] || 0;
+          const legacySku = 'BD-' + activeM + '-' + sz;
+          const q = cart[sku] || cart[legacySku] || 0;
           const activeClass = q > 0 ? 'has-qty' : '';
-          return `<div class="size-item ${activeClass}" id="item-${sku}"><span class="size-label">${sz}</span><div class="qty-controls"><button type="button" class="btn-mini" onclick="changeQty('${sku}', -1)">-</button><span class="qty-num" id="qty-${sku}">${q}</span><button type="button" class="btn-mini" onclick="changeQty('${sku}', 1)">+</button></div></div>`;
+          return `
+            <div class="size-item ${activeClass}" id="item-${sku}" onclick="handleSizeCardClick(event, '${sku}')" title="Klik untuk tambah ukuran ${sz}">
+              <span class="size-label">${sz}</span>
+              <div class="qty-controls" onclick="event.stopPropagation()">
+                <button type="button" class="btn-mini" onclick="changeQty('${sku}', -1)">-</button>
+                <span class="qty-num" id="qty-${sku}">${q}</span>
+                <button type="button" class="btn-mini" onclick="changeQty('${sku}', 1)">+</button>
+              </div>
+            </div>
+          `;
         }).join('');
       } else if (prod === 'KP' || prod === 'KJ') {
-        const prefix = prod + '-';
+        const prefix = prod + '-' + col + '-';
         const sizes = ['S', 'M', 'L', 'XL', '2XL', '3XL'];
         container.innerHTML = sizes.map(sz => {
           const sku = prefix + sz;
-          const q = cart[sku] || 0;
+          const legacySku = prod + '-' + sz;
+          const q = cart[sku] || cart[legacySku] || 0;
           const activeClass = q > 0 ? 'has-qty' : '';
-          return `<div class="size-item ${activeClass}" id="item-${sku}"><span class="size-label">${sz}</span><div class="qty-controls"><button type="button" class="btn-mini" onclick="changeQty('${sku}', -1)">-</button><span class="qty-num" id="qty-${sku}">${q}</span><button type="button" class="btn-mini" onclick="changeQty('${sku}', 1)">+</button></div></div>`;
+          return `
+            <div class="size-item ${activeClass}" id="item-${sku}" onclick="handleSizeCardClick(event, '${sku}')" title="Klik untuk tambah ukuran ${sz}">
+              <span class="size-label">${sz}</span>
+              <div class="qty-controls" onclick="event.stopPropagation()">
+                <button type="button" class="btn-mini" onclick="changeQty('${sku}', -1)">-</button>
+                <span class="qty-num" id="qty-${sku}">${q}</span>
+                <button type="button" class="btn-mini" onclick="changeQty('${sku}', 1)">+</button>
+              </div>
+            </div>
+          `;
         }).join('');
       } else {
         const sku = prod + '-STD';
         const q = cart[sku] || 0;
-        const price = PRICES[sku] || 0;
-        container.innerHTML = `<div class="acc-item" style="width:100%;"><div><div class="acc-name">Standard Size</div><div class="acc-price">Rp ${price.toLocaleString('id-ID')}</div></div><div class="qty-controls" style="gap:6px;"><button type="button" class="btn-acc" onclick="changeQty('${sku}', -1)">-</button><span class="qty-num" id="qty-${sku}" style="font-size:0.85rem; width:16px;">${q}</span><button type="button" class="btn-acc" onclick="changeQty('${sku}', 1)">+</button></div></div>`;
+        const price = getPrice(sku);
+        container.innerHTML = `
+          <div class="acc-item" style="width:100%;">
+            <div>
+              <div class="acc-name">Standard Size</div>
+              <div class="acc-price">Rp ${price.toLocaleString('id-ID')}</div>
+            </div>
+            <div class="qty-controls" style="gap:6px;">
+              <button type="button" class="btn-acc" onclick="changeQty('${sku}', -1)">-</button>
+              <span class="qty-num" id="qty-${sku}" style="font-size:0.85rem; width:16px;">${q}</span>
+              <button type="button" class="btn-acc" onclick="changeQty('${sku}', 1)">+</button>
+            </div>
+          </div>
+        `;
       }
     }
 
@@ -2202,6 +2313,7 @@
       currentZoomColor = color;
       if (activeColors[currentZoomProduct]) activeColors[currentZoomProduct] = color;
       updateZoomDisplay();
+      renderPdpSizeGrid();
     }
 
     function zoomToggleView(view) {
@@ -2325,14 +2437,32 @@
           orderCompleted = true;
           const itemSummaryText = items.map(it => {
             let label = it.sku;
-            if (it.sku.startsWith('BD-KP')) label = 'Paket Bundling (Kaos Pendek ' + (activeColors['BD'] || 'hitam') + ' ' + it.sku.replace('BD-KP-', '') + ' + Tumbler 750ml + Korek + Keychain + Goodie Bag)';
-            else if (it.sku.startsWith('BD-KJ')) label = 'Paket Bundling (Kaos Panjang ' + (activeColors['BD'] || 'hitam') + ' ' + it.sku.replace('BD-KJ-', '') + ' + Tumbler 750ml + Korek + Keychain + Goodie Bag)';
-            else if (it.sku.startsWith('KP')) label = 'Kaos Pendek (' + activeColors['KP'] + ' - ' + it.sku.replace('KP-', '') + ')';
-            else if (it.sku.startsWith('KJ')) label = 'Kaos Panjang (' + activeColors['KJ'] + ' - ' + it.sku.replace('KJ-', '') + ')';
-            else if (it.sku === 'TB-STD') label = 'Tumbler Stainless';
+            const price = getPrice(it.sku);
+            const lineTotal = price * it.qty;
+            if (it.sku.startsWith('BD-KP')) {
+              const parts = it.sku.replace('BD-KP-', '').split('-');
+              const col = parts.length > 1 ? parts[0] : (activeColors['BD'] || 'hitam');
+              const sz = parts.length > 1 ? parts[1] : parts[0];
+              label = 'Paket Bundling (Kaos Pendek ' + col.toUpperCase() + ' - ' + sz + ')';
+            } else if (it.sku.startsWith('BD-KJ')) {
+              const parts = it.sku.replace('BD-KJ-', '').split('-');
+              const col = parts.length > 1 ? parts[0] : (activeColors['BD'] || 'hitam');
+              const sz = parts.length > 1 ? parts[1] : parts[0];
+              label = 'Paket Bundling (Kaos Panjang ' + col.toUpperCase() + ' - ' + sz + ')';
+            } else if (it.sku.startsWith('KP-')) {
+              const parts = it.sku.replace('KP-', '').split('-');
+              const col = parts.length > 1 ? parts[0] : (activeColors['KP'] || 'hitam');
+              const sz = parts.length > 1 ? parts[1] : parts[0];
+              label = 'Kaos Pendek (' + col.toUpperCase() + ' - ' + sz + ')';
+            } else if (it.sku.startsWith('KJ-')) {
+              const parts = it.sku.replace('KJ-', '').split('-');
+              const col = parts.length > 1 ? parts[0] : (activeColors['KJ'] || 'hitam');
+              const sz = parts.length > 1 ? parts[1] : parts[0];
+              label = 'Kaos Panjang (' + col.toUpperCase() + ' - ' + sz + ')';
+            } else if (it.sku === 'TB-STD') label = 'Tumbler Stainless';
             else if (it.sku === 'KR-STD') label = 'Korek Cricket';
             else if (it.sku === 'KC-STD') label = 'Safari Keychain Paracord';
-            return `<div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--color-muted); margin-bottom:4px;"><span>• ${it.qty}x ${label}</span><span>Rp ${(PRICES[it.sku] * it.qty).toLocaleString('id-ID')}</span></div>`;
+            return `<div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--color-muted); margin-bottom:4px;"><span>• ${it.qty}x ${label}</span><span>Rp ${lineTotal.toLocaleString('id-ID')}</span></div>`;
           }).join('');
 
           const waUrl = "https://wa.me/62895330478397?text=" + encodeURIComponent("Halo Admin CS, saya mau kirim bukti transfer untuk Order ID: " + data.orderId + " dengan nominal Rp " + Number(data.totalTf).toLocaleString('id-ID'));

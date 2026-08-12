@@ -186,11 +186,53 @@ function tesSimulasiWebStore() {
 }
 
 /**
+ * Pengujian Khusus: Verifikasi Bug Total Tagihan (KJ-3XL + KC-STD)
+ * Memastikan 1x KJ-3XL (125.000) + 1x KC-STD (20.000) menghasilkan Total Tagihan Rp 145.000 (bukan Rp 20.000)
+ */
+function tesFixTotalKJ3XL() {
+  Logger.log('\n--- Running Test Fix Total (KJ-3XL + KC-STD) ---');
+  const mockPayload = {
+    postData: {
+      contents: JSON.stringify({
+        nama: 'Devi (Tes Fix Total)',
+        waInput: '081234567899',
+        daerah: 'Surabaya',
+        metode: 'KIRIM',
+        penerima: 'Devi',
+        hpPenerima: '081234567899',
+        provinsi: 'Jawa Timur',
+        kota: 'Surabaya',
+        kecamatan: 'Gubeng',
+        alamat: 'Jl. Pemuda No. 10',
+        kodePos: '60271',
+        catatan: 'Tes total tagihan KJ-3XL + KC-STD',
+        items: [
+          { sku: 'KJ-3XL', qty: 1 }, // Kaos Panjang 3XL (125.000)
+          { sku: 'KC-STD', qty: 1 }  // Keychain (20.000)
+        ]
+      })
+    }
+  };
+
+  const response = doPost(mockPayload);
+  const data = JSON.parse(response.getContent());
+  Logger.log('Respons Backend: ' + JSON.stringify(data));
+
+  if (data.status === 'success' && data.totalTf >= 145000) {
+    Logger.log('✅ PASS: Total tagihan valid = Rp ' + Number(data.totalTf).toLocaleString('id-ID'));
+  } else {
+    Logger.log('❌ FAIL: Total tagihan tidak sesuai! Expected >= 145000, got: ' + data.totalTf);
+  }
+}
+
+/**
  * Jalankan Seluruh Skenario Pengujian
  */
 function jalankanSemuaPengujian() {
   testSkenario1_MultiVarian();
   testSkenario6_Expired();
+  tesFixTotalKJ3XL();
+  tesSimulasiWebStore();
   simulasiMultiPersonaDanDaerah();
   alertOrLog_('Pengujian selesai. Cek Apps Script Execution Logs.');
 }

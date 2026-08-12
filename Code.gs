@@ -123,6 +123,69 @@ function rupiah_(n) {
   return 'Rp ' + Number(n).toLocaleString('id-ID');
 }
 
+/** Resolusi SKU dari MASTER_PRODUK atau fallback terprogram (mendukung SKU dengan warna & ukuran) */
+function resolveProduk_(sku, prodMap) {
+  if (!sku) return null;
+  const s = String(sku).trim();
+
+  if (prodMap && prodMap[s]) {
+    const p = prodMap[s];
+    if (String(p[5]).toUpperCase() === 'YA') {
+      return {
+        sku: s,
+        nama: String(p[1]).trim(),
+        ukuran: String(p[2]).trim(),
+        harga: Number(p[3]) || 0
+      };
+    }
+  }
+
+  // Fallback terprogram jika tidak ditemukan di tab MASTER_PRODUK
+  if (s.indexOf('BD-KP') === 0) {
+    const rest = s.replace(/^BD-KP-/, '');
+    const parts = rest.split('-');
+    const color = parts.length > 1 ? parts[0] : '';
+    const sz = parts.length > 1 ? parts[1] : parts[0];
+    const colorLabel = color ? ' (' + color.charAt(0).toUpperCase() + color.slice(1) + ')' : '';
+    return { sku: s, nama: 'Paket Bundling (Kaos Pendek' + colorLabel + ' + Tumbler 750ml + Korek + Keychain + Goodie Bag)', ukuran: sz, harga: 210000 };
+  }
+  if (s.indexOf('BD-KJ') === 0) {
+    const rest = s.replace(/^BD-KJ-/, '');
+    const parts = rest.split('-');
+    const color = parts.length > 1 ? parts[0] : '';
+    const sz = parts.length > 1 ? parts[1] : parts[0];
+    const colorLabel = color ? ' (' + color.charAt(0).toUpperCase() + color.slice(1) + ')' : '';
+    return { sku: s, nama: 'Paket Bundling (Kaos Panjang' + colorLabel + ' + Tumbler 750ml + Korek + Keychain + Goodie Bag)', ukuran: sz, harga: 210000 };
+  }
+  if (s.indexOf('KP-') === 0) {
+    const rest = s.replace(/^KP-/, '');
+    const parts = rest.split('-');
+    const color = parts.length > 1 ? parts[0] : '';
+    const sz = parts.length > 1 ? parts[1] : parts[0];
+    const colorLabel = color ? ' (' + color.charAt(0).toUpperCase() + color.slice(1) + ')' : '';
+    return { sku: s, nama: 'Kaos Lengan Pendek' + colorLabel, ukuran: sz, harga: 120000 };
+  }
+  if (s.indexOf('KJ-') === 0) {
+    const rest = s.replace(/^KJ-/, '');
+    const parts = rest.split('-');
+    const color = parts.length > 1 ? parts[0] : '';
+    const sz = parts.length > 1 ? parts[1] : parts[0];
+    const colorLabel = color ? ' (' + color.charAt(0).toUpperCase() + color.slice(1) + ')' : '';
+    return { sku: s, nama: 'Kaos Lengan Panjang' + colorLabel, ukuran: sz, harga: 125000 };
+  }
+  if (s === 'TB-STD') {
+    return { sku: s, nama: 'Tumbler Thermal Stainless', ukuran: '—', harga: 85000 };
+  }
+  if (s === 'KR-STD') {
+    return { sku: s, nama: 'Korek Cricket', ukuran: '—', harga: 10000 };
+  }
+  if (s === 'KC-STD') {
+    return { sku: s, nama: 'Safari Keychain Paracord', ukuran: '—', harga: 20000 };
+  }
+
+  return null;
+}
+
 // ====== FONNTE ======
 
 function kirimWA_(target, pesan, orderId, jenis) {
@@ -224,22 +287,13 @@ function doPost(e) {
     let totalQty = 0, subtotal = 0;
 
     (postData.items || []).forEach(function(it) {
-      let p = prodMap[it.sku];
-      if (!p && it.sku && it.sku.indexOf('BD-') === 0) {
-        const isKP = it.sku.indexOf('BD-KP') === 0;
-        const size = it.sku.replace(/^BD-K[PJ]-/, '');
-        p = [it.sku, 'Paket Bundling (' + (isKP ? 'Kaos Pendek' : 'Kaos Panjang') + ' + Tumbler 750ml + Korek + Keychain + Goodie Bag)', size, 210000, '', 'YA'];
-      }
-      if (!p || String(p[5]).toUpperCase() !== 'YA') return;
+      const p = resolveProduk_(it.sku, prodMap);
+      if (!p) return;
       const qty = parseInt(it.qty, 10);
       if (!qty || qty <= 0) return;
 
-      const namaItem = String(p[1]).trim();
-      const ukuran   = String(p[2]).trim();
-      const harga    = Number(p[3]) || 0;
-      const sub      = qty * harga;
-
-      lines.push({ sku: it.sku, nama: namaItem, ukuran: ukuran, qty: qty, harga: harga, sub: sub });
+      const sub = qty * p.harga;
+      lines.push({ sku: p.sku, nama: p.nama, ukuran: p.ukuran, qty: qty, harga: p.harga, sub: sub });
       totalQty += qty;
       subtotal += sub;
     });
