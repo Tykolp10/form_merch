@@ -1926,6 +1926,7 @@
       updateBar();
       updatePdpCountLabel();
       renderCartDrawer();
+      updateColorPillBadges();
     }
 
     function handleSizeCardClick(e, sku) {
@@ -2276,6 +2277,34 @@
       updateZoomDisplay();
     }
 
+    function updateColorPillBadges() {
+      const btnH = document.getElementById('zoomBtnHitam');
+      const btnM = document.getElementById('zoomBtnMerah');
+      if (!btnH || !btnM) return;
+
+      let cntHitam = 0;
+      let cntMerah = 0;
+      const prod = currentZoomProduct;
+
+      Object.keys(cart).forEach(sku => {
+        if (cart[sku] <= 0) return;
+        if (prod === 'BD') {
+          const m = activeBundleModel;
+          if (sku.startsWith('BD-' + m + '-hitam-')) cntHitam += cart[sku];
+          if (sku.startsWith('BD-' + m + '-merah-')) cntMerah += cart[sku];
+        } else if (prod === 'KP') {
+          if (sku.startsWith('KP-hitam-')) cntHitam += cart[sku];
+          if (sku.startsWith('KP-merah-')) cntMerah += cart[sku];
+        } else if (prod === 'KJ') {
+          if (sku.startsWith('KJ-hitam-')) cntHitam += cart[sku];
+          if (sku.startsWith('KJ-merah-')) cntMerah += cart[sku];
+        }
+      });
+
+      btnH.innerText = 'Hitam' + (cntHitam > 0 ? ' (' + cntHitam + ')' : '');
+      btnM.innerText = 'Merah' + (cntMerah > 0 ? ' (' + cntMerah + ')' : '');
+    }
+
     function updateZoomDisplay() {
       const isBD = currentZoomProduct === 'BD';
       const isKP = isBD ? (activeBundleModel === 'KP') : (currentZoomProduct === 'KP');
@@ -2307,6 +2336,8 @@
         if (currentZoomView === 'Depan') { btnD.classList.add('active'); btnB.classList.remove('active'); }
         else { btnB.classList.add('active'); btnD.classList.remove('active'); }
       }
+
+      updateColorPillBadges();
     }
 
     function zoomSelectColor(color) {
