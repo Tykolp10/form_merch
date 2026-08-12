@@ -322,9 +322,9 @@ function simulasiMultiPersonaDanDaerah() {
         kecamatan: 'Tegalsari',
         alamat: 'Jl. Basuki Rahmat No. 12',
         kodePos: '60261',
-        catatan: 'Paket bundling hemat 200rb.',
+        catatan: 'Paket bundling hemat 210rb.',
         items: [
-          { sku: 'BD-KP-L', qty: 1 } // 1 Paket Bundling Kaos Pendek L (Rp 200.000)
+          { sku: 'BD-KP-L', qty: 1 } // 1 Paket Bundling Kaos Pendek L (Rp 210.000)
         ]
       }
     }

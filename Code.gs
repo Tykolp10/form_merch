@@ -228,7 +228,7 @@ function doPost(e) {
       if (!p && it.sku && it.sku.indexOf('BD-') === 0) {
         const isKP = it.sku.indexOf('BD-KP') === 0;
         const size = it.sku.replace(/^BD-K[PJ]-/, '');
-        p = [it.sku, 'Paket Bundling (' + (isKP ? 'Kaos Pendek' : 'Kaos Panjang') + ' + Tumbler 750ml + Korek + Keychain + Goodie Bag)', size, 200000, '', 'YA'];
+        p = [it.sku, 'Paket Bundling (' + (isKP ? 'Kaos Pendek' : 'Kaos Panjang') + ' + Tumbler 750ml + Korek + Keychain + Goodie Bag)', size, 210000, '', 'YA'];
       }
       if (!p || String(p[5]).toUpperCase() !== 'YA') return;
       const qty = parseInt(it.qty, 10);
@@ -708,16 +708,16 @@ function updateMasterProdukBundling() {
   }
 
   const bundleRows = [
-    ['BD-KP-S',   'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'S',   200000, 'Paket Bundling Pendek [S]',   'YA'],
-    ['BD-KP-M',   'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'M',   200000, 'Paket Bundling Pendek [M]',   'YA'],
-    ['BD-KP-L',   'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'L',   200000, 'Paket Bundling Pendek [L]',   'YA'],
-    ['BD-KP-XL',  'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'XL',  200000, 'Paket Bundling Pendek [XL]',  'YA'],
-    ['BD-KP-XXL', 'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'XXL', 200000, 'Paket Bundling Pendek [XXL]', 'YA'],
-    ['BD-KJ-S',   'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'S',   200000, 'Paket Bundling Panjang [S]',   'YA'],
-    ['BD-KJ-M',   'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'M',   200000, 'Paket Bundling Panjang [M]',   'YA'],
-    ['BD-KJ-L',   'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'L',   200000, 'Paket Bundling Panjang [L]',   'YA'],
-    ['BD-KJ-XL',  'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'XL',  200000, 'Paket Bundling Panjang [XL]',  'YA'],
-    ['BD-KJ-XXL', 'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'XXL', 200000, 'Paket Bundling Panjang [XXL]', 'YA']
+    ['BD-KP-S',   'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'S',   210000, 'Paket Bundling Pendek [S]',   'YA'],
+    ['BD-KP-M',   'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'M',   210000, 'Paket Bundling Pendek [M]',   'YA'],
+    ['BD-KP-L',   'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'L',   210000, 'Paket Bundling Pendek [L]',   'YA'],
+    ['BD-KP-XL',  'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'XL',  210000, 'Paket Bundling Pendek [XL]',  'YA'],
+    ['BD-KP-XXL', 'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'XXL', 210000, 'Paket Bundling Pendek [XXL]', 'YA'],
+    ['BD-KJ-S',   'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'S',   210000, 'Paket Bundling Panjang [S]',   'YA'],
+    ['BD-KJ-M',   'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'M',   210000, 'Paket Bundling Panjang [M]',   'YA'],
+    ['BD-KJ-L',   'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'L',   210000, 'Paket Bundling Panjang [L]',   'YA'],
+    ['BD-KJ-XL',  'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'XL',  210000, 'Paket Bundling Panjang [XL]',  'YA'],
+    ['BD-KJ-XXL', 'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'XXL', 210000, 'Paket Bundling Panjang [XXL]', 'YA']
   ];
 
   const newRows = bundleRows.filter(r => !existingSKUs[r[0]]);

@@ -42,7 +42,7 @@ Semua kaos hanya tersedia **warna hitam**. Tidak ada varian warna.
 | `KJ-L` | Kaos Lengan Panjang | L | 125.000 |
 | `KJ-XL` | Kaos Lengan Panjang | XL | 125.000 |
 | `KJ-XXL` | Kaos Lengan Panjang | XXL | 125.000 |
-| `TB-STD` | Tumbler | — | 75.000 |
+| `TB-STD` | Tumbler | — | 85.000 |
 | `KR-STD` | Korek | — | 10.000 |
 | `KC-STD` | Keychain | — | 20.000 |
 
@@ -124,7 +124,7 @@ Tipe: **Kisi-kisi pilihan ganda** (Multiple choice grid)
 **3.2 — Kaos Lengan Panjang Hitam (Rp 125.000)**
 Struktur identik dengan 3.1.
 
-**3.3 — Tumbler (Rp 75.000)** → Dropdown: `0` `1` `2` `3` `4` `5`
+**3.3 — Tumbler (Rp 85.000)** → Dropdown: `0` `1` `2` `3` `4` `5`
 **3.4 — Korek (Rp 10.000)** → Dropdown: `0` `1` `2` `3` `4` `5` `10`
 **3.5 — Keychain (Rp 20.000)** → Dropdown: `0` `1` `2` `3` `4` `5` `10`
 
@@ -220,7 +220,7 @@ Header di baris 1. **Ini otak konfigurasi sistem.**
 | KJ-L | Kaos Lengan Panjang | L | 125000 | `Kaos Lengan Panjang Hitam (Rp 125.000) [L]` | YA |
 | KJ-XL | Kaos Lengan Panjang | XL | 125000 | `Kaos Lengan Panjang Hitam (Rp 125.000) [XL]` | YA |
 | KJ-XXL | Kaos Lengan Panjang | XXL | 125000 | `Kaos Lengan Panjang Hitam (Rp 125.000) [XXL]` | YA |
-| TB-STD | Tumbler | — | 75000 | `Tumbler (Rp 75.000)` | YA |
+| TB-STD | Tumbler | — | 85000 | `Tumbler (Rp 85.000)` | YA |
 | KR-STD | Korek | — | 10000 | `Korek (Rp 10.000)` | YA |
 | KC-STD | Keychain | — | 20000 | `Keychain (Rp 20.000)` | YA |
 
@@ -300,7 +300,7 @@ Budi memesan 3 kaos varian berbeda + 1 tumbler.
 | MQ-260810-007-L1 | MQ-260810-007 | Budi | KP-M | Kaos Lengan Pendek | M | 1 | 120000 | 120000 |
 | MQ-260810-007-L2 | MQ-260810-007 | Budi | KP-XL | Kaos Lengan Pendek | XL | 1 | 120000 | 120000 |
 | MQ-260810-007-L3 | MQ-260810-007 | Budi | KJ-L | Kaos Lengan Panjang | L | 1 | 125000 | 125000 |
-| MQ-260810-007-L4 | MQ-260810-007 | Budi | TB-STD | Tumbler | — | 1 | 75000 | 75000 |
+| MQ-260810-007-L4 | MQ-260810-007 | Budi | TB-STD | Tumbler | — | 1 | 85000 | 85000 |
 
 Satu submit → 1 baris di `ORDERS`, 4 baris di `ORDER_LINES`. Kalau Budi ambil 2 pcs ukuran M, `Qty` jadi 2 — tetap satu baris.
 
