@@ -499,6 +499,9 @@ function prosesBaris_(rowNum) {
 // ====== TEMPLATE PESAN ======
 
 function pesanOrderMasuk_(o) {
+  const csNum = normalisasiWA_(P_('CS_WA', '0895330478397')) || '62895330478397';
+  const linkCS = 'https://wa.me/' + csNum + '?text=' + encodeURIComponent('Halo Admin CS, saya mau kirim bukti transfer untuk Order ID: ' + o.orderId);
+
   let t = '';
   t += '*PESANAN DITERIMA* ✅\n';
   t += 'Order ID: *' + o.orderId + '*\n\n';
@@ -516,7 +519,7 @@ function pesanOrderMasuk_(o) {
   t += '*REKENING PEMBAYARAN*\n';
   t += P_('NAMA_BANK', 'BCA') + ': *' + P_('NOMOR_REKENING', '7710399993') + '*\na.n. ' + P_('ATAS_NAMA', 'Abidatul Faricha Ch') + '\n*(⚠️ Pilih menu Transfer Rekening Bank, BUKAN Virtual Account/VA)*\n';
   t += '\n⏰ *Batas pembayaran:*\n' + Utilities.formatDate(o.batas, TZ, 'EEEE, dd MMMM yyyy, HH:mm') + ' WIB\n';
-  t += '\nSetelah transfer, *kirim bukti ke chat CS ini (' + P_('CS_WA', '0895330478397') + ')* untuk konfirmasi pengiriman & informasi lanjutan.\n';
+  t += '\nSetelah transfer, *klik link di bawah ini untuk langsung kirim bukti transfer:* \n👉 ' + linkCS + '\n';
   t += '\nPengambilan: ' + (o.metode === 'KIRIM' ? 'Dikirim via ekspedisi (detail resi & estimasi dikonfirmasi via CS WA)' : 'Ambil di lokasi (jadwal penyerahan dikonfirmasi via CS WA)') + '\n';
   return t;
 }
@@ -546,12 +549,14 @@ function tandaiLunas() {
     } catch (e) {}
   }
 
-  a.sh.getRange(a.row, 20).setValue('LUNAS');      // T: Status_Bayar
-  a.sh.getRange(a.row, 22).setValue(new Date());   // V: Tgl_Verifikasi
+  a.sh.getRange(a.row, 20).setValue('LUNAS');
+  a.sh.getRange(a.row, 22).setValue(new Date());
   const d = a.sh.getRange(a.row, 1, 1, 26).getValues()[0];
+  const csNumL = normalisasiWA_(P_('CS_WA', '0895330478397')) || '62895330478397';
+  const linkCSL = 'https://wa.me/' + csNumL + '?text=' + encodeURIComponent('Halo Admin CS, saya mau menanyakan info pengiriman/resi untuk Order ID: ' + d[0]);
   const pesan = '*PEMBAYARAN TERVERIFIKASI* ✅\n\nOrder ' + d[0] + '\na.n. ' + d[2] +
                 '\n' + d[14] + ' pcs • ' + rupiah_(d[18]) +
-                '\n\nPesananmu telah masuk daftar produksi. Untuk informasi kelanjutan pengiriman & resi, silakan hubungi CS WA (' + P_('CS_WA', '0895330478397') + ').\n\nTerima kasih 🙏';
+                '\n\nPesananmu telah masuk daftar produksi.\nHubungi CS WA via link berikut: \n👉 ' + linkCSL + '\n\nTerima kasih 🙏';
   kirimWA_(d[4], pesan, d[0], 'LUNAS');
   SpreadsheetApp.getActive().toast('Order ' + d[0] + ' → LUNAS');
 }
@@ -718,9 +723,11 @@ function onEditTrigger(e) {
       const waSent = String(sh.getRange(row, 25).getValue()); // Y: Catatan_Admin
 
       if (waSent !== 'NOTIF_LUNAS_TERKIRIM') {
+        const csNumE = normalisasiWA_(P_('CS_WA', '0895330478397')) || '62895330478397';
+        const linkCSE = 'https://wa.me/' + csNumE + '?text=' + encodeURIComponent('Halo Admin CS, saya mau menanyakan info pengiriman/resi untuk Order ID: ' + d[0]);
         const pesan = '*PEMBAYARAN TERVERIFIKASI* ✅\n\nOrder ' + d[0] + '\na.n. ' + d[2] +
                       '\n' + d[14] + ' pcs • ' + rupiah_(d[18]) +
-                      '\n\nPesananmu telah masuk daftar produksi. Untuk informasi kelanjutan pengiriman & resi, silakan hubungi CS WA (' + P_('CS_WA', '0895330478397') + ').\n\nTerima kasih 🙏';
+                      '\n\nPesananmu telah masuk daftar produksi.\nHubungi CS WA via link berikut: \n👉 ' + linkCSE + '\n\nTerima kasih 🙏';
         if (kirimWA_(d[4], pesan, d[0], 'LUNAS')) {
           sh.getRange(row, 25).setValue('NOTIF_LUNAS_TERKIRIM');
         }
