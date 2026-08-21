@@ -884,6 +884,14 @@ function tesKirimWANotifAnak() {
  */
 function setupRekapProduksi() {
   const ss = getSS_();
+
+  // 0. Pastikan rumus VLOOKUP di ORDER_LINES K1 & L1 aktif
+  const shLine = ss.getSheetByName(SH.LINES);
+  if (shLine) {
+    shLine.getRange('K1').setFormula('=ARRAYFORMULA(IF(ROW(A:A)=1; "Status_Bayar"; IF(A:A=""; ""; VLOOKUP(B:B; ORDERS!A:T; 20; FALSE))))');
+    shLine.getRange('L1').setFormula('=ARRAYFORMULA(IF(ROW(A:A)=1; "Status_Order"; IF(A:A=""; ""; VLOOKUP(B:B; ORDERS!A:W; 23; FALSE))))');
+  }
+
   let shRekap = ss.getSheetByName(SH.REKAP || 'REKAP_PRODUKSI');
   if (!shRekap) {
     shRekap = ss.insertSheet('REKAP_PRODUKSI');
@@ -897,11 +905,13 @@ function setupRekapProduksi() {
 
   const colsAdult = ['B', 'C', 'D', 'E', 'F', 'G', 'H'];
   const sizesAdult = ['S', 'M', 'L', 'XL', 'XXL', '2XL', '3XL'];
+  const modelPatterns = ['*Pendek*', '*Panjang*'];
 
   for (let r = 2; r <= 3; r++) {
+    const pat = modelPatterns[r - 2];
     colsAdult.forEach(function(col, i) {
       shRekap.getRange(col + r).setFormula(
-        '=SUMIFS(ORDER_LINES!$H:$H, ORDER_LINES!$F:$F, $A' + r + ', ORDER_LINES!$G:$G, "' + sizesAdult[i] + '", ORDER_LINES!$L:$L, "VALID", ORDER_LINES!$K:$K, "LUNAS")'
+        '=SUMIFS(ORDER_LINES!$H:$H; ORDER_LINES!$F:$F; "' + pat + '"; ORDER_LINES!$G:$G; "' + sizesAdult[i] + '"; ORDER_LINES!$L:$L; "VALID"; ORDER_LINES!$K:$K; "LUNAS")'
       );
     });
     shRekap.getRange('I' + r).setFormula('=SUM(B' + r + ':H' + r + ')');
@@ -914,7 +924,7 @@ function setupRekapProduksi() {
   const sizesKids = ['Anak XS', 'Anak S', 'Anak M', 'Anak L', 'Anak XL'];
   colsKids.forEach(function(col, i) {
     shRekap.getRange(col + '6').setFormula(
-      '=SUMIFS(ORDER_LINES!$H:$H, ORDER_LINES!$F:$F, $A6, ORDER_LINES!$G:$G, "' + sizesKids[i] + '", ORDER_LINES!$L:$L, "VALID", ORDER_LINES!$K:$K, "LUNAS")'
+      '=SUMIFS(ORDER_LINES!$H:$H; ORDER_LINES!$F:$F; "*Panjang*"; ORDER_LINES!$G:$G; "' + sizesKids[i] + '"; ORDER_LINES!$L:$L; "VALID"; ORDER_LINES!$K:$K; "LUNAS")'
     );
   });
   shRekap.getRange('G6').setFormula('=SUM(B6:F6)');
@@ -922,9 +932,10 @@ function setupRekapProduksi() {
   // 3. Item Non-Kaos (Lunas)
   shRekap.getRange('A8:B8').setValues([['ITEM NON-KAOS', 'TOTAL LUNAS']]);
   shRekap.getRange('A9:A11').setValues([['Tumbler'], ['Korek'], ['Keychain']]);
+  const nonKaosPats = ['*Tumbler*', '*Korek*', '*Keychain*'];
   for (let r = 9; r <= 11; r++) {
     shRekap.getRange('B' + r).setFormula(
-      '=SUMIFS(ORDER_LINES!$H:$H, ORDER_LINES!$F:$F, $A' + r + ', ORDER_LINES!$L:$L, "VALID", ORDER_LINES!$K:$K, "LUNAS")'
+      '=SUMIFS(ORDER_LINES!$H:$H; ORDER_LINES!$F:$F; "' + nonKaosPats[r - 9] + '"; ORDER_LINES!$L:$L; "VALID"; ORDER_LINES!$K:$K; "LUNAS")'
     );
   }
 
@@ -932,9 +943,10 @@ function setupRekapProduksi() {
   shRekap.getRange('A13:I13').setValues([['PROYEKSI DEWASA (TERMASUK UNPAID)', 'S', 'M', 'L', 'XL', 'XXL', '2XL', '3XL', 'TOTAL']]);
   shRekap.getRange('A14:A15').setValues([['Kaos Lengan Pendek'], ['Kaos Lengan Panjang']]);
   for (let r = 14; r <= 15; r++) {
+    const pat = modelPatterns[r - 14];
     colsAdult.forEach(function(col, i) {
       shRekap.getRange(col + r).setFormula(
-        '=SUMIFS(ORDER_LINES!$H:$H, ORDER_LINES!$F:$F, $A' + r + ', ORDER_LINES!$G:$G, "' + sizesAdult[i] + '", ORDER_LINES!$L:$L, "VALID")'
+        '=SUMIFS(ORDER_LINES!$H:$H; ORDER_LINES!$F:$F; "' + pat + '"; ORDER_LINES!$G:$G; "' + sizesAdult[i] + '"; ORDER_LINES!$L:$L; "VALID")'
       );
     });
     shRekap.getRange('I' + r).setFormula('=SUM(B' + r + ':H' + r + ')');
@@ -944,7 +956,7 @@ function setupRekapProduksi() {
   shRekap.getRange('A18').setValue('Kaos Lengan Panjang');
   colsKids.forEach(function(col, i) {
     shRekap.getRange(col + '18').setFormula(
-      '=SUMIFS(ORDER_LINES!$H:$H, ORDER_LINES!$F:$F, $A18, ORDER_LINES!$G:$G, "' + sizesKids[i] + '", ORDER_LINES!$L:$L, "VALID")'
+      '=SUMIFS(ORDER_LINES!$H:$H; ORDER_LINES!$F:$F; "*Panjang*"; ORDER_LINES!$G:$G; "' + sizesKids[i] + '"; ORDER_LINES!$L:$L; "VALID")'
     );
   });
   shRekap.getRange('G18').setFormula('=SUM(B18:F18)');
@@ -953,7 +965,7 @@ function setupRekapProduksi() {
   shRekap.getRange('A21:A23').setValues([['Tumbler'], ['Korek'], ['Keychain']]);
   for (let r = 21; r <= 23; r++) {
     shRekap.getRange('B' + r).setFormula(
-      '=SUMIFS(ORDER_LINES!$H:$H, ORDER_LINES!$F:$F, $A' + (r - 12) + ', ORDER_LINES!$L:$L, "VALID")'
+      '=SUMIFS(ORDER_LINES!$H:$H; ORDER_LINES!$F:$F; "' + nonKaosPats[r - 21] + '"; ORDER_LINES!$L:$L; "VALID")'
     );
   }
 
@@ -967,5 +979,5 @@ function setupRekapProduksi() {
     shRekap.getRange('A20:B20').setBackground('#0369a1').setFontColor('#ffffff').setFontWeight('bold');
   } catch (e) {}
 
-  alertOrLog_('✅ Tab REKAP_PRODUKSI berhasil diperbarui dengan matriks Dewasa & Anak-Anak!');
+  alertOrLog_('✅ Tab REKAP_PRODUKSI & ORDER_LINES berhasil disinkronkan!');
 }
