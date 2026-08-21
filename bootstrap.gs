@@ -76,14 +76,14 @@ function bootstrapSystem() {
   // 3.1 Grid Kaos Pendek
   const gridPendek = form.addGridItem();
   gridPendek.setTitle('Kaos Lengan Pendek Hitam (Rp 120.000)')
-    .setRows(['S', 'M', 'L', 'XL', 'XXL'])
+    .setRows(['Anak XS', 'Anak S', 'Anak M', 'Anak L', 'Anak XL', 'S', 'M', 'L', 'XL', 'XXL'])
     .setColumns(['0', '1', '2', '3', '4', '5'])
     .setRequired(false);
 
   // 3.2 Grid Kaos Panjang
   const gridPanjang = form.addGridItem();
   gridPanjang.setTitle('Kaos Lengan Panjang Hitam (Rp 125.000)')
-    .setRows(['S', 'M', 'L', 'XL', 'XXL'])
+    .setRows(['Anak XS', 'Anak S', 'Anak M', 'Anak L', 'Anak XL', 'S', 'M', 'L', 'XL', 'XXL'])
     .setColumns(['0', '1', '2', '3', '4', '5'])
     .setRequired(false);
 
@@ -176,6 +176,11 @@ function bootstrapSystem() {
 
   const katalogData = [
     // SKU, Nama_Item, Ukuran, Harga, Header_Form, Aktif
+    ['KP-AK-XS',  'Kaos Lengan Pendek',  'Anak XS',  120000, titleGridPendek + ' [Anak XS]',  'YA'],
+    ['KP-AK-S',   'Kaos Lengan Pendek',  'Anak S',   120000, titleGridPendek + ' [Anak S]',   'YA'],
+    ['KP-AK-M',   'Kaos Lengan Pendek',  'Anak M',   120000, titleGridPendek + ' [Anak M]',   'YA'],
+    ['KP-AK-L',   'Kaos Lengan Pendek',  'Anak L',   120000, titleGridPendek + ' [Anak L]',   'YA'],
+    ['KP-AK-XL',  'Kaos Lengan Pendek',  'Anak XL',  120000, titleGridPendek + ' [Anak XL]',  'YA'],
     ['KP-S',   'Kaos Lengan Pendek',  'S',   120000, titleGridPendek + ' [S]',   'YA'],
     ['KP-M',   'Kaos Lengan Pendek',  'M',   120000, titleGridPendek + ' [M]',   'YA'],
     ['KP-L',   'Kaos Lengan Pendek',  'L',   120000, titleGridPendek + ' [L]',   'YA'],
@@ -183,6 +188,11 @@ function bootstrapSystem() {
     ['KP-XXL', 'Kaos Lengan Pendek',  'XXL', 120000, titleGridPendek + ' [XXL]', 'YA'],
     ['KP-2XL', 'Kaos Lengan Pendek',  '2XL', 120000, titleGridPendek + ' [2XL]', 'YA'],
     ['KP-3XL', 'Kaos Lengan Pendek',  '3XL', 120000, titleGridPendek + ' [3XL]', 'YA'],
+    ['KJ-AK-XS',  'Kaos Lengan Panjang', 'Anak XS',  125000, titleGridPanjang + ' [Anak XS]', 'YA'],
+    ['KJ-AK-S',   'Kaos Lengan Panjang', 'Anak S',   125000, titleGridPanjang + ' [Anak S]',  'YA'],
+    ['KJ-AK-M',   'Kaos Lengan Panjang', 'Anak M',   125000, titleGridPanjang + ' [Anak M]',  'YA'],
+    ['KJ-AK-L',   'Kaos Lengan Panjang', 'Anak L',   125000, titleGridPanjang + ' [Anak L]',  'YA'],
+    ['KJ-AK-XL',  'Kaos Lengan Panjang', 'Anak XL',  125000, titleGridPanjang + ' [Anak XL]', 'YA'],
     ['KJ-S',   'Kaos Lengan Panjang', 'S',   125000, titleGridPanjang + ' [S]',   'YA'],
     ['KJ-M',   'Kaos Lengan Panjang', 'M',   125000, titleGridPanjang + ' [M]',   'YA'],
     ['KJ-L',   'Kaos Lengan Panjang', 'L',   125000, titleGridPanjang + ' [L]',   'YA'],
@@ -193,6 +203,11 @@ function bootstrapSystem() {
     ['TB-STD', 'Tumbler',            '—',   85000,  titleTumbler,                'YA'],
     ['KR-STD', 'Korek',              '—',   10000,  titleKorek,                  'YA'],
     ['KC-STD', 'Keychain',           '—',   20000,  titleKeychain,               'YA'],
+    ['BD-KP-AK-XS', 'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'Anak XS', 210000, 'Paket Bundling Pendek [Anak XS]', 'YA'],
+    ['BD-KP-AK-S',  'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'Anak S',  210000, 'Paket Bundling Pendek [Anak S]',  'YA'],
+    ['BD-KP-AK-M',  'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'Anak M',  210000, 'Paket Bundling Pendek [Anak M]',  'YA'],
+    ['BD-KP-AK-L',  'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'Anak L',  210000, 'Paket Bundling Pendek [Anak L]',  'YA'],
+    ['BD-KP-AK-XL', 'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'Anak XL', 210000, 'Paket Bundling Pendek [Anak XL]', 'YA'],
     ['BD-KP-S',   'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'S',   210000, 'Paket Bundling Pendek [S]',   'YA'],
     ['BD-KP-M',   'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'M',   210000, 'Paket Bundling Pendek [M]',   'YA'],
     ['BD-KP-L',   'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'L',   210000, 'Paket Bundling Pendek [L]',   'YA'],
@@ -200,6 +215,11 @@ function bootstrapSystem() {
     ['BD-KP-XXL', 'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'XXL', 210000, 'Paket Bundling Pendek [XXL]', 'YA'],
     ['BD-KP-2XL', 'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', '2XL', 210000, 'Paket Bundling Pendek [2XL]', 'YA'],
     ['BD-KP-3XL', 'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', '3XL', 210000, 'Paket Bundling Pendek [3XL]', 'YA'],
+    ['BD-KJ-AK-XS', 'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'Anak XS', 210000, 'Paket Bundling Panjang [Anak XS]', 'YA'],
+    ['BD-KJ-AK-S',  'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'Anak S',  210000, 'Paket Bundling Panjang [Anak S]',  'YA'],
+    ['BD-KJ-AK-M',  'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'Anak M',  210000, 'Paket Bundling Panjang [Anak M]',  'YA'],
+    ['BD-KJ-AK-L',  'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'Anak L',  210000, 'Paket Bundling Panjang [Anak L]',  'YA'],
+    ['BD-KJ-AK-XL', 'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'Anak XL', 210000, 'Paket Bundling Panjang [Anak XL]', 'YA'],
     ['BD-KJ-S',   'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'S',   210000, 'Paket Bundling Panjang [S]',   'YA'],
     ['BD-KJ-M',   'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'M',   210000, 'Paket Bundling Panjang [M]',   'YA'],
     ['BD-KJ-L',   'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'L',   210000, 'Paket Bundling Panjang [L]',   'YA'],

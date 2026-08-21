@@ -226,12 +226,53 @@ function tesFixTotalKJ3XL() {
 }
 
 /**
+ * Pengujian Khusus: Verifikasi Varian Anak (KP-AK-XS, KJ-AK-M, BD-KP-AK-L)
+ */
+function tesVarianAnak() {
+  Logger.log('\n--- Running Test Varian Anak ---');
+  const mockPayload = {
+    postData: {
+      contents: JSON.stringify({
+        nama: 'Bunda Rina (Tes Kaos Anak)',
+        waInput: '081234567811',
+        daerah: 'Bandung',
+        metode: 'KIRIM',
+        penerima: 'Bunda Rina',
+        hpPenerima: '081234567811',
+        provinsi: 'Jawa Barat',
+        kota: 'Bandung',
+        kecamatan: 'Coblong',
+        alamat: 'Jl. Dago No. 100',
+        kodePos: '40135',
+        catatan: 'Tes order kaos varian anak-anak',
+        items: [
+          { sku: 'KP-AK-XS', qty: 1 }, // Kaos Pendek Anak XS (120.000)
+          { sku: 'KJ-AK-M', qty: 1 },  // Kaos Panjang Anak M (125.000)
+          { sku: 'BD-KP-AK-L', qty: 1 } // Bundling Kaos Pendek Anak L (210.000)
+        ]
+      })
+    }
+  };
+
+  const response = doPost(mockPayload);
+  const data = JSON.parse(response.getContent());
+  Logger.log('Respons Backend: ' + JSON.stringify(data));
+
+  if (data.status === 'success' && data.totalTf >= 455000) {
+    Logger.log('✅ PASS: Order varian anak berhasil disubmit = Rp ' + Number(data.totalTf).toLocaleString('id-ID'));
+  } else {
+    Logger.log('❌ FAIL: Order varian anak gagal! ' + data.message);
+  }
+}
+
+/**
  * Jalankan Seluruh Skenario Pengujian
  */
 function jalankanSemuaPengujian() {
   testSkenario1_MultiVarian();
   testSkenario6_Expired();
   tesFixTotalKJ3XL();
+  tesVarianAnak();
   tesSimulasiWebStore();
   simulasiMultiPersonaDanDaerah();
   alertOrLog_('Pengujian selesai. Cek Apps Script Execution Logs.');

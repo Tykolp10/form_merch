@@ -1732,30 +1732,54 @@
 
   <!-- MODAL SIZE CHART -->
   <div class="modal-backdrop" id="sizeModal" onclick="if(event.target === this) closeModal('sizeModal')">
-    <div class="modal-box">
+    <div class="modal-box" style="max-width:520px; max-height:85vh; overflow-y:auto;">
       <div class="modal-header">
         <h3 class="modal-title">Panduan Ukuran Kaos</h3>
         <button class="modal-close" onclick="closeModal('sizeModal')">&times;</button>
       </div>
       <p style="color:var(--color-muted); font-size:0.85rem; margin-bottom:12px;">Ukur kaos yang paling sering Anda pakai, lalu cocokkan dengan tabel di bawah.</p>
+      
+      <div style="font-weight:800; font-size:0.88rem; text-transform:uppercase; letter-spacing:0.04em; margin:12px 0 6px; color:#000000; display:flex; align-items:center; gap:6px;">
+        <span>👨‍👩‍👦 Ukuran Dewasa</span>
+      </div>
       <table class="table-chart">
         <thead>
           <tr>
             <th>SIZE</th>
-            <th>Width (cm)</th>
-            <th>Length (cm)</th>
+            <th>Lebar (cm)</th>
+            <th>Panjang (cm)</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td><strong>S</strong></td><td>44</td><td>62</td></tr>
-          <tr><td><strong>M</strong></td><td>47</td><td>65</td></tr>
-          <tr><td><strong>L</strong></td><td>50</td><td>68</td></tr>
-          <tr><td><strong>XL</strong></td><td>52</td><td>70</td></tr>
-          <tr><td><strong>2XL</strong></td><td>55</td><td>73</td></tr>
-          <tr><td><strong>3XL</strong></td><td>57</td><td>75</td></tr>
+          <tr><td><strong>S</strong></td><td>47</td><td>67</td></tr>
+          <tr><td><strong>M</strong></td><td>49</td><td>70</td></tr>
+          <tr><td><strong>L</strong></td><td>52</td><td>73</td></tr>
+          <tr><td><strong>XL</strong></td><td>55</td><td>75</td></tr>
+          <tr><td><strong>XXL</strong></td><td>58</td><td>78</td></tr>
         </tbody>
       </table>
-      <p style="color:var(--color-muted); font-size:0.75rem; margin-top:14px; text-align:center; font-weight:700; letter-spacing:0.04em; text-transform:uppercase;">Toleransi Jahit 1 &ndash; 2 cm</p>
+
+      <div style="font-weight:800; font-size:0.88rem; text-transform:uppercase; letter-spacing:0.04em; margin:18px 0 6px; color:#dc2626; display:flex; align-items:center; gap:6px;">
+        <span>👶 Ukuran Anak-Anak</span>
+      </div>
+      <table class="table-chart">
+        <thead>
+          <tr>
+            <th>SIZE</th>
+            <th>Lebar (cm)</th>
+            <th>Panjang (cm)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>XS</strong></td><td>28</td><td>38</td></tr>
+          <tr><td><strong>S</strong></td><td>30</td><td>42</td></tr>
+          <tr><td><strong>M</strong></td><td>36</td><td>46</td></tr>
+          <tr><td><strong>L</strong></td><td>40</td><td>54</td></tr>
+          <tr><td><strong>XL</strong></td><td>43</td><td>59</td></tr>
+        </tbody>
+      </table>
+
+      <p style="color:var(--color-muted); font-size:0.75rem; margin-top:14px; text-align:center; font-weight:700; letter-spacing:0.04em; text-transform:uppercase;">Toleransi Jahit ±1 &ndash; 2 cm</p>
     </div>
   </div>
 
@@ -1986,30 +2010,48 @@
         let title = sku;
         let sub = '';
 
+        function parseSkuCartInfo(prefix, sku, defaultColKey) {
+          const rest = sku.replace(prefix, '');
+          const parts = rest.split('-');
+          let col = activeColors[defaultColKey] || 'hitam';
+          let szStr = '';
+
+          if (parts.length >= 3) {
+            col = parts[0];
+            szStr = parts.slice(1).join('-');
+          } else if (parts.length === 2) {
+            if (parts[0] === 'AK' || parts[0] === 'KIDS') {
+              szStr = parts.join('-');
+            } else {
+              col = parts[0];
+              szStr = parts[1];
+            }
+          } else {
+            szStr = parts[0];
+          }
+
+          if (szStr.startsWith('AK-')) {
+            szStr = 'Anak ' + szStr.replace('AK-', '');
+          }
+          return { col: col, sz: szStr };
+        }
+
         if (sku.startsWith('BD-KP')) {
-          const parts = sku.replace('BD-KP-', '').split('-');
-          const col = parts.length > 1 ? parts[0] : (activeColors['BD'] || 'hitam');
-          const sz = parts.length > 1 ? parts[1] : parts[0];
+          const info = parseSkuCartInfo('BD-KP-', sku, 'BD');
           title = 'Paket Bundling (Kaos Pendek)';
-          sub = 'Ukuran: ' + sz + ' • Warna: <span class="cart-color-badge ' + col + '">' + col.toUpperCase() + '</span>';
+          sub = 'Ukuran: ' + info.sz + ' • Warna: <span class="cart-color-badge ' + info.col + '">' + info.col.toUpperCase() + '</span>';
         } else if (sku.startsWith('BD-KJ')) {
-          const parts = sku.replace('BD-KJ-', '').split('-');
-          const col = parts.length > 1 ? parts[0] : (activeColors['BD'] || 'hitam');
-          const sz = parts.length > 1 ? parts[1] : parts[0];
+          const info = parseSkuCartInfo('BD-KJ-', sku, 'BD');
           title = 'Paket Bundling (Kaos Panjang)';
-          sub = 'Ukuran: ' + sz + ' • Warna: <span class="cart-color-badge ' + col + '">' + col.toUpperCase() + '</span>';
+          sub = 'Ukuran: ' + info.sz + ' • Warna: <span class="cart-color-badge ' + info.col + '">' + info.col.toUpperCase() + '</span>';
         } else if (sku.startsWith('KP-')) {
-          const parts = sku.replace('KP-', '').split('-');
-          const col = parts.length > 1 ? parts[0] : (activeColors['KP'] || 'hitam');
-          const sz = parts.length > 1 ? parts[1] : parts[0];
+          const info = parseSkuCartInfo('KP-', sku, 'KP');
           title = 'Kaos Lengan Pendek';
-          sub = 'Ukuran: ' + sz + ' • Warna: <span class="cart-color-badge ' + col + '">' + col.toUpperCase() + '</span>';
+          sub = 'Ukuran: ' + info.sz + ' • Warna: <span class="cart-color-badge ' + info.col + '">' + info.col.toUpperCase() + '</span>';
         } else if (sku.startsWith('KJ-')) {
-          const parts = sku.replace('KJ-', '').split('-');
-          const col = parts.length > 1 ? parts[0] : (activeColors['KJ'] || 'hitam');
-          const sz = parts.length > 1 ? parts[1] : parts[0];
+          const info = parseSkuCartInfo('KJ-', sku, 'KJ');
           title = 'Kaos Lengan Panjang';
-          sub = 'Ukuran: ' + sz + ' • Warna: <span class="cart-color-badge ' + col + '">' + col.toUpperCase() + '</span>';
+          sub = 'Ukuran: ' + info.sz + ' • Warna: <span class="cart-color-badge ' + info.col + '">' + info.col.toUpperCase() + '</span>';
         } else if (sku === 'TB-STD') {
           title = 'Tumbler Thermal Stainless';
           sub = 'Capacity: 750ml';
@@ -2206,45 +2248,45 @@
       const prod = currentZoomProduct;
       const col = currentZoomColor;
 
+      function renderSizeCategory(prefix, legacyPrefix, sizes, categoryTitle) {
+        let html = `<div style="grid-column: 1 / -1; font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; color:var(--color-muted); margin-top:8px; margin-bottom:2px;">${categoryTitle}</div>`;
+        html += sizes.map(sz => {
+          const isKids = sz.startsWith('AK-');
+          const displayLabel = isKids ? 'Anak ' + sz.replace('AK-', '') : sz;
+          const sku = prefix + sz;
+          const legacySku = legacyPrefix + sz;
+          const q = cart[sku] || cart[legacySku] || 0;
+          const activeClass = q > 0 ? 'has-qty' : '';
+          return `
+            <div class="size-item ${activeClass}" id="item-${sku}" onclick="handleSizeCardClick(event, '${sku}')" title="Klik untuk tambah ukuran ${displayLabel}">
+              <span class="size-label" style="${isKids ? 'font-size:0.75rem;' : ''}">${displayLabel}</span>
+              <div class="qty-controls" onclick="event.stopPropagation()">
+                <button type="button" class="btn-mini" onclick="changeQty('${sku}', -1)">-</button>
+                <span class="qty-num" id="qty-${sku}">${q}</span>
+                <button type="button" class="btn-mini" onclick="changeQty('${sku}', 1)">+</button>
+              </div>
+            </div>
+          `;
+        }).join('');
+        return html;
+      }
+
+      const adultSizes = ['S', 'M', 'L', 'XL', '2XL', '3XL'];
+      const kidsSizes = ['AK-XS', 'AK-S', 'AK-M', 'AK-L', 'AK-XL'];
+
       if (prod === 'BD') {
         const activeM = activeBundleModel;
         const prefix = 'BD-' + activeM + '-' + col + '-';
-        const sizes = ['S', 'M', 'L', 'XL', '2XL', '3XL'];
-        container.innerHTML = sizes.map(sz => {
-          const sku = prefix + sz;
-          const legacySku = 'BD-' + activeM + '-' + sz;
-          const q = cart[sku] || cart[legacySku] || 0;
-          const activeClass = q > 0 ? 'has-qty' : '';
-          return `
-            <div class="size-item ${activeClass}" id="item-${sku}" onclick="handleSizeCardClick(event, '${sku}')" title="Klik untuk tambah ukuran ${sz}">
-              <span class="size-label">${sz}</span>
-              <div class="qty-controls" onclick="event.stopPropagation()">
-                <button type="button" class="btn-mini" onclick="changeQty('${sku}', -1)">-</button>
-                <span class="qty-num" id="qty-${sku}">${q}</span>
-                <button type="button" class="btn-mini" onclick="changeQty('${sku}', 1)">+</button>
-              </div>
-            </div>
-          `;
-        }).join('');
+        const legacyPrefix = 'BD-' + activeM + '-';
+        container.innerHTML = 
+          renderSizeCategory(prefix, legacyPrefix, adultSizes, '👨‍👩‍👦 Ukuran Dewasa') +
+          renderSizeCategory(prefix, legacyPrefix, kidsSizes, '👶 Ukuran Anak-Anak');
       } else if (prod === 'KP' || prod === 'KJ') {
         const prefix = prod + '-' + col + '-';
-        const sizes = ['S', 'M', 'L', 'XL', '2XL', '3XL'];
-        container.innerHTML = sizes.map(sz => {
-          const sku = prefix + sz;
-          const legacySku = prod + '-' + sz;
-          const q = cart[sku] || cart[legacySku] || 0;
-          const activeClass = q > 0 ? 'has-qty' : '';
-          return `
-            <div class="size-item ${activeClass}" id="item-${sku}" onclick="handleSizeCardClick(event, '${sku}')" title="Klik untuk tambah ukuran ${sz}">
-              <span class="size-label">${sz}</span>
-              <div class="qty-controls" onclick="event.stopPropagation()">
-                <button type="button" class="btn-mini" onclick="changeQty('${sku}', -1)">-</button>
-                <span class="qty-num" id="qty-${sku}">${q}</span>
-                <button type="button" class="btn-mini" onclick="changeQty('${sku}', 1)">+</button>
-              </div>
-            </div>
-          `;
-        }).join('');
+        const legacyPrefix = prod + '-';
+        container.innerHTML = 
+          renderSizeCategory(prefix, legacyPrefix, adultSizes, '👨‍👩‍👦 Ukuran Dewasa') +
+          renderSizeCategory(prefix, legacyPrefix, kidsSizes, '👶 Ukuran Anak-Anak');
       } else {
         const sku = prod + '-STD';
         const q = cart[sku] || 0;
