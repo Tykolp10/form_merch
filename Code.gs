@@ -180,7 +180,8 @@ function resolveProduk_(sku, prodMap) {
   }
   if (s.indexOf('KJ-') === 0) {
     const p = parseSkuDetails_(s.replace(/^KJ-/, ''));
-    return { sku: s, nama: 'Kaos Lengan Panjang' + p.colorLabel, ukuran: p.sz, harga: 125000 };
+    const isKids = p.sz.indexOf('Anak') === 0;
+    return { sku: s, nama: 'Kaos Lengan Panjang' + p.colorLabel, ukuran: p.sz, harga: isKids ? 85000 : 125000 };
   }
   if (s === 'TB-STD') {
     return { sku: s, nama: 'Tumbler Thermal Stainless', ukuran: '—', harga: 85000 };
@@ -784,7 +785,7 @@ function updateMasterProdukBundling() {
 }
 
 /**
- * Menambahkan SKU Varian Anak (AK-S, AK-M, AK-L, AK-XL) ke tab MASTER_PRODUK secara aman (tanpa menghapus data yang ada)
+ * Menambahkan/Meng-update SKU Varian Kaos Lengan Panjang Anak (Rp 85.000) ke tab MASTER_PRODUK
  */
 function tambahVarianAnakToMasterProduk() {
   const ss = getSS_();
@@ -794,47 +795,37 @@ function tambahVarianAnakToMasterProduk() {
     return;
   }
 
-  const existingSkus = {};
+  const existingRows = {};
   const lastRow = shProd.getLastRow();
   if (lastRow >= 2) {
-    const data = shProd.getRange(2, 1, lastRow - 1, 1).getValues();
-    data.forEach(function(r) { existingSkus[String(r[0]).trim()] = true; });
+    const data = shProd.getRange(2, 1, lastRow - 1, 6).getValues();
+    data.forEach(function(r, idx) {
+      existingRows[String(r[0]).trim()] = idx + 2;
+    });
   }
 
   const newKidsCatalog = [
     // SKU, Nama_Item, Ukuran, Harga, Header_Form, Aktif
-    ['KP-AK-XS',  'Kaos Lengan Pendek',  'Anak XS',  120000, 'Kaos Lengan Pendek Hitam (Rp 120.000) [Anak XS]',  'YA'],
-    ['KP-AK-S',   'Kaos Lengan Pendek',  'Anak S',   120000, 'Kaos Lengan Pendek Hitam (Rp 120.000) [Anak S]',   'YA'],
-    ['KP-AK-M',   'Kaos Lengan Pendek',  'Anak M',   120000, 'Kaos Lengan Pendek Hitam (Rp 120.000) [Anak M]',   'YA'],
-    ['KP-AK-L',   'Kaos Lengan Pendek',  'Anak L',   120000, 'Kaos Lengan Pendek Hitam (Rp 120.000) [Anak L]',   'YA'],
-    ['KP-AK-XL',  'Kaos Lengan Pendek',  'Anak XL',  120000, 'Kaos Lengan Pendek Hitam (Rp 120.000) [Anak XL]',  'YA'],
-
-    ['KJ-AK-XS',  'Kaos Lengan Panjang', 'Anak XS',  125000, 'Kaos Lengan Panjang Hitam (Rp 125.000) [Anak XS]', 'YA'],
-    ['KJ-AK-S',   'Kaos Lengan Panjang', 'Anak S',   125000, 'Kaos Lengan Panjang Hitam (Rp 125.000) [Anak S]',  'YA'],
-    ['KJ-AK-M',   'Kaos Lengan Panjang', 'Anak M',   125000, 'Kaos Lengan Panjang Hitam (Rp 125.000) [Anak M]',  'YA'],
-    ['KJ-AK-L',   'Kaos Lengan Panjang', 'Anak L',   125000, 'Kaos Lengan Panjang Hitam (Rp 125.000) [Anak L]',  'YA'],
-    ['KJ-AK-XL',  'Kaos Lengan Panjang', 'Anak XL',  125000, 'Kaos Lengan Panjang Hitam (Rp 125.000) [Anak XL]', 'YA'],
-
-    ['BD-KP-AK-XS', 'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'Anak XS', 210000, 'Paket Bundling Pendek [Anak XS]', 'YA'],
-    ['BD-KP-AK-S',  'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'Anak S',  210000, 'Paket Bundling Pendek [Anak S]',  'YA'],
-    ['BD-KP-AK-M',  'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'Anak M',  210000, 'Paket Bundling Pendek [Anak M]',  'YA'],
-    ['BD-KP-AK-L',  'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'Anak L',  210000, 'Paket Bundling Pendek [Anak L]',  'YA'],
-    ['BD-KP-AK-XL', 'Paket Bundling (Kaos Pendek + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'Anak XL', 210000, 'Paket Bundling Pendek [Anak XL]', 'YA'],
-
-    ['BD-KJ-AK-XS', 'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'Anak XS', 210000, 'Paket Bundling Panjang [Anak XS]', 'YA'],
-    ['BD-KJ-AK-S',  'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'Anak S',  210000, 'Paket Bundling Panjang [Anak S]',  'YA'],
-    ['BD-KJ-AK-M',  'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'Anak M',  210000, 'Paket Bundling Panjang [Anak M]',  'YA'],
-    ['BD-KJ-AK-L',  'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'Anak L',  210000, 'Paket Bundling Panjang [Anak L]',  'YA'],
-    ['BD-KJ-AK-XL', 'Paket Bundling (Kaos Panjang + Tumbler 750ml + Korek + Keychain + Goodie Bag)', 'Anak XL', 210000, 'Paket Bundling Panjang [Anak XL]', 'YA']
+    ['KJ-AK-XS',  'Kaos Lengan Panjang', 'Anak XS',  85000, 'Kaos Lengan Panjang Hitam (Rp 85.000) [Anak XS]', 'YA'],
+    ['KJ-AK-S',   'Kaos Lengan Panjang', 'Anak S',   85000, 'Kaos Lengan Panjang Hitam (Rp 85.000) [Anak S]',  'YA'],
+    ['KJ-AK-M',   'Kaos Lengan Panjang', 'Anak M',   85000, 'Kaos Lengan Panjang Hitam (Rp 85.000) [Anak M]',  'YA'],
+    ['KJ-AK-L',   'Kaos Lengan Panjang', 'Anak L',   85000, 'Kaos Lengan Panjang Hitam (Rp 85.000) [Anak L]',  'YA'],
+    ['KJ-AK-XL',  'Kaos Lengan Panjang', 'Anak XL',  85000, 'Kaos Lengan Panjang Hitam (Rp 85.000) [Anak XL]', 'YA']
   ];
 
-  let addedCount = 0;
+  let addedCount = 0, updatedCount = 0;
   newKidsCatalog.forEach(function(row) {
-    if (!existingSkus[row[0]]) {
+    const sku = row[0];
+    if (existingRows[sku]) {
+      const rIdx = existingRows[sku];
+      shProd.getRange(rIdx, 4).setValue(85000); // Set harga Rp 85.000
+      shProd.getRange(rIdx, 5).setValue(row[4]); // Set Header_Form
+      updatedCount++;
+    } else {
       shProd.appendRow(row);
       addedCount++;
     }
   });
 
-  alertOrLog_('✅ Berhasil menambahkan ' + addedCount + ' SKU Varian Anak ke tab MASTER_PRODUK!');
+  alertOrLog_('✅ Sync Kaos Lengan Panjang Anak Selesai! (' + addedCount + ' SKU baru, ' + updatedCount + ' SKU diperbarui ke Rp 85.000)');
 }

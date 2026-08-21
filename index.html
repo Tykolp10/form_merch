@@ -1760,7 +1760,7 @@
       </table>
 
       <div style="font-weight:800; font-size:0.88rem; text-transform:uppercase; letter-spacing:0.04em; margin:18px 0 6px; color:#dc2626; display:flex; align-items:center; gap:6px;">
-        <span>Ukuran Anak-Anak</span>
+        <span>Ukuran Anak-Anak (Khusus Lengan Panjang &bull; Rp 85.000)</span>
       </div>
       <table class="table-chart">
         <thead>
@@ -1925,6 +1925,7 @@
 
     function getPrice(sku) {
       if (PRICES[sku]) return PRICES[sku];
+      if (sku.includes('-AK-') || sku.startsWith('KJ-AK-')) return 85000;
       if (sku.startsWith('KP-')) return 120000;
       if (sku.startsWith('KJ-')) return 125000;
       if (sku.startsWith('BD-')) return 210000;
@@ -2278,15 +2279,17 @@
         const activeM = activeBundleModel;
         const prefix = 'BD-' + activeM + '-' + col + '-';
         const legacyPrefix = 'BD-' + activeM + '-';
+        container.innerHTML = renderSizeCategory(prefix, legacyPrefix, adultSizes, 'Ukuran Dewasa');
+      } else if (prod === 'KP') {
+        const prefix = 'KP-' + col + '-';
+        const legacyPrefix = 'KP-';
+        container.innerHTML = renderSizeCategory(prefix, legacyPrefix, adultSizes, 'Ukuran Dewasa');
+      } else if (prod === 'KJ') {
+        const prefix = 'KJ-' + col + '-';
+        const legacyPrefix = 'KJ-';
         container.innerHTML = 
-          renderSizeCategory(prefix, legacyPrefix, adultSizes, 'Ukuran Dewasa') +
-          renderSizeCategory(prefix, legacyPrefix, kidsSizes, 'Ukuran Anak-Anak');
-      } else if (prod === 'KP' || prod === 'KJ') {
-        const prefix = prod + '-' + col + '-';
-        const legacyPrefix = prod + '-';
-        container.innerHTML = 
-          renderSizeCategory(prefix, legacyPrefix, adultSizes, 'Ukuran Dewasa') +
-          renderSizeCategory(prefix, legacyPrefix, kidsSizes, 'Ukuran Anak-Anak');
+          renderSizeCategory(prefix, legacyPrefix, adultSizes, 'Ukuran Dewasa (Rp 125.000)') +
+          renderSizeCategory(prefix, legacyPrefix, kidsSizes, 'Ukuran Anak-Anak (Rp 85.000)');
       } else {
         const sku = prod + '-STD';
         const q = cart[sku] || 0;
