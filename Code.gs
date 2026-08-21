@@ -786,6 +786,7 @@ function updateMasterProdukBundling() {
 
 /**
  * Menambahkan/Meng-update SKU Varian Kaos Lengan Panjang Anak (Rp 85.000) ke tab MASTER_PRODUK
+ * dan menghapus otomatis SKU varian anak lama yang tidak dipakai (KP-AK- dan BD-AK-).
  */
 function tambahVarianAnakToMasterProduk() {
   const ss = getSS_();
@@ -795,10 +796,25 @@ function tambahVarianAnakToMasterProduk() {
     return;
   }
 
+  // 1. Hapus baris varian anak lama yang tidak terpakai (KP-AK- dan BD-AK-) dari bawah ke atas
+  const lastRowBefore = shProd.getLastRow();
+  let deletedCount = 0;
+  if (lastRowBefore >= 2) {
+    const values = shProd.getRange(2, 1, lastRowBefore - 1, 1).getValues();
+    for (let i = values.length - 1; i >= 0; i--) {
+      const sku = String(values[i][0]).trim();
+      if (sku.indexOf('KP-AK-') === 0 || (sku.indexOf('BD-') === 0 && sku.indexOf('-AK-') >= 0)) {
+        shProd.deleteRow(i + 2);
+        deletedCount++;
+      }
+    }
+  }
+
+  // 2. Baca sisa baris yang ada
   const existingRows = {};
-  const lastRow = shProd.getLastRow();
-  if (lastRow >= 2) {
-    const data = shProd.getRange(2, 1, lastRow - 1, 6).getValues();
+  const lastRowNow = shProd.getLastRow();
+  if (lastRowNow >= 2) {
+    const data = shProd.getRange(2, 1, lastRowNow - 1, 6).getValues();
     data.forEach(function(r, idx) {
       existingRows[String(r[0]).trim()] = idx + 2;
     });
@@ -827,5 +843,5 @@ function tambahVarianAnakToMasterProduk() {
     }
   });
 
-  alertOrLog_('✅ Sync Kaos Lengan Panjang Anak Selesai! (' + addedCount + ' SKU baru, ' + updatedCount + ' SKU diperbarui ke Rp 85.000)');
+  alertOrLog_('✅ Sync Selesai! (' + addedCount + ' SKU baru, ' + updatedCount + ' SKU di-update Rp 85rb, ' + deletedCount + ' SKU lama dibersihkan)');
 }
