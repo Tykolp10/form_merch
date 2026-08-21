@@ -622,13 +622,19 @@ function batalkanOrder() {
 
   a.sh.getRange(a.row, 20).setValue('BATAL');      // T: Status_Bayar
   a.sh.getRange(a.row, 23).setValue('BATAL');      // W: Status_Order
-  SpreadsheetApp.getActive().toast('Order dibatalkan (Status Bayar & Order → BATAL).');
+  a.sh.getRange(a.row, 1).setFontColor('#dc2626'); // Warna Teks Order_ID Merah
+  const d = a.sh.getRange(a.row, 1, 1, 26).getValues()[0];
+  updateOrderLinesStatus_(d[0], 'BATAL', 'BATAL');
+  SpreadsheetApp.getActive().toast('Order dibatalkan (Status Bayar & Order → BATAL, Teks ID → Merah).');
 }
 
 function tandaiDuplikat() {
   const a = barisAktif_(); if (!a) return;
   a.sh.getRange(a.row, 23).setValue('DUPLIKAT');
-  SpreadsheetApp.getActive().toast('Ditandai DUPLIKAT.');
+  a.sh.getRange(a.row, 1).setFontColor('#dc2626'); // Warna Teks Order_ID Merah
+  const d = a.sh.getRange(a.row, 1, 1, 26).getValues()[0];
+  updateOrderLinesStatus_(d[0], 'DUPLIKAT', 'DUPLIKAT');
+  SpreadsheetApp.getActive().toast('Ditandai DUPLIKAT (Teks ID → Merah).');
 }
 
 function prosesUlangDialog() {
@@ -782,8 +788,14 @@ function onEditTrigger(e) {
     } else if (val === 'BATAL') {
       sh.getRange(row, 20).setValue('BATAL');
       sh.getRange(row, 23).setValue('BATAL');
+      sh.getRange(row, 1).setFontColor('#dc2626');
       const d = sh.getRange(row, 1, 1, 26).getValues()[0];
       updateOrderLinesStatus_(d[0], 'BATAL', 'BATAL');
+    } else if (val === 'DUPLIKAT') {
+      sh.getRange(row, 23).setValue('DUPLIKAT');
+      sh.getRange(row, 1).setFontColor('#dc2626');
+      const d = sh.getRange(row, 1, 1, 26).getValues()[0];
+      updateOrderLinesStatus_(d[0], 'DUPLIKAT', 'DUPLIKAT');
     } else if (val === 'EXPIRED') {
       sh.getRange(row, 20).setValue('EXPIRED');
       const d = sh.getRange(row, 1, 1, 26).getValues()[0];
