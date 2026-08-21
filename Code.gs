@@ -95,13 +95,38 @@ function headerMap_(sheet) {
   return m;
 }
 
-/** Order ID berurutan: MQ-YYMMDD-001 */
+/** Order ID berurutan: MQ-YYMMDD-XXX (Otomatis membaca nomor urut tertinggi di tab ORDERS) */
 function generateOrderId_() {
-  const props = PropertiesService.getScriptProperties();
-  const n = parseInt(props.getProperty('ORDER_COUNTER') || '0', 10) + 1;
-  props.setProperty('ORDER_COUNTER', String(n));
   const tgl = Utilities.formatDate(new Date(), TZ, 'yyMMdd');
-  return 'MQ-' + tgl + '-' + ('000' + n).slice(-3);
+  let highestNum = 0;
+
+  try {
+    const ss = getSS_();
+    const shOrd = ss.getSheetByName(SH.ORDERS);
+    if (shOrd && shOrd.getLastRow() >= 2) {
+      const ids = shOrd.getRange(2, 1, shOrd.getLastRow() - 1, 1).getValues();
+      ids.forEach(function(r) {
+        const idStr = String(r[0]).trim(); // misal "MQ-260820-039"
+        const parts = idStr.split('-');
+        if (parts.length >= 3) {
+          const num = parseInt(parts[2], 10);
+          if (!isNaN(num) && num > highestNum) {
+            highestNum = num;
+          }
+        }
+      });
+    }
+  } catch (e) {}
+
+  if (highestNum === 0) {
+    const props = PropertiesService.getScriptProperties();
+    highestNum = parseInt(props.getProperty('ORDER_COUNTER') || '0', 10);
+  }
+
+  const nextNum = highestNum + 1;
+  PropertiesService.getScriptProperties().setProperty('ORDER_COUNTER', String(nextNum));
+
+  return 'MQ-' + tgl + '-' + ('000' + nextNum).slice(-3);
 }
 
 /** Kode unik 3 digit yang belum dipakai order aktif */
