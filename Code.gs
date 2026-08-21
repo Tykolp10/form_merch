@@ -60,6 +60,7 @@ function onOpen() {
       .addItem('👶 Tambah Varian Anak ke MASTER_PRODUK', 'tambahVarianAnakToMasterProduk')
       .addSeparator()
       .addItem('🧪 Tes koneksi Fonnte', 'tesFonnte')
+      .addItem('📱 Tes Kirim WA Notif Checkout (Kaos Anak)', 'tesKirimWANotifAnak')
       .addItem('⏰ Pasang trigger otomatis', 'pasangTrigger')
       .addToUi();
   } catch (e) {
@@ -851,4 +852,28 @@ function tambahVarianAnakToMasterProduk() {
   });
 
   alertOrLog_('✅ Sync Selesai! (' + addedCount + ' SKU baru, ' + updatedCount + ' SKU di-update Rp 85rb, ' + deletedCount + ' SKU lama dibersihkan)');
+}
+
+/**
+ * UJI COBA KIRIM WA NOTIFIKASI AUTO (Contoh Checkout Kaos Anak)
+ */
+function tesKirimWANotifAnak() {
+  const samplePesan = pesanOrderMasuk_({
+    orderId: 'MQ-260821-099',
+    nama: 'Bunda Rina (Contoh Pembeli)',
+    lines: [
+      { sku: 'KJ-AK-S', nama: 'Kaos Lengan Panjang', ukuran: 'Anak S', qty: 2, harga: 85000, sub: 170000 },
+      { sku: 'KJ-L', nama: 'Kaos Lengan Panjang', ukuran: 'L', qty: 1, harga: 125000, sub: 125000 }
+    ],
+    totalQty: 3,
+    subtotal: 295000,
+    kodeUnik: 0,
+    totalTf: 295000,
+    metode: 'KIRIM',
+    batas: new Date(new Date().getTime() + 24 * 3600 * 1000)
+  });
+
+  const targetWA = P_('ADMIN_WA', '6283199861947');
+  const ok = kirimWA_(targetWA, samplePesan, 'TEST_ANAK', 'TES');
+  alertOrLog_(ok ? '✅ Pesan tes notifikasi berhasil dikirim ke WA Admin (' + targetWA + ')!' : '❌ Gagal kirim WA tes. Cek token Fonnte.');
 }
