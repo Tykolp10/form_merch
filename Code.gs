@@ -884,19 +884,54 @@ function tesKirimWANotifAnak() {
  */
 function setupRekapProduksi() {
   const ss = getSS_();
-
-  // 0. Pastikan rumus VLOOKUP di ORDER_LINES K1 & L1 aktif
+  const shOrd = ss.getSheetByName(SH.ORDERS);
   const shLine = ss.getSheetByName(SH.LINES);
-  if (shLine) {
-    shLine.getRange('K1').setFormula('=ARRAYFORMULA(IF(ROW(A:A)=1, "Status_Bayar", IF(A:A="", "", VLOOKUP(B:B, ORDERS!A:T, 20, FALSE))))');
-    shLine.getRange('L1').setFormula('=ARRAYFORMULA(IF(ROW(A:A)=1, "Status_Order", IF(A:A="", "", VLOOKUP(B:B, ORDERS!A:W, 23, FALSE))))');
-  }
-
   let shRekap = ss.getSheetByName(SH.REKAP || 'REKAP_PRODUKSI');
   if (!shRekap) {
     shRekap = ss.insertSheet('REKAP_PRODUKSI');
   }
 
+  // 1. Sinkronisasi Fisik Status_Bayar & Status_Order ke ORDER_LINES (Kolom K & L)
+  const orderStatusMap = {};
+  if (shOrd && shOrd.getLastRow() >= 2) {
+    const ordData = shOrd.getRange(2, 1, shOrd.getLastRow() - 1, 23).getValues();
+    ordData.forEach(function(r) {
+      const oId = String(r[0]).trim();
+      if (oId) {
+        orderStatusMap[oId] = {
+          bayar: String(r[19]).trim().toUpperCase(),
+          status: String(r[22]).trim().toUpperCase()
+        };
+      }
+    });
+  }
+
+  if (shLine && shLine.getLastRow() >= 2) {
+    const lineLast = shLine.getLastRow();
+    const lineData = shLine.getRange(2, 1, lineLast - 1, 10).getValues();
+    const kValues = [];
+    const lValues = [];
+
+    lineData.forEach(function(r) {
+      const oId = String(r[1]).trim();
+      const st = orderStatusMap[oId] || { bayar: 'BELUM_BAYAR', status: 'VALID' };
+      kValues.push([st.bayar]);
+      lValues.push([st.status]);
+    });
+
+    shLine.getRange(1, 11).setValue('Status_Bayar');
+    shLine.getRange(1, 12).setValue('Status_Order');
+    shLine.getRange(2, 11, kValues.length, 1).setValues(kValues);
+    shLine.getRange(2, 12, lValues.length, 1).setValues(lValues);
+
+    // Pasang rumus VLOOKUP backup di K1 & L1
+    try {
+      shLine.getRange('K1').setFormula('=ARRAYFORMULA(IF(ROW(A:A)=1, "Status_Bayar", IF(A:A="", "", VLOOKUP(B:B, ORDERS!A:T, 20, FALSE))))');
+      shLine.getRange('L1').setFormula('=ARRAYFORMULA(IF(ROW(A:A)=1, "Status_Order", IF(A:A="", "", VLOOKUP(B:B, ORDERS!A:W, 23, FALSE))))');
+    } catch (e) {}
+  }
+
+  // 2. Tulis Ulang REKAP_PRODUKSI
   shRekap.clear();
 
   // 1. Matriks Kaos Dewasa (Lunas)
@@ -979,5 +1014,5 @@ function setupRekapProduksi() {
     shRekap.getRange('A20:B20').setBackground('#0369a1').setFontColor('#ffffff').setFontWeight('bold');
   } catch (e) {}
 
-  alertOrLog_('✅ Tab REKAP_PRODUKSI & ORDER_LINES berhasil disinkronkan!');
+  alertOrLog_('✅ Sync Selesai! Tab ORDER_LINES & REKAP_PRODUKSI berhasil dipulihkan!');
 }
