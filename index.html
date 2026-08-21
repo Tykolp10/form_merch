@@ -1740,7 +1740,7 @@
       <p style="color:var(--color-muted); font-size:0.85rem; margin-bottom:12px;">Ukur kaos yang paling sering Anda pakai, lalu cocokkan dengan tabel di bawah.</p>
       
       <div style="font-weight:800; font-size:0.88rem; text-transform:uppercase; letter-spacing:0.04em; margin:12px 0 6px; color:#000000; display:flex; align-items:center; gap:6px;">
-        <span>👨‍👩‍👦 Ukuran Dewasa</span>
+        <span>Ukuran Dewasa</span>
       </div>
       <table class="table-chart">
         <thead>
@@ -1760,7 +1760,7 @@
       </table>
 
       <div style="font-weight:800; font-size:0.88rem; text-transform:uppercase; letter-spacing:0.04em; margin:18px 0 6px; color:#dc2626; display:flex; align-items:center; gap:6px;">
-        <span>👶 Ukuran Anak-Anak</span>
+        <span>Ukuran Anak-Anak</span>
       </div>
       <table class="table-chart">
         <thead>
@@ -2279,14 +2279,14 @@
         const prefix = 'BD-' + activeM + '-' + col + '-';
         const legacyPrefix = 'BD-' + activeM + '-';
         container.innerHTML = 
-          renderSizeCategory(prefix, legacyPrefix, adultSizes, '👨‍👩‍👦 Ukuran Dewasa') +
-          renderSizeCategory(prefix, legacyPrefix, kidsSizes, '👶 Ukuran Anak-Anak');
+          renderSizeCategory(prefix, legacyPrefix, adultSizes, 'Ukuran Dewasa') +
+          renderSizeCategory(prefix, legacyPrefix, kidsSizes, 'Ukuran Anak-Anak');
       } else if (prod === 'KP' || prod === 'KJ') {
         const prefix = prod + '-' + col + '-';
         const legacyPrefix = prod + '-';
         container.innerHTML = 
-          renderSizeCategory(prefix, legacyPrefix, adultSizes, '👨‍👩‍👦 Ukuran Dewasa') +
-          renderSizeCategory(prefix, legacyPrefix, kidsSizes, '👶 Ukuran Anak-Anak');
+          renderSizeCategory(prefix, legacyPrefix, adultSizes, 'Ukuran Dewasa') +
+          renderSizeCategory(prefix, legacyPrefix, kidsSizes, 'Ukuran Anak-Anak');
       } else {
         const sku = prod + '-STD';
         const q = cart[sku] || 0;
