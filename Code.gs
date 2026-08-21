@@ -339,11 +339,12 @@ function doPost(e) {
     const barisLine = lines.map(function(l, i) {
       return [
         orderId + '-L' + (i + 1), orderId, timestamp, nama,
-        l.sku, l.nama, l.ukuran, l.qty, l.harga, l.sub
+        l.sku, l.nama, l.ukuran, l.qty, l.harga, l.sub,
+        'BELUM_BAYAR', 'VALID'
       ];
     });
     const nextLineRow = getRealLastRow_(shLine, 1) + 1;
-    shLine.getRange(nextLineRow, 1, barisLine.length, 10).setValues(barisLine);
+    shLine.getRange(nextLineRow, 1, barisLine.length, 12).setValues(barisLine);
 
     // Kirim WA
     const pesan = pesanOrderMasuk_({
@@ -472,11 +473,12 @@ function prosesBaris_(rowNum) {
     const barisLine = lines.map(function(l, i) {
       return [
         orderId + '-L' + (i + 1), orderId, timestamp, nama,
-        l.sku, l.nama, l.ukuran, l.qty, l.harga, l.sub
+        l.sku, l.nama, l.ukuran, l.qty, l.harga, l.sub,
+        'BELUM_BAYAR', 'VALID'
       ];
     });
     const nextLineRow = getRealLastRow_(shLine, 1) + 1;
-    shLine.getRange(nextLineRow, 1, barisLine.length, 10).setValues(barisLine);
+    shLine.getRange(nextLineRow, 1, barisLine.length, 12).setValues(barisLine);
 
     // --- kirim WhatsApp ---
     const pesan = pesanOrderMasuk_({
@@ -554,6 +556,7 @@ function tandaiLunas() {
   a.sh.getRange(a.row, 20).setValue('LUNAS');
   a.sh.getRange(a.row, 22).setValue(new Date());
   const d = a.sh.getRange(a.row, 1, 1, 26).getValues()[0];
+  updateOrderLinesStatus_(d[0], 'LUNAS', 'VALID');
   const csNumL = normalisasiWA_(P_('CS_WA', '0895330478397')) || '62895330478397';
   const linkCSL = 'https://wa.me/' + csNumL + '?text=' + encodeURIComponent('Halo Admin CS, saya mau menanyakan info pengiriman/resi untuk Order ID: ' + d[0]);
   const pesan = '*PEMBAYARAN TERVERIFIKASI* ✅\n\nOrder ' + d[0] + '\na.n. ' + d[2] +
@@ -561,6 +564,22 @@ function tandaiLunas() {
                 '\n\nPesananmu telah masuk daftar produksi.\nHubungi CS WA via link berikut: \n👉 ' + linkCSL + '\n\nTerima kasih 🙏';
   kirimWA_(d[4], pesan, d[0], 'LUNAS');
   SpreadsheetApp.getActive().toast('Order ' + d[0] + ' → LUNAS');
+}
+
+/** Helper sinkronisasi status ke ORDER_LINES */
+function updateOrderLinesStatus_(orderId, bayarStatus, orderStatus) {
+  try {
+    const shLine = getSS_().getSheetByName(SH.LINES);
+    if (!shLine || shLine.getLastRow() < 2) return;
+    const last = shLine.getLastRow();
+    const data = shLine.getRange(2, 2, last - 1, 1).getValues();
+    for (let i = 0; i < data.length; i++) {
+      if (String(data[i][0]).trim() === String(orderId).trim()) {
+        if (bayarStatus) shLine.getRange(i + 2, 11).setValue(bayarStatus);
+        if (orderStatus) shLine.getRange(i + 2, 12).setValue(orderStatus);
+      }
+    }
+  } catch (e) {}
 }
 
 function tandaiMenunggu() {
@@ -722,6 +741,7 @@ function onEditTrigger(e) {
       sh.getRange(row, 22).setValue(new Date()); // V: Tgl_Verifikasi
 
       const d = sh.getRange(row, 1, 1, 26).getValues()[0];
+      updateOrderLinesStatus_(d[0], 'LUNAS', 'VALID');
       const waSent = String(sh.getRange(row, 25).getValue()); // Y: Catatan_Admin
 
       if (waSent !== 'NOTIF_LUNAS_TERKIRIM') {
@@ -737,12 +757,20 @@ function onEditTrigger(e) {
     } else if (val === 'BATAL') {
       sh.getRange(row, 20).setValue('BATAL');
       sh.getRange(row, 23).setValue('BATAL');
+      const d = sh.getRange(row, 1, 1, 26).getValues()[0];
+      updateOrderLinesStatus_(d[0], 'BATAL', 'BATAL');
     } else if (val === 'EXPIRED') {
       sh.getRange(row, 20).setValue('EXPIRED');
+      const d = sh.getRange(row, 1, 1, 26).getValues()[0];
+      updateOrderLinesStatus_(d[0], 'EXPIRED', 'VALID');
     } else if (val.indexOf('MENUNGGU') >= 0) {
       sh.getRange(row, 20).setValue('MENUNGGU_VERIFIKASI');
+      const d = sh.getRange(row, 1, 1, 26).getValues()[0];
+      updateOrderLinesStatus_(d[0], 'MENUNGGU_VERIFIKASI', 'VALID');
     } else if (val.indexOf('BELUM') >= 0) {
       sh.getRange(row, 20).setValue('BELUM_BAYAR');
+      const d = sh.getRange(row, 1, 1, 26).getValues()[0];
+      updateOrderLinesStatus_(d[0], 'BELUM_BAYAR', 'VALID');
     }
   }
 }
@@ -923,12 +951,6 @@ function setupRekapProduksi() {
     shLine.getRange(1, 12).setValue('Status_Order');
     shLine.getRange(2, 11, kValues.length, 1).setValues(kValues);
     shLine.getRange(2, 12, lValues.length, 1).setValues(lValues);
-
-    // Pasang rumus VLOOKUP backup di K1 & L1
-    try {
-      shLine.getRange('K1').setFormula('=ARRAYFORMULA(IF(ROW(A:A)=1, "Status_Bayar", IF(A:A="", "", VLOOKUP(B:B, ORDERS!A:T, 20, FALSE))))');
-      shLine.getRange('L1').setFormula('=ARRAYFORMULA(IF(ROW(A:A)=1, "Status_Order", IF(A:A="", "", VLOOKUP(B:B, ORDERS!A:W, 23, FALSE))))');
-    } catch (e) {}
   }
 
   // 2. Tulis Ulang REKAP_PRODUKSI
